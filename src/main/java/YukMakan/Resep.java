@@ -13,7 +13,7 @@ public class Resep {
     private String kandunganGizi;
     private String imagePath;
     //ArrayList untuk menampung ulasan-ulasan dari user
-    private ArrayList <Ulasan> ulasan = new ArrayList<Ulasan>();
+    private ArrayList <Ulasan> ulasan = new ArrayList<>();
 
     public Resep(String judul, Admin uploader, String datePosted, String deskripsi,
                  String langkah, String bahan, String imagePath, String kandunganGizi){
@@ -52,7 +52,7 @@ public class Resep {
     public String getKandunganGizi(){
         return kandunganGizi;
     }
-
+    
     public void setJudul(String judul){
         this.judul = judul;
     }
@@ -74,7 +74,7 @@ public class Resep {
     public void setImagePath(String imagePath){
         this.imagePath = imagePath;
     }
-    public void setUlasan(Ulasan ulasan){
+    public void addUlasan(Ulasan ulasan){
         this.ulasan.add(ulasan);
     }
     public void setKandunganGizi(String kandunganGizi){
@@ -84,7 +84,26 @@ public class Resep {
     public String printUlasan(int index){
         return ulasan.get(index).printUlasan();
     }
-
+    
+    public ArrayList <Ulasan> getUlasan(){
+        return this.ulasan;
+    }
+    
+    public void printResep(){
+        System.out.println("Judul : " + getJudul());
+        System.out.println("Deskripsi : \n" + getDeskripsi());
+        System.out.println("Bahan-bahan :\n" + getBahan());
+        System.out.println("Langkah pembuatan :\n" + getLangkah());
+        System.out.println("Kandungan gizi : \n" + getKandunganGizi());
+        System.out.println("Diupload oleh : \n" + getUploader().getUsername() + ", pada tanggal : " + getDatePosted());
+        System.out.println("Ulasan : \n");
+        if(ulasan.size() > 0){
+            ulasan.forEach((Ulasan u) -> System.out.println(u.getUlasanUsername() + " : " + u.getUlasan()));
+        }
+        else{
+            System.out.println("belum ada ulasan");
+        }
+    }
 
 
 }
