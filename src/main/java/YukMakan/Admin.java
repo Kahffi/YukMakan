@@ -18,6 +18,7 @@ public class Admin extends Akun{
     public void createKontenEdukasi () {
         System.out.println("Masukkan judul konten edukasi: ");
         
+        
     }
     
     public void addCreatedKontenEdukasi (KontenEdukasi kontenEdukasi){
