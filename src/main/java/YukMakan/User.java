@@ -6,15 +6,12 @@ public class User extends Akun {
     // arraylist digunakan untuk mempermudah proses modifikasi array
     ArrayList <Resep> daftarFavorit = new ArrayList<Resep>();
 
-    public User(String username, String password, String phoneNum, String nama, String email) {
+    public User(String username, String password, String phoneNum, String nama, String email){
         super(username, password, phoneNum, nama, email);
     }
 
-    public User() {
-    }
+    public User(){}
     
-
-
     //method untuk menambahkan resep kedalam daftar favorit
     public void addToFav(Resep resep){
         //menambahkan resep ke dalam daftar favorit
@@ -23,8 +20,4 @@ public class User extends Akun {
     public void delFav(int index){
         daftarFavorit.remove(index);
     }
-
-   
-
-
 }

@@ -2,6 +2,7 @@ package YukMakan;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import YukMakan.Akun;
 
 
 public class Main {
@@ -38,14 +39,15 @@ public class Main {
         
         while (start != 0){
             int menu = 0;
+            Akun akun = new Akun(); 
             System.out.println("~~~~~ YukMakan ~~~~~");
             System.out.println("1. Daftar Akun\n2. Login User\n3. Login Admin");
             menu = Integer.parseInt(scanner.nextLine());
             if (menu == 1){
-                daftarUser();
+                akun.createAkun();
             }
             else if (menu == 2){
-                akunIndex = login("user");
+                akunIndex = akun.login("user");
                 if (akunIndex != -1){
                     menuUser(akunIndex);
                 }
@@ -54,7 +56,7 @@ public class Main {
                 }
             }
             else if (menu == 3){
-                login("admin");
+                akun.login("admin");
             }
             else{
                 printInputError();
@@ -83,6 +85,7 @@ public class Main {
   
     }
     
+    // method menu resep
     public static void menuResepUser(int akunIndex){
         int start = 1;
         int i = 0;
@@ -111,122 +114,10 @@ public class Main {
         
     }
     
-    public static void daftarUser(){
-        int start = 1;
-        int menu;
-        String username, password, email, phoneNum, nama;
-        while (start != 3){
-            System.out.println("Daftar akun :");
-            System.out.println("Masukkan username:");
-            username = scanner.nextLine();
-            // jika username belum ada (checkUsername me-return -1)
-            if (checkUsername(username, "user") == -1){
-                System.out.println("Masukkan password : ");
-                password = scanner.nextLine();
-                System.out.println("Masukkan nama : ");
-                nama = scanner.nextLine();
-                System.out.println("Masukkan email : ");
-                email = scanner.nextLine();
-                System.out.println("Masukkan nomor telfon : ");
-                phoneNum = scanner.nextLine();
-                System.out.println("Daftar Akun berhasil");
-                users.add(new User (username, password, phoneNum, nama, email));
-                start = 3;
-            }
-            else if (checkUsername(username, "user") == 1){
-                System.out.println("Username sudah ada, buat username lain");
-            }
-            else{
-                start++;
-            }
-            
-        }
-        
-    }
     
-    public static int checkUsername(String username, String role){
-        int i = 0;
-        if (role.equals("user")){
-            while (i != users.size()){
-                if (users.get(i).getUsername().equals(username)){
-                    return i;
-                }
-                i++;
-            }
-            return -1;
-        }
-        else {
-            while (i != users.size()){
-                if (users.get(i).getUsername().equals(username)){
-                    return i;
-                }
-                i++;
-            }
-            return -1;
-        }
-        
-    }   
     
-    public static int login(String role){
-        int start = 1;
-        String username, password;
-        int akunIndex;
-        
-        // metode login untuk user
-        if (role.equals("user")){
-            while(start != 0){
-                System.out.println("Masukkan username : ");
-                username = scanner.nextLine();
-                akunIndex = checkUsername(username, "user");
-                
-                if(akunIndex >= 0){
-                    System.out.println("Masukkan password : ");
-                    password = scanner.nextLine();
-                    //verifikasi apakah username dan password benar
-                    if (users.get(akunIndex).loginVer(username, password)){
-                        System.out.println("Login berhasil");
-                        return akunIndex;
-                    }
-                    else{
-                        System.out.println("Login gagal");
-                        return -1;
-                    }
-                }
-                
-                else{
-                    System.out.println("Username belum didaftarkan");
-                    return -1;
-                }
-            }
-        }
-        // metode login untuk admin
-        else{
-            while(start != 0){
-                System.out.println("Masukkan username : ");
-                username = scanner.nextLine();
-                akunIndex = checkUsername(username, "user");
-                if(akunIndex >= 0){
-                    System.out.println("Masukkan password : ");
-                    password = scanner.nextLine();
-                    //verifikasi apakah username dan password benar
-                    if (users.get(akunIndex).loginVer(username, password)){
-                        System.out.println("Login berhasil");
-                        return akunIndex;
-                    }
-                    else{
-                        System.out.println("Login gagal");
-                        return -1;
-                    }
-                }
-                
-                else {
-                    System.out.println("Username belum didaftarkan");
-                    return -1;
-                }
-            }
-        }
-        return -1;
-    }
+   
+    
     
     public static void printInputError(){
         System.out.println("Input yang anda masukkan salah");
