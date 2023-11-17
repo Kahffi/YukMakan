@@ -43,6 +43,7 @@ public class Admin extends Akun{
         Resep newResep = new Resep(judul, content, tanggal, this, imagePath, deskripsi, langkah, bahan, kandunganGizi);
         createdResep.add(newResep);
         
+        
     }
     
     // create campaign

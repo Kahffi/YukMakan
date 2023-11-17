@@ -14,6 +14,7 @@ import java.util.Scanner;
  * @author Asus
  */
 public class Akun {
+
     private Scanner input = new Scanner(System.in);
     public String username;
     private String password;
@@ -24,7 +25,9 @@ public class Akun {
     private ArrayList <Resep> resep = new ArrayList <Resep>();
     private ArrayList <User> users = new ArrayList <User> ();
     private ArrayList <Admin> admins = new ArrayList <>();
+
     ArrayList<Ulasan> ulasanList = new ArrayList<>();
+
     
     public Akun(String username, String password, String phoneNum, String nama, String email){
         this.username = username;
@@ -66,6 +69,7 @@ public class Akun {
         while (start != 3){
             System.out.println("Daftar akun :");
             System.out.println("Masukkan username:");
+
             username = input.nextLine();
             // jika username belum ada (checkUsername me-return -1)
             if (checkUsername(username, "user") == -1){
@@ -77,6 +81,7 @@ public class Akun {
                 email = input.nextLine();
                 System.out.println("nomor telfon : ");
                 phoneNum = input.nextLine();
+
                 System.out.println("Daftar Akun berhasil");
                 users.add(new User (username, password, phoneNum, nama, email));
                 start = 3;
@@ -105,7 +110,6 @@ public class Akun {
                 System.out.println("Masukkan username : ");
                 username = input.nextLine();
                 akunIndex = checkUsername(username, "user");
-                
                 if(akunIndex >= 0){
                     System.out.println("Masukkan password : ");
                     password = input.nextLine();
@@ -227,3 +231,4 @@ public class Akun {
 
     
 }
+

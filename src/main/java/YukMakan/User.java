@@ -11,6 +11,7 @@ public class User extends Akun {
     ArrayList<Ulasan> ulasanList = new ArrayList<>();
 
 
+
     public User(String username, String password, String phoneNum, String nama, String email){
         super(username, password, phoneNum, nama, email);
     }
