@@ -213,10 +213,8 @@ public class Akun {
     
     // lihat konten
     public void viewKontenEdukasi(KontenEdukasi kontenEdukasi) {
-        System.out.println("Judul: " + kontenEdukasi.getJudul()+ "Deskripsi: " + kontenEdukasi.getDeskripsi()+
-                "Isi: " + kontenEdukasi.getContent()+ "Tanggal: " + kontenEdukasi.getTanggal()+ "Uploader: " + 
-                kontenEdukasi.getUploader()+ "Langkah: " + kontenEdukasi.getLangkah()+"Bahan: " + kontenEdukasi.getBahan()+ 
-                "Kandungan Gizi: " + kontenEdukasi.getKandunganGizi());
+        System.out.println("Judul: " + kontenEdukasi.getJudul()+ "Isi: " + kontenEdukasi.getContent()+
+                "Tanggal: " + kontenEdukasi.getTanggal()+ "Uploader: " + kontenEdukasi.getUploader());
        // menampilkan gambar (path gambar) jika tersedia
         if (kontenEdukasi.getImagePath() != null && !kontenEdukasi.getImagePath().isEmpty()) {
             System.out.println("Gambar: " + kontenEdukasi.getImagePath());
