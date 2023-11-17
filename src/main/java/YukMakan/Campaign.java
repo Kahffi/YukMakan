@@ -1,16 +1,16 @@
 package YukMakan;
 import java.util.ArrayList;
 
-public class Donasi {
+public class Campaign {
     private String imagePath;
     private String judul;
     private Admin creator;
     private String deskripsi;
-    private ArrayList <User> donatur = new ArrayList<User>();
+    private ArrayList <User> donatur = new ArrayList<>();
     private int targetDonasi;
     private int currentDonasi;
 
-    public Donasi (String judul, Admin creator, String deskripsi){
+    public Campaign (String judul, Admin creator, String deskripsi){
         this.judul = judul;
         this.creator = creator;
         this.deskripsi = deskripsi;
