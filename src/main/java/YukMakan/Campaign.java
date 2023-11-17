@@ -6,7 +6,7 @@ public class Campaign {
     private String judul;
     private Admin creator;
     private String deskripsi;
-    private ArrayList <User> donatur = new ArrayList<User>();
+    private ArrayList <User> donatur = new ArrayList<>();
     private int targetDonasi;
     private int currentDonasi;
 

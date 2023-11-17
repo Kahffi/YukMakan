@@ -15,12 +15,10 @@ public class Resep extends KontenEdukasi{
     
     public void addUlasan(Ulasan ulasan){
         this.ulasan.add(ulasan);
-    }
-    
+    } 
     public String printUlasan(int index){
         return ulasan.get(index).printUlasan();
-    }
-    
+    }   
     public ArrayList <Ulasan> getUlasan(){
         return this.ulasan;
     }

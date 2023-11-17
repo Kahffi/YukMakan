@@ -14,7 +14,8 @@ import java.util.Scanner;
  * @author Asus
  */
 public class Akun {
-    private Scanner scanner = new Scanner(System.in);
+
+    private Scanner input = new Scanner(System.in);
     public String username;
     private String password;
     private String nama;
@@ -24,6 +25,9 @@ public class Akun {
     private ArrayList <Resep> resep = new ArrayList <Resep>();
     private ArrayList <User> users = new ArrayList <User> ();
     private ArrayList <Admin> admins = new ArrayList <>();
+
+    ArrayList<Ulasan> ulasanList = new ArrayList<>();
+
     
     public Akun(String username, String password, String phoneNum, String nama, String email){
         this.username = username;
@@ -65,17 +69,19 @@ public class Akun {
         while (start != 3){
             System.out.println("Daftar akun :");
             System.out.println("Masukkan username:");
-            username = scanner.nextLine();
+
+            username = input.nextLine();
             // jika username belum ada (checkUsername me-return -1)
             if (checkUsername(username, "user") == -1){
                 System.out.println("Masukkan password : ");
-                password = scanner.nextLine();
+                password = input.nextLine();
                 System.out.println("nama : ");
-                nama = scanner.nextLine();
+                nama = input.nextLine();
                 System.out.println("email : ");
-                email = scanner.nextLine();
+                email = input.nextLine();
                 System.out.println("nomor telfon : ");
-                phoneNum = scanner.nextLine();
+                phoneNum = input.nextLine();
+
                 System.out.println("Daftar Akun berhasil");
                 users.add(new User (username, password, phoneNum, nama, email));
                 start = 3;
@@ -102,12 +108,11 @@ public class Akun {
         if (role.equals("user")){
             while(start != 0){
                 System.out.println("Masukkan username : ");
-                username = scanner.nextLine();
+                username = input.nextLine();
                 akunIndex = checkUsername(username, "user");
-                
                 if(akunIndex >= 0){
                     System.out.println("Masukkan password : ");
-                    password = scanner.nextLine();
+                    password = input.nextLine();
                     //verifikasi apakah username dan password benar
                     if (users.get(akunIndex).loginVer(username, password)){
                         System.out.println("Login berhasil");
@@ -129,11 +134,11 @@ public class Akun {
         else{
             while(start != 0){
                 System.out.println("Masukkan username : ");
-                username = scanner.nextLine();
+                username = input.nextLine();
                 akunIndex = checkUsername(username, "user");
                 if(akunIndex >= 0){
                     System.out.println("Masukkan password : ");
-                    password = scanner.nextLine();
+                    password = input.nextLine();
                     //verifikasi apakah username dan password benar
                     if (users.get(akunIndex).loginVer(username, password)){
                         System.out.println("Login berhasil");
@@ -205,6 +210,25 @@ public class Akun {
     public boolean loginVer(String username, String password){
         return this.username.equals(username) && this.password.equals(password);
     }
+    
+    // lihat konten
+    public void viewKontenEdukasi(KontenEdukasi kontenEdukasi) {
+        System.out.println("Judul: " + kontenEdukasi.getJudul()+ "Deskripsi: " + kontenEdukasi.getDeskripsi()+
+                "Isi: " + kontenEdukasi.getContent()+ "Tanggal: " + kontenEdukasi.getTanggal()+ "Uploader: " + 
+                kontenEdukasi.getUploader()+ "Langkah: " + kontenEdukasi.getLangkah()+"Bahan: " + kontenEdukasi.getBahan()+ 
+                "Kandungan Gizi: " + kontenEdukasi.getKandunganGizi());
+       // menampilkan gambar (path gambar) jika tersedia
+        if (kontenEdukasi.getImagePath() != null && !kontenEdukasi.getImagePath().isEmpty()) {
+            System.out.println("Gambar: " + kontenEdukasi.getImagePath());
+        }
+    }
+    
+    public void viewUlasan(){
+        for (Ulasan ulasan : ulasanList) {
+            System.out.println(ulasan.printUlasan());
+        }
+    }
 
     
 }
+
