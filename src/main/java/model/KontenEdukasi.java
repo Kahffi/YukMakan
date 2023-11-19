@@ -1,4 +1,4 @@
-package YukMakan;
+package model;
 
 public class KontenEdukasi {
 

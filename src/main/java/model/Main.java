@@ -1,8 +1,8 @@
-package YukMakan;
+package model;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import YukMakan.Akun;
+import model.Akun;
 
 
 public class Main {
@@ -24,16 +24,13 @@ public class Main {
         users.add(new User("Nanda07", "nandasiuu", "50487548", "Nanda", "nanadaSiuu@upi.edun"));
         
         // menambahkan listResep
-        listResep.add(new Resep("Capcay Balado",  "17 Agustus 1945", admins.get(0), "Documents/something.png",
+        listResep.add(new Resep("Capcay Balado",  "17 Agustus 1945", "Documents/something.png", admins.get(0),
                 " 12mg Vitamin C\n5g Vitamin A", "1. Masukan ini\n2. Tambahkan itu\n3. Inikan itunya\n4. Capcay Balado siap disajikan",
-                "1. Cabe\n2. Wortel\n3. Jagung\n4. DLL", "Nikmat nikmat mantap"));
+                "1. Cabe\n2. Wortel\n3. Jagung\n4. DLL", "Nikmat nikmat mantap", " 12mg Vitamin C\n5g Vitamin A"));
         
         // menambahkan listUlasan listResep
         listResep.get(0).addUlasan(new Ulasan(users.get(0), "Mantap gan", "17 Agustus 1945"));
         listResep.get(0).addUlasan(new Ulasan(users.get(1), "B aja gan", "17 Agustus 1945"));
-        
-        
-        
         // main menu
         int start = 1;
         
@@ -63,10 +60,7 @@ public class Main {
             }
             users.forEach((User user) -> System.out.println(user.getUsername()));
         }
-        
-        
-            
-            
+
     }
     
     public static void menuUser(int akunIndex){

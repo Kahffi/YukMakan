@@ -1,4 +1,4 @@
-package YukMakan;
+package model;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

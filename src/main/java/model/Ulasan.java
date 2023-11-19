@@ -1,4 +1,4 @@
-package YukMakan;
+package model;
 
 public class Ulasan {
     private User user;

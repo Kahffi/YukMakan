@@ -1,4 +1,4 @@
-package YukMakan;
+package model;
 
 import java.util.ArrayList;
 // child class dari class konten edukasi
@@ -9,8 +9,7 @@ public class Resep extends KontenEdukasi{
     private String bahan;
     private String deskripsi;
 
-    public Resep(String judul, String tanggal, Admin uploader,String imagePath,
-                 String kandunganGizi, String langkah, String bahan, String deskripsi) {
+    public Resep(String judul, String tanggal, String imagePath, Admin uploader, String kandunganGizi, String langkah, String bahan, String deskripsi, String kandunganGizi1) {
         super(judul, tanggal, uploader, imagePath);
         this.kandunganGizi = kandunganGizi;
         this.langkah = langkah;
