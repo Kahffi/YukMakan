@@ -26,7 +26,7 @@ public class Main {
         // menambahkan listResep
         listResep.add(new Resep("Capcay Balado",  "17 Agustus 1945", "Documents/something.png", admins.get(0),
                 " 12mg Vitamin C\n5g Vitamin A", "1. Masukan ini\n2. Tambahkan itu\n3. Inikan itunya\n4. Capcay Balado siap disajikan",
-                "1. Cabe\n2. Wortel\n3. Jagung\n4. DLL", "Nikmat nikmat mantap", " 12mg Vitamin C\n5g Vitamin A"));
+                "1. Cabe\n2. Wortel\n3. Jagung\n4. DLL", "Nikmat nikmat mantap"));
         
         // menambahkan listUlasan listResep
         listResep.get(0).addUlasan(new Ulasan(users.get(0), "Mantap gan", "17 Agustus 1945"));

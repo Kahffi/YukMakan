@@ -9,7 +9,7 @@ public class Resep extends KontenEdukasi{
     private String bahan;
     private String deskripsi;
 
-    public Resep(String judul, String tanggal, String imagePath, Admin uploader, String kandunganGizi, String langkah, String bahan, String deskripsi, String kandunganGizi1) {
+    public Resep(String judul, String tanggal, String imagePath, Admin uploader, String kandunganGizi, String langkah, String bahan, String deskripsi) {
         super(judul, tanggal, uploader, imagePath);
         this.kandunganGizi = kandunganGizi;
         this.langkah = langkah;

@@ -40,7 +40,7 @@ public class Admin extends Akun{
 
         String tanggal = java.time.LocalDate.now().toString();
 
-        Resep newResep = new Resep(judul, content, tanggal, this, imagePath, deskripsi, langkah, bahan, kandunganGizi);
+        Resep newResep = new Resep(judul, tanggal, imagePath, this, kandunganGizi, langkah, bahan, deskripsi);
         createdResep.add(newResep);
         
         

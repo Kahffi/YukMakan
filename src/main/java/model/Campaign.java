@@ -66,4 +66,11 @@ public class Campaign {
     public void setTargetDonasi(int targetDonasi){
         this.targetDonasi = targetDonasi;
     }
+    
+    public void printCampaign(){
+        System.out.println(getJudul() + ":");
+        System.out.println("Deskripsi: " + getDeskripsi());
+        System.out.println("Target donasi: " + getTargetDonasi());
+    }
+    
 }
