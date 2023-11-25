@@ -1,193 +1,179 @@
-package model;
-
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+package model;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author Asus
+ * @author Kahffi
  */
 public class Akun {
-
-    private Scanner input = new Scanner(System.in);
-    public String username;
+    
+    private ArrayList <Resep> resepList = new ArrayList <>();
+    private ArrayList <KontenEdukasi> kontenEduList = new ArrayList <>();
+    private ArrayList <Campaign> campaignList = new ArrayList <>();
+    
+    
+    private String username;
     private String password;
     private String nama;
     private String phoneNum;
     private String email;
-    private ArrayList <KontenEdukasi> kontenEdukasi = new ArrayList <KontenEdukasi>();
-    private ArrayList <Resep> resep = new ArrayList <Resep>();
-    private ArrayList <User> users = new ArrayList <User> ();
-    private ArrayList <Admin> admins = new ArrayList <>();
+    private String role;
 
-    ArrayList<Ulasan> ulasanList = new ArrayList<>();
-
-    
-    public Akun(String username, String password, String phoneNum, String nama, String email){
+    Scanner scanner = new Scanner (System.in);
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public Akun(String username, String password, String nama, String phoneNum, String email, String role) {
         this.username = username;
         this.password = password;
         this.nama = nama;
         this.phoneNum = phoneNum;
         this.email = email;
+        this.role = role;
+    }
+
+    public Akun(ArrayList<Resep> resepList, ArrayList<KontenEdukasi> kontenEduList, ArrayList<Campaign> campaignList, String username, String password, String nama, String phoneNum, String email, String role) {
+        this.resepList = resepList;
+        this.kontenEduList = kontenEduList;
+        this.campaignList = campaignList;
+        this.username = username;
+        this.password = password;
+        this.nama = nama;
+        this.phoneNum = phoneNum;
+        this.email = email;
+        this.role = role;
     }
     
-    public Akun(){}
     
-    public int checkUsername(String username, String role){
-        int i = 0;
-        if (role.equals("user")){
-            while (i != users.size()){
-                if (users.get(i).getUsername().equals(username)){
-                    return i;
-                }
-                i++;
-            }
-            return -1;
-        }
-        else {
-            while (i != users.size()){
-                if (users.get(i).getUsername().equals(username)){
-                    return i;
-                }
-                i++;
-            }
-            return -1;
-        }
-        
-    }   
     
-    // method untuk create akun
-   public void createAkun(){
+    
+    public void editProfile (){
         int start = 1;
         int menu;
-        while (start != 3){
-            System.out.println("Daftar akun :");
-            System.out.println("Masukkan username:");
-
-            username = input.nextLine();
-            // jika username belum ada (checkUsername me-return -1)
-            if (checkUsername(username, "user") == -1){
-                System.out.println("Masukkan password : ");
-                password = input.nextLine();
-                System.out.println("nama : ");
-                nama = input.nextLine();
-                System.out.println("email : ");
-                email = input.nextLine();
-                System.out.println("nomor telfon : ");
-                phoneNum = input.nextLine();
-
-                System.out.println("Daftar Akun berhasil");
-                users.add(new User (username, password, phoneNum, nama, email));
-                start = 3;
+        String newNama, newPhoneNum;
+        while(start != 0){
+           printProfile();
+           System.out.println("1. Ubah nama\n2. Ubah nomor telepon\n3. Kembali");
+           
+            // Integer.parseInt digunakan untuk merubah String ke integer, ini dilakukan karena bila menggunakan nexInt maka scanner akan di-skip.
+           menu = Integer.parseInt(scanner.nextLine()) ;
+            switch (menu) {
+                case 1:
+                    System.out.println("Ubah nama : ");
+                    newNama = scanner.nextLine();
+                    setNama(newNama);
+                    break;
+                case 2:
+                    System.out.println("Ubah nomor telepon : ");
+                    newPhoneNum = scanner.nextLine();
+                    setPhoneNum(newPhoneNum);
+                    break;
+                case 3:
+                    start = 0;
+                    break;
+                default:
+                    printInputError();
+                    break;
             }
-            else if (checkUsername(username, "user") == 1){
-                System.out.println("Username sudah ada, mohon buat username lain");
-            }
-            else{
-                start++;
-            }
-            
         }
-        
     }
-   
-    // method login
-    public int login(String role){
-        int start = 1;
-        String username, password;
-        Akun akun = new Akun();
-        int akunIndex;
-        
-        // metode login untuk user
-        if (role.equals("user")){
-            while(start != 0){
-                System.out.println("Masukkan username : ");
-                username = input.nextLine();
-                akunIndex = checkUsername(username, "user");
-                if(akunIndex >= 0){
-                    System.out.println("Masukkan password : ");
-                    password = input.nextLine();
-                    //verifikasi apakah username dan password benar
-                    if (users.get(akunIndex).loginVer(username, password)){
-                        System.out.println("Login berhasil");
-                        return akunIndex;
-                    }
-                    else{
-                        System.out.println("Login gagal");
-                        return -1;
-                    }
-                }
-                
-                else{
-                    System.out.println("Username belum didaftarkan");
-                    return -1;
-                }
-            }
-        }
-        // metode login untuk admin
-        else{
-            while(start != 0){
-                System.out.println("Masukkan username : ");
-                username = input.nextLine();
-                akunIndex = checkUsername(username, "user");
-                if(akunIndex >= 0){
-                    System.out.println("Masukkan password : ");
-                    password = input.nextLine();
-                    //verifikasi apakah username dan password benar
-                    if (users.get(akunIndex).loginVer(username, password)){
-                        System.out.println("Login berhasil");
-                        return akunIndex;
-                    }
-                    else{
-                        System.out.println("Login gagal");
-                        return -1;
-                    }
-                }
-                
-                else {
-                    System.out.println("Username belum didaftarkan");
-                    return -1;
-                }
-            }
-        }
-        return -1;
+    
+    public void printProfile(){
+        System.out.println("Username : " + this.username);
+        System.out.println("Nama : " + this.nama);
+        System.out.println("Nomor telepon : " + this.phoneNum);
+        System.out.println("Email : " + this.email);
     }
-   
-   
-    // method setter dan getter
+
+    // method untuk menambahkan objek kedalam arraylist agar user dan admin dapat melihat dan mengakses
+    
+    public void addToResepList (Resep resep){
+        resepList.add(resep);
+    }
+    public void addToKontenEduList (KontenEdukasi kontenEd){
+        kontenEduList.add(kontenEd);
+    }
+    public void addToCampaignList (Campaign campaign){
+        campaignList.add(campaign);
+    }
+    
+    // method untuk menghapus objek dari arraylist
+    
+    public void rmFromResepList(int index){
+        resepList.remove(index);
+    }
+    public void rmFromKontenEduList(int index){
+        kontenEduList.remove(index);
+    }
+    public void rmFromCampaignList(int index){
+        campaignList.remove(index);
+    }
+    
+    
+    // setter & getter
+     
+    public ArrayList<Resep> getResepList() {
+        return resepList;
+    }
+
+    public void setResepList(ArrayList<Resep> resepList) {
+        this.resepList = resepList;
+    }
+
+    public ArrayList<KontenEdukasi> getKontenEduList() {
+        return kontenEduList;
+    }
+
+    public void setKontenEduList(ArrayList<KontenEdukasi> kontenEduList) {
+        this.kontenEduList = kontenEduList;
+    }
+
+    public ArrayList<Campaign> getCampaignList() {
+        return campaignList;
+    }
+
+    public void setCampaignList(ArrayList<Campaign> campaignList) {
+        this.campaignList = campaignList;
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+    
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getNama() {
         return nama;
     }
-    public ArrayList<KontenEdukasi> getKontenEdukasi() {
-        return kontenEdukasi;
-    }
-    public void setKontenEdukasi(ArrayList<KontenEdukasi> kontenEdukasi) {
-        this.kontenEdukasi = kontenEdukasi;
-    }
-    public ArrayList<Resep> getResep() {
-        return resep;
-    }
-    public void setResep(ArrayList<Resep> resep) {
-        this.resep = resep;
-    }
+
     public void setNama(String nama) {
         this.nama = nama;
     }
@@ -195,38 +181,56 @@ public class Akun {
     public String getPhoneNum() {
         return phoneNum;
     }
+
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
-    // method untuk konfirmasi usn dan pass saat login
-    public boolean loginVer(String username, String password){
-        return this.username.equals(username) && this.password.equals(password);
-    }
-    
-    // lihat konten
-    public void viewKontenEdukasi(KontenEdukasi kontenEdukasi) {
-        System.out.println("Judul: " + kontenEdukasi.getJudul()+ "Isi: " + kontenEdukasi.getContent()+
-                "Tanggal: " + kontenEdukasi.getTanggal()+ "Uploader: " + kontenEdukasi.getUploader());
-       // menampilkan gambar (path gambar) jika tersedia
-        if (kontenEdukasi.getImagePath() != null && !kontenEdukasi.getImagePath().isEmpty()) {
-            System.out.println("Gambar: " + kontenEdukasi.getImagePath());
-        }
-    }
-    
-    public void viewUlasan(){
-        for (Ulasan ulasan : ulasanList) {
-            System.out.println(ulasan.printUlasan());
-        }
+
+    public String getRole() {
+        return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
     
+    // misc method
+    
+    //method agar memungkinkan copy paste paragraph dan juga memasukan input dengan garis baru
+    public String createParagraph(){
+        StringBuilder sb = new StringBuilder();
+        String str;
+        try {
+            System.out.println("start");
+            while (!(str = br.readLine()).isEmpty()){
+                System.out.println("yok");
+                sb.append(str).append("\n");
+            }
+            System.out.println(sb.toString().length());
+            return sb.toString();
+        } catch (IOException ex) {
+            Logger.getLogger(Akun.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    public void printInputError(){
+        System.out.println("Input yang anda masukkan salah");
+    }
+    // mengambil tanggal dan jam saat ini
+    public String getDate(){
+        String date;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        LocalDateTime current = LocalDateTime.now();
+        date = dtf.format(current);
+        return date;
+    }
 }
-

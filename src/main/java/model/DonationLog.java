@@ -8,6 +8,6 @@ package model;
  *
  * @author Kahffi
  */
-public class Campaign {
+public class DonationLog {
     
 }

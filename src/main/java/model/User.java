@@ -1,22 +1,47 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class User extends Akun {
-    // arraylist digunakan untuk mempermudah proses modifikasi array
-    ArrayList <Resep> daftarFavorit = new ArrayList<>();
-    ArrayList<Campaign> historyDonasi = new ArrayList<>();
-    Scanner input = new Scanner(System.in);
-    ArrayList<Ulasan> ulasanList = new ArrayList<>();
+/**
+ *
+ * @author Kahffi
+ */
+public class User extends Akun{
+    
+    private ArrayList <Resep> daftarFavorit;
+    private ArrayList <DonationLog> riwayatDonasi;
+    
 
-
-
-    public User(String username, String password, String phoneNum, String nama, String email){
-        super(username, password, phoneNum, nama, email);
+    public User(String username, String password, String nama, String phoneNum, String email, String role) {
+        super(username, password, nama, phoneNum, email, role);
     }
 
-    public User(){}
+    public User(Ulasan ulasan, ArrayList<Resep> daftarFavorit, String username, String password, String nama,
+            String phoneNum, String email, String role, ArrayList<Resep> resepList, ArrayList<KontenEdukasi> kontenEduList,
+            ArrayList<Campaign> campaignList, ArrayList <DonationLog> riwayatDonasi) {
+        super(resepList, kontenEduList, campaignList, username, password, nama, phoneNum, email, role);
+        this.daftarFavorit = daftarFavorit;
+        this.riwayatDonasi = riwayatDonasi;
+    }
+    
+    public User(ArrayList<Resep> daftarFavorit, String username, String password, String nama, String phoneNum, String email, String role) {
+        super(username, password, nama, phoneNum, email, role);
+        this.daftarFavorit = daftarFavorit;
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
     
     //method untuk menambahkan resep kedalam daftar favorit
     public void addToFav(Resep resep){
@@ -27,41 +52,23 @@ public class User extends Akun {
         daftarFavorit.remove(index);
     }
     
-    // Method untuk berdonasi
-    public void donate(Campaign campaign, int nominalDonasi){
-        campaign.setDonatur(this);
-        campaign.setCurrentDonasi(nominalDonasi);
-        addToDonationHistory(campaign);
+    
+    //setter & getter
+    public ArrayList<Resep> getDaftarFavorit() {
+        return daftarFavorit;
+    }
+
+    public ArrayList<DonationLog> getRiwayatDonasi() {
+        return riwayatDonasi;
+    }
+
+    public void setRiwayatDonasi(ArrayList<DonationLog> riwayatDonasi) {
+        this.riwayatDonasi = riwayatDonasi;
     }
     
-    // Method untuk histori donasi user
-    public ArrayList<String> getDonationHistory() {
-        ArrayList<String> donationHistory = new ArrayList<>();
-        for (Campaign campaign : historyDonasi) {
-            donationHistory.add("Campaign: " + campaign.getJudul() + ", Nominal Donasi: " + campaign.getCurrentDonasi());
-        }
-        return donationHistory;
+    public void setDaftarFavorit(ArrayList<Resep> daftarFavorit) {
+        this.daftarFavorit = daftarFavorit;
     }
-    
-    // method untuk add history donasi
-    public void addToDonationHistory(Campaign campaign) {
-        historyDonasi.add(campaign);
-    }
-    
    
-    
-    // Method untuk melakukan ulasan
-    public void createUlasan(String ulasan, String tanggalUlasan){
-        System.out.print("Masukkan ulasan Anda: ");
-        ulasan = input.nextLine();
-        System.out.print("tanggal: ");
-        tanggalUlasan = input.nextLine(); 
-        Ulasan userUlasan = new Ulasan(this, ulasan, tanggalUlasan);
-        ulasanList.add(userUlasan);
-    }
-    
-    
-    
-    
     
 }

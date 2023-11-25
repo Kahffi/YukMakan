@@ -1,7 +1,5 @@
-module YukMakan {
+module model {
     requires javafx.controls;
-    requires javafx.fxml;
-
-    opens model to javafx.fxml;
+    requires java.sql;
     exports model;
 }
