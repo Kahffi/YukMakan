@@ -44,6 +44,40 @@ public class AkunDAO {
         registerAccount(values);
     }
     
+    public static User getUser(String usn){
+         String query = "Select * from akun where username = '%s'";
+        query = String.format(query, usn);
+        try {
+            conn = BaseDAO.getConn();
+            stmt = conn.prepareStatement(query);
+            rs = stmt.executeQuery();
+            
+            if (!rs.next()){
+                String username, password, nama, phoneNum, email, role;
+                
+                username = rs.getString(1);
+                password = rs.getString(2);
+                nama = rs.getString(3);
+                phoneNum = rs.getString(4);
+                email = rs.getString(5);
+                role = rs.getString(6);
+                conn.close();
+                User us = new User (username, password, nama, phoneNum, email, role);
+                return us;
+                
+            }
+            else{
+                System.out.println("data tidak ditemukan");
+                return null;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(KontenEduDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("terjadi error");
+            return null;
+        }
+    }
+    
     public static Admin getAdmin(String usn){
         String query = "Select * from akun where username = '%s'";
         query = String.format(query, usn);
