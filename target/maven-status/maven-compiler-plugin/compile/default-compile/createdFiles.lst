@@ -3,6 +3,7 @@ model\KontenEdukasi.class
 model\App.class
 utils\BaseDAO.class
 model\Campaign.class
+utils\CampaignDAO.class
 model\Akun.class
 model\SystemInfo.class
 module-info.class
@@ -13,3 +14,4 @@ utils\AkunDAO.class
 utils\KontenEduDAO.class
 model\User.class
 model\Admin.class
+utils\UlasanDAO.class
