@@ -5,7 +5,7 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.UUID;
 
 /**
  *
@@ -15,33 +15,40 @@ public class User extends Akun{
     
     private ArrayList <Resep> daftarFavorit;
     private ArrayList <DonationLog> riwayatDonasi;
+    private ArrayList <Ulasan> createdUlasan = new ArrayList <>();
     
 
     public User(String username, String password, String nama, String phoneNum, String email, String role) {
         super(username, password, nama, phoneNum, email, role);
     }
 
-    public User(Ulasan ulasan, ArrayList<Resep> daftarFavorit, String username, String password, String nama,
+    public User(ArrayList<Resep> daftarFavorit, ArrayList <Ulasan> createdUlasan, String username, String password, String nama,
             String phoneNum, String email, String role, ArrayList<Resep> resepList, ArrayList<KontenEdukasi> kontenEduList,
             ArrayList<Campaign> campaignList, ArrayList <DonationLog> riwayatDonasi) {
         super(resepList, kontenEduList, campaignList, username, password, nama, phoneNum, email, role);
         this.daftarFavorit = daftarFavorit;
         this.riwayatDonasi = riwayatDonasi;
+        this.createdUlasan = createdUlasan;
     }
     
     public User(ArrayList<Resep> daftarFavorit, String username, String password, String nama, String phoneNum, String email, String role) {
         super(username, password, nama, phoneNum, email, role);
         this.daftarFavorit = daftarFavorit;
     }
+    
+    public Ulasan createUlasan(){
+        Ulasan u;
+        u = new Ulasan(this);
+        u.setId(generateUUID());
+        System.out.println("masukkan ulasan:");
+        String newUlasan = super.createParagraph();
+        u.setUlasan(newUlasan);
+        System.out.println("ulasan berhasil diubah");
+        u.printUlasan();
+        return u;
+    }
+    
 
-    
-    
-    
-    
-    
-    
-    
-    
     
     //method untuk menambahkan resep kedalam daftar favorit
     public void addToFav(Resep resep){
@@ -52,8 +59,20 @@ public class User extends Akun{
         daftarFavorit.remove(index);
     }
     
+    public void setCreatedUlasan(ArrayList <Ulasan> createdUlasan){    
+        this.createdUlasan = createdUlasan;
+    }
     
+    public ArrayList<Ulasan> getCreatedUlasan() {    
+        return createdUlasan;
+    }
+
     //setter & getter
+    public void addCreatedUlasan(Ulasan u) {    
+        createdUlasan.add(u);
+    }
+    
+
     public ArrayList<Resep> getDaftarFavorit() {
         return daftarFavorit;
     }
@@ -69,6 +88,6 @@ public class User extends Akun{
     public void setDaftarFavorit(ArrayList<Resep> daftarFavorit) {
         this.daftarFavorit = daftarFavorit;
     }
-   
-    
+    public UUID generateUUID(){
+        return UUID.randomUUID();}
 }
