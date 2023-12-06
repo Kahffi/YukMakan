@@ -22,6 +22,7 @@ public class Akun {
     private ArrayList <Resep> resepList = new ArrayList <>();
     private ArrayList <KontenEdukasi> kontenEduList = new ArrayList <>();
     private ArrayList <Campaign> campaignList = new ArrayList <>();
+    private ArrayList <Ulasan> ulasanList = new ArrayList<>();
     
     
     private String username;
@@ -106,9 +107,11 @@ public class Akun {
     public void addToCampaignList (Campaign campaign){
         campaignList.add(campaign);
     }
+    public void addToUlasanList(Ulasan ulasan){
+        ulasanList.add(ulasan);
+    }
     
     // method untuk menghapus objek dari arraylist
-    
     public void rmFromResepList(int index){
         resepList.remove(index);
     }
@@ -118,6 +121,11 @@ public class Akun {
     public void rmFromCampaignList(int index){
         campaignList.remove(index);
     }
+    public void rmFromUlasanList(int index){
+        ulasanList.remove(index);
+    }
+    
+    
     
     
     // setter & getter

@@ -4,7 +4,8 @@
  */
 package model;
 import java.util.UUID;
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -25,18 +26,20 @@ public class Ulasan{
         this.user = user;
         this.ulasan = ulasan;
         this.tanggalUlasan = ulasan;
-    }
-    
+    }  
     public Ulasan(UUID id, String ulasan, String tanggalUlasan){
         this.ulasan = ulasan;
         this.tanggalUlasan = ulasan;
         this.id = id;     
     }
+    public Ulasan(User user){
+        this.user = user;
+    }
 
     public UUID getId() {
         return id;
     }
-
+    
     public void setId(UUID id) {
         this.id = id;
     } 
@@ -46,6 +49,13 @@ public class Ulasan{
     }
     public String getTanggalUlasan(){
         return tanggalUlasan;
+    }  
+    public String getDate(){
+        String date;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        LocalDateTime current = LocalDateTime.now();
+        date = dtf.format(current);
+        return date;
     }
     public String getUlasanUsername(){
         return user.getUsername();

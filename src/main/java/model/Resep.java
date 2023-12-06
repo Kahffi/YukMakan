@@ -37,6 +37,9 @@ public class Resep {
         this.datePosted = datePosted;
         this.uploader = uploader;
     }
+    public Resep(Admin uploader){
+        this.uploader = uploader;
+    }
     
     
     public void printResep(){
