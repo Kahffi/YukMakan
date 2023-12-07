@@ -43,8 +43,8 @@ public class AkunDAO {
         );
         registerAccount(values);
     }
-    
-    public static User getUser(String usn){
+     public static User getUser(String usn){
+
          String query = "Select * from akun where username = '%s'";
         query = String.format(query, usn);
         try {
@@ -77,7 +77,6 @@ public class AkunDAO {
             return null;
         }
     }
-    
     public static Admin getAdmin(String usn){
         String query = "Select * from akun where username = '%s'";
         query = String.format(query, usn);
