@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Asus\Documents\YukMakan\src\main\java\model\Campaign.java
 C:\Users\Asus\Documents\YukMakan\src\main\java\model\KontenEdukasi.java
 C:\Users\Asus\Documents\YukMakan\src\main\java\utils\KontenEduDAO.java
@@ -13,3 +14,22 @@ C:\Users\Asus\Documents\YukMakan\src\main\java\model\Admin.java
 C:\Users\Asus\Documents\YukMakan\src\main\java\model\Ulasan.java
 C:\Users\Asus\Documents\YukMakan\src\main\java\utils\BaseDAO.java
 C:\Users\Asus\Documents\YukMakan\src\main\java\model\SystemInfo.java
+=======
+D:\Hehehe\PBO\YukMakan\src\main\java\utils\BaseDAO.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\User.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\Admin.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\DonationLog.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\Akun.java
+D:\Hehehe\PBO\YukMakan\src\main\java\module-info.java
+D:\Hehehe\PBO\YukMakan\src\main\java\utils\UlasanDAO.java
+D:\Hehehe\PBO\YukMakan\src\main\java\Main\java.java
+D:\Hehehe\PBO\YukMakan\src\main\java\utils\AkunDAO.java
+D:\Hehehe\PBO\YukMakan\src\main\java\utils\KontenEduDAO.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\SystemInfo.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\Resep.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\KontenEdukasi.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\Campaign.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\App.java
+D:\Hehehe\PBO\YukMakan\src\main\java\utils\CampaignDAO.java
+D:\Hehehe\PBO\YukMakan\src\main\java\model\Ulasan.java
+>>>>>>> 0b234b8b8beba1f8e97bdca3b90ee72c141bfe5d
