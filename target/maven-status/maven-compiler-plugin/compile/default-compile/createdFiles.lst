@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+=======
+Main\java.class
+model\KontenEdukasi.class
+model\App.class
+utils\BaseDAO.class
+model\Campaign.class
+utils\CampaignDAO.class
+>>>>>>> 0b234b8b8beba1f8e97bdca3b90ee72c141bfe5d
 model\Akun.class
 model\KontenEdukasi.class
 module-info.class
@@ -7,3 +16,4 @@ model\Resep.class
 model\Ulasan.class
 model\Campaign.class
 model\Admin.class
+utils\UlasanDAO.class

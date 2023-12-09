@@ -118,7 +118,50 @@ public class Admin extends Akun{
         return k = null;
     }
     
-//create 
+    // Create campaign
+    public Campaign createCampaign(Admin creator) {
+        Campaign c;
+        c = new Campaign(this);
+        c.setId(generateUUID());
+        System.out.println("Judul campaign: ");
+        c.setJudul(scanner.nextLine());
+        System.out.println("Deskripsi campaign: ");
+        c.setDeskripsi(super.createParagraph());
+        c.setTanggal(super.getDate());
+        System.out.println("Sumber gambar campaign: ");
+        c.setImagePath(scanner.nextLine());
+        System.out.println("Target donasi campaign: ");
+        c.setTargetDonasi(scanner.nextInt());
+        super.addToCampaignList(c);
+
+        return c;
+    }
+
+    public Campaign updateCampaignDesc(Campaign c) {
+        c.printCampaign();
+        System.out.println("Masukkan deskripsi campaign yang baru : ");
+        String newDesc = super.createParagraph();
+        c.setDeskripsi(newDesc);
+        System.out.println("Deskripsi campaign berhasil diubah");
+        c.printCampaign();
+        return c;
+    }
+
+    public Campaign updateCampaignTitle(Campaign c) {
+        c.printCampaign();
+        System.out.println("Masukkan judul campaign yang baru : ");
+        String newTitle = super.createParagraph();
+        c.setJudul(newTitle);
+        System.out.println("Judul campaign berhasil diubah");
+        c.printCampaign();
+        return c;
+    }
+
+    public Campaign delCampaign(Campaign c) {
+        c = null;
+        System.out.println("Campaign berhasil dihapus");
+        return c;
+    }
     
     
     // setter & getter

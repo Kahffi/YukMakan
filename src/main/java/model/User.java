@@ -5,7 +5,11 @@
 package model;
 
 import java.util.ArrayList;
+
 import java.util.UUID;
+import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -48,7 +52,20 @@ public class User extends Akun{
         return u;
     }
     
-
+    private String getCurrentTimestampAsString() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return currentDateTime.format(formatter);
+    }
+    
+    public void donateToCampaign(Campaign campaign, int amount) {
+        String currentTimestamp = getCurrentTimestampAsString();
+        DonationLog donationLog = new DonationLog(campaign, this, amount);
+        riwayatDonasi.add(donationLog);
+        campaign.addDonationLog(donationLog);
+        campaign.setCurrentDonasi(campaign.getCurrentDonasi() + amount);
+        System.out.println("Donation successful!");
+    }
     
     //method untuk menambahkan resep kedalam daftar favorit
     public void addToFav(Resep resep){
