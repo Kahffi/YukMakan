@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox prefHeight="720.0" prefWidth="1280.0" styleClass="mainPane" stylesheets="@../style/Landing.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpController">
+   <children>
+      <AnchorPane prefHeight="720.0" prefWidth="638.0">
+         <children>
+            <VBox layoutX="68.0" layoutY="192.0" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="68.0" AnchorPane.rightAnchor="78.0">
+               <children>
+                  <Text fill="#28462b" stroke="#d2e3c8" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="SELAMAT" wrappingWidth="470.48433685302734">
+                     <font>
+                        <Font name="Arial Black" size="70.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#28462b" stroke="#d2e3c8" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="DATANG" wrappingWidth="485.1510238647461">
+                     <font>
+                        <Font name="Arial Black" size="70.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#faf8ed2e" stroke="#28462b" strokeType="OUTSIDE" strokeWidth="0.5" text="yukMakan!" wrappingWidth="386.31771087646484">
+                     <font>
+                        <Font size="41.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <ImageView fitHeight="76.0" fitWidth="81.0" layoutX="32.0" layoutY="30.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" smooth="false" AnchorPane.bottomAnchor="614.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="537.0152893066406">
+               <image>
+                  <Image url="@../images/Coklat_Hitam_Profesional_Perusahaan_Penyedia_Makanan_Sehat_Presentasi__3_-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="728.0" prefWidth="654.0">
+         <children>
+            <VBox alignment="CENTER" layoutX="203.0" layoutY="102.0" minHeight="300.0" spacing="20.0" style="-fx-background-radius: 40;" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="115.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <HBox fx:id="formName" alignment="CENTER" prefHeight="50.0" spacing="15.0" styleClass="formContainer">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT" opacity="0.71" pickOnBounds="true" smooth="false" styleClass="formIcons">
+                           <image>
+                              <Image url="@../images/id.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="25.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox>
+                           <children>
+                              <Label styleClass="formLabel" text="Nama" />
+                              <TextField fx:id="txtName" accessibleRole="BUTTON" prefHeight="35.0" prefWidth="250.0" promptText="Masukan Nama" style="-fx-background-image: #FAF8ED;" styleClass="textField" stylesheets="@../style/Landing.css" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="formUsn" alignment="CENTER" prefHeight="50.0" spacing="15.0" styleClass="formContainer">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT" opacity="0.7" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../images/user.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="25.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox>
+                           <children>
+                              <Label styleClass="formLabel" text="Username" />
+                              <TextField fx:id="txtUsn" accessibleRole="BUTTON" prefHeight="35.0" prefWidth="250.0" promptText="Masukan Username" style="-fx-background-image: #FAF8ED;" styleClass="textField" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="formPass" alignment="CENTER" prefHeight="50.0" spacing="15.0" styleClass="formContainer">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT" opacity="0.7" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../images/lock.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="25.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox>
+                           <children>
+                              <Label styleClass="formLabel" text="Password" />
+                              <TextField fx:id="txtPass" accessibleRole="BUTTON" prefHeight="35.0" prefWidth="250.0" promptText="Masukan Password" style="-fx-background-image: #FAF8ED;" styleClass="textField" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="formEmail" alignment="CENTER" prefHeight="50.0" spacing="15.0" styleClass="formContainer">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT" opacity="0.7" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../images/envelope.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="25.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox>
+                           <children>
+                              <Label styleClass="formLabel" text="Email" />
+                              <TextField fx:id="txtEmail" accessibleRole="BUTTON" prefHeight="35.0" prefWidth="250.0" promptText="Masukan Email" style="-fx-background-image: #FAF8ED;" styleClass="textField" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="formPhone" alignment="CENTER" prefHeight="50.0" spacing="15.0" styleClass="formContainer">
+                     <children>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" nodeOrientation="INHERIT" opacity="0.7" pickOnBounds="true" smooth="false">
+                           <image>
+                              <Image url="@../images/call.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="25.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <VBox>
+                           <children>
+                              <Label styleClass="formLabel" text="Nomor Telefon" />
+                              <TextField fx:id="txtPhone" accessibleRole="BUTTON" prefHeight="35.0" prefWidth="250.0" promptText="Masukan No Telp" style="-fx-background-image: #FAF8ED;" styleClass="textField" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Button fx:id="btnDaftar" alignment="CENTER" maxHeight="34.0" mnemonicParsing="false" onAction="#proceedLogin" prefHeight="80.0" prefWidth="200.0" style="-fx-background-radius: 10; -fx-background-color: #28462b;" styleClass="formBtn" text="DAFTAR" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="19.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Label fx:id="lblErr" text="Username/password salah" textFill="RED" underline="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Group>
+                           <children>
+                              <Button fx:id="btnBackToLogin" mnemonicParsing="false" onAction="#backToLogin" style="-fx-background-color: none;" styleClass="regularText" text="&lt; Kembali Ke halaman login" underline="true">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </Group>
+                        <HBox fx:id="toDaftarContainer" alignment="CENTER" spacing="5.0">
+                           <children>
+                              <Label prefHeight="39.0" prefWidth="156.0" styleClass="regularText" text="Belum punya akun?">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnToDaftar" alignment="CENTER" mnemonicParsing="false" onAction="#toDaftar" style="-fx-background-color: none;" styleClass="regularText" text="Daftar" underline="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="30.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

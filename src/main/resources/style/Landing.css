@@ -1,0 +1,42 @@
+@font-face{
+	font-family: jomhuria;
+	src: url("../fonts/Jomhuria-Regular.ttf");
+}
+
+.mainPane{
+	-fx-background-color: #B2C8BA;
+
+}
+
+.regularText{
+	-fx-text-fill: #28462b;
+	
+}
+
+.h1{
+	-fx-font-family: jomhuria;
+	-fx-font-size: 170px;
+}
+
+.formLabel{
+	-fx-font-weight: normal;
+	-fx-font-size: 20px;
+	-fx-text-fill: #28462b;
+}
+
+.formBtn{
+	-fx-pref-width: 280px;
+	-fx-border-color: black;
+	-fx-border-style: solid;
+	-fx-border-width: 2.3px;
+	-fx-border-radius: 8;
+}
+
+.formContainer{
+	-fx-pref-height: 70px;
+	-fx-alignment: center;
+}
+
+.textField{
+	-fx-background-radius: 5px;
+}
