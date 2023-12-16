@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package utils;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,7 +62,7 @@ public class AkunDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	return null;
+    	return "";
     	
     }
     
@@ -187,7 +187,12 @@ public class AkunDAO {
     		conn = BaseDAO.getConn();
     		stmt = conn.prepareStatement(query);
     		rs = stmt.executeQuery();
-    		return true;
+    		if (rs.next()) {
+				return true;
+			}
+    		else {
+				return false;
+			}
     		
     	} catch(SQLException ex) {
     		Logger.getLogger(AkunDAO.class.getName()).log(Level.SEVERE, null, ex);

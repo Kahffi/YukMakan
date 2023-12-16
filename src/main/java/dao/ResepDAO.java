@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package utils;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -126,4 +126,34 @@ public class ResepDAO {
         
     }
     
+    public ArrayList<Resep> getAllResep(){
+    	ArrayList <Resep> ls = new ArrayList<>();
+    	conn = BaseDAO.getConn();
+    	try {
+			stmt = conn.prepareStatement("select * from akun");
+			rs = stmt.executeQuery();
+			while(!rs.next()) {
+				UUID id;
+		    	String judul, deskripsi, langkah, bahan, kandunganGizi, imagePath, datePosted;
+		    	Admin admin;
+				id = UUID.fromString(rs.getString("id"));
+				admin = AkunDAO.getAdmin(rs.getString("admin_username"));
+				judul = rs.getString("judul");
+				datePosted = rs.getString("datePosted");
+				deskripsi = rs.getString("deskripsi");
+				langkah = rs.getString("langkah");
+				bahan = rs.getString("bahan");
+				kandunganGizi = rs.getString("kandunganGizi");
+				imagePath = rs.getString("imagePath");
+				
+				ls.add(new Resep(id, judul, deskripsi, langkah, bahan, kandunganGizi, imagePath, datePosted, admin));
+			}
+			return ls;
+			
+		} catch (SQLException e) {
+			System.out.println("Terjadi kesalahan saat mengambil data resep dari database");
+			e.printStackTrace();
+			return null;
+		}
+    }
 }

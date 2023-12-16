@@ -4,25 +4,31 @@
  */
 package controller;
 
+import static dao.AkunDAO.getAccRole;
+import static dao.AkunDAO.getAdmin;
+import static dao.AkunDAO.getUser;
+import static dao.AkunDAO.registerAccount;
+import static dao.AkunDAO.validateAcc;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import static utils.AkunDAO.getUser;
-import static utils.AkunDAO.registerAccount;
-import static utils.AkunDAO.getAccRole;
-import static utils.AkunDAO.validateAcc;
-import static utils.AkunDAO.getAdmin;
 import model.Akun;
 import model.User;
 import model.Admin;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -95,6 +101,7 @@ public class SignUpController implements Initializable {
     	emptyAllTxtField();
 		formEmail.setVisible(false);lblErr.setVisible(false); formName.setVisible(false); formPhone.setVisible(false);
 		toDaftarContainer.setVisible(true);
+		btnBackToLogin.setVisible(false);
     }
     
     @FXML
@@ -125,11 +132,7 @@ public class SignUpController implements Initializable {
     		else if (getAccRole(usn).equals("user")) {
     			if (validateAcc(usn,pass)) {
     				user = getUser(usn);
-    				/* TODO
-    				 * Tambahin untuk lanjut ke dashboard user
-    				 */
-    				lblErr.setVisible(true);
-    				lblErr.setText("Login berhasil");// sementara untuk ngecek
+    				goToUsrDash();
     			}
     			else {
     				lblErr.setVisible(true);
@@ -150,13 +153,9 @@ public class SignUpController implements Initializable {
     		if (!usn.isBlank() && !pass.isBlank() && !name.isBlank() && !email.isBlank() && !phone.isBlank()) {
     			
     			registerAccount(usn, pass, name, phone, email, role);
-    			/*TODO
-    			 * isi untuk navigasi ke dashboard user
-    			 */
+    			user = new User(name, pass, name, phone, email, role);
     			
-    			// sementara untuk ngecek
-    			lblErr.setVisible(true);
-    			lblErr.setText("Daftar akun berhasil");
+    			goToUsrDash();
     		}
     		else {
     			lblErr.setVisible(true);
@@ -183,6 +182,18 @@ public class SignUpController implements Initializable {
     	txtUsn.setText(null); txtPass.setText(null); txtPhone.setText(null); txtEmail.setText(null); txtName.setText(null);
     }
 
-	
+    private void goToUsrDash(){
+    	try {
+			Parent usrDashboardPage = FXMLLoader.load(getClass().getResource("/view/UserDashboard.fxml"));
+			Scene scene = new Scene(usrDashboardPage);
+			Stage thisStage = (Stage) txtUsn.getScene().getWindow();
+			thisStage.setScene(scene);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }
 
 }

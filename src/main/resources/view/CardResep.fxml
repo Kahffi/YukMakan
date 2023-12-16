@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="cardContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#toResep" prefHeight="310.0" prefWidth="241.0" spacing="5.0" style="-fx-background-color: B2C8BA;" styleClass="mainContainer" stylesheets="@../style/ItemCard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CardResepController">
+   <children>
+      <ImageView fx:id="fotoResep" fitHeight="117.0" fitWidth="221.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/add_photo_alternate.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="judulResep" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="246.0" text="Telur Kecap" textOverrun="CENTER_WORD_ELLIPSIS">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="deskripsiResep" alignment="TOP_LEFT" layoutX="39.0" layoutY="165.0" maxWidth="1.7976931348623157E308" prefHeight="62.0" prefWidth="188.0" text="Telur makanan yang praktis dibuat namun menghasilkan rasa yang lezat. Perpaduan rasa gurih telur dengan kecap manis memang menjadikannya menu favorit bagi sebagian orang, terutama anak kos yang ingin serba cepat dan murah." wrapText="true" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="3.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER_LEFT" spacing="5.0">
+         <children>
+            <Label maxWidth="1.7976931348623157E308" text="Dibuat Oleh: ">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="namaAdmin" maxWidth="1.7976931348623157E308" text="Admin name" underline="true" wrapText="true">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <HBox layoutX="26.0" layoutY="311.0" spacing="5.0">
+         <children>
+            <Label maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="58.0" text="Tanggal: ">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+            <Label fx:id="tanggal" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="62.0" text="07/06/5" underline="true" wrapText="true">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+   </padding>
+   <effect>
+      <DropShadow height="29.31" radius="9.3275" spread="0.26" width="10.0" />
+   </effect>
+</VBox>

@@ -1,0 +1,49 @@
+#mainSection:focused{
+	-fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+    -fx-padding: 1;
+
+}
+
+.navbarContainer{
+	-fx-text-fill: red;
+}
+
+.cardsContainer{
+	-fx-background-color: #C1C5AA;
+}
+
+.navbarTxt{
+	-fx-text-fill: #C1C5AA;
+	-fx-font-size: 20px;
+}
+
+.mouseHover:hover{
+	-fx-background-color:  #C1C5AA;
+	-fx-text-fill: #5B6B61;
+}
+
+
+.navbarBtn{
+	-fx-text-fill: #C1C5AA;
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+	-fx-background-color:  #5B6B61;
+	-fx-background-radius: 0;
+	-fx-cursor: hand;
+	-fx-pref-width: 268;
+}
+
+.navbarTopAffected{
+	-fx-background-radius: 0 0 25 0;
+}
+
+.navbarBottomAffected{
+	-fx-background-radius: 0 25 0 0;
+}
+
+.navbarBtnSelected{
+	-fx-background-color:  #C1C5AA;
+	-fx-text-fill: #5B6B61;
+}
+
