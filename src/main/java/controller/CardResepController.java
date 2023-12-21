@@ -38,6 +38,7 @@ public class CardResepController {
     	deskripsiResep.setText(resep.getJudul());
     	namaAdmin.setText(resep.getUploader().getUsername());
     	tanggal.setText(resep.getDatePosted());
+
     }
     
     

@@ -5,6 +5,10 @@
 
 }
 
+.mainPanel{
+	-fx-background-color: #C1C5AA;
+}
+
 .navbarContainer{
 	-fx-text-fill: red;
 }

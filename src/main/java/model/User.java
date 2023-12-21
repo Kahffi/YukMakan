@@ -4,10 +4,13 @@
  */
 package model;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 
 import java.util.UUID;
 import java.util.Scanner;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -25,10 +28,16 @@ public class User extends Akun{
     public User(String username, String password, String nama, String phoneNum, String email, String role) {
         super(username, password, nama, phoneNum, email, role);
     }
+    
+    public User(String username, String password, String nama, String phoneNum, String email, String role,
+			Image profilePict) {
+		super(username, password, nama, phoneNum, email, role, profilePict);
+		// TODO Auto-generated constructor stub
+	}
 
     public User(ArrayList<Resep> daftarFavorit, ArrayList <Ulasan> createdUlasan, String username, String password, String nama,
-            String phoneNum, String email, String role, ArrayList<Resep> resepList, ArrayList<KontenEdukasi> kontenEduList,
-            ArrayList<Campaign> campaignList, ArrayList <DonationLog> riwayatDonasi) {
+        String phoneNum, String email, String role, ArrayList<Resep> resepList, ArrayList<KontenEdukasi> kontenEduList,
+        ArrayList<Campaign> campaignList, ArrayList <DonationLog> riwayatDonasi) {
         super(resepList, kontenEduList, campaignList, username, password, nama, phoneNum, email, role);
         this.daftarFavorit = daftarFavorit;
         this.riwayatDonasi = riwayatDonasi;

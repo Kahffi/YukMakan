@@ -4,6 +4,9 @@
  */
 package model;
 
+import javafx.scene.image.Image;
+
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
@@ -13,17 +16,28 @@ import java.util.UUID;
  * @author Kahffi
  */
 public class Admin extends Akun{
-    
+
     private ArrayList <KontenEdukasi> createdKontenEdu = new ArrayList <>();
     private ArrayList <Campaign> createdCampaign = new ArrayList <>();
     private ArrayList <Resep> createdResep = new ArrayList <>();
-    
-    
+
+
     //constructor
     public Admin(String username, String password, String nama, String phoneNum, String email, String role) {
         super(username, password, nama, phoneNum, email, role);
     }
-    public Admin(ArrayList<KontenEdukasi> createdKontenEdu, ArrayList<Campaign> createdCampaign, ArrayList<Resep> createdResep, String username, String password, String nama, String phoneNum, String email, String role) {
+
+
+
+    public Admin(String username, String password, String nama, String phoneNum, String email, String role,
+			Image profilePict) {
+		super(username, password, nama, phoneNum, email, role, profilePict);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public Admin(ArrayList<KontenEdukasi> createdKontenEdu, ArrayList<Campaign> createdCampaign, ArrayList<Resep> createdResep, String username, String password, String nama, String phoneNum, String email, String role) {
         super(username, password, nama, phoneNum, email, role);
         this.createdKontenEdu = createdKontenEdu;
         this.createdCampaign = createdCampaign;

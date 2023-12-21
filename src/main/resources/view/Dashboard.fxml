@@ -29,7 +29,7 @@
          <children>
             <HBox fx:id="navbarProfile" alignment="CENTER_LEFT" onMouseClicked="#toProfile" prefHeight="130.0" prefWidth="225.0" spacing="10.0" styleClass="navbarBtn" stylesheets="@../style/UserDashboard.css">
                <children>
-                  <ImageView fx:id="profilePict" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="profilePict" fitHeight="60.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/account_circle.png" />
                      </image>

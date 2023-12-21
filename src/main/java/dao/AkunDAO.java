@@ -4,6 +4,9 @@
  */
 package dao;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +14,10 @@ import java.sql.SQLException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.mysql.cj.Query;
+
+import javafx.scene.image.Image;
 import model.Akun;
 import model.User;
 import model.Admin;
@@ -66,8 +73,8 @@ public class AkunDAO {
     	
     }
     
-     public static User getUser(String usn){
-
+    public static User getUser(String usn){
+        User us;
          String query = "Select * from akun where username = '%s'";
         query = String.format(query, usn);
         try {
@@ -77,6 +84,8 @@ public class AkunDAO {
             
             if (rs.next()){
                 String username, password, nama, phoneNum, email, role;
+                InputStream profilePict;
+                
                 
                 username = rs.getString(1);
                 password = rs.getString(2);
@@ -84,23 +93,33 @@ public class AkunDAO {
                 phoneNum = rs.getString(4);
                 email = rs.getString(5);
                 role = rs.getString(6);
+                profilePict = rs.getBinaryStream(7);
                 conn.close();
-                User us = new User (username, password, nama, phoneNum, email, role);
+                if (profilePict != null){
+                    us = new User (username, password, nama, phoneNum, email, role, new Image(profilePict));
+                }
+                else {
+                     us = new User(username, password, nama, phoneNum, email, role);
+                }
+                assert profilePict != null;
+                profilePict.close();
+
                 return us;
-                
             }
             else{
                 System.out.println("data tidak ditemukan");
                 return null;
             }
             
-        } catch (SQLException ex) {
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(KontenEduDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("terjadi error");
             return null;
         }
     }
+    
     public static Admin getAdmin(String usn){
+        Admin admin;
         String query = "Select * from akun where username = '%s'";
         query = String.format(query, usn);
         try {
@@ -110,24 +129,31 @@ public class AkunDAO {
             
             if (rs.next()){
                 String username, password, nama, phoneNum, email, role;
-                
+                InputStream profilePict;
+
                 username = rs.getString(1);
                 password = rs.getString(2);
                 nama = rs.getString(3);
                 phoneNum = rs.getString(4);
                 email = rs.getString(5);
                 role = rs.getString(6);
+                if (rs.getBinaryStream(7)!= null){
+                    profilePict = rs.getBinaryStream(7);
+                    admin = new Admin (username, password, nama, phoneNum, email, role, new Image(profilePict));
+                    profilePict.close();
+                }
+                else{
+                    admin = new Admin(username, password, nama, phoneNum, email, role);
+                }
                 conn.close();
-                Admin admin = new Admin (username, password, nama, phoneNum, email, role);
-                return admin;
-                
+                return admin;            
             }
             else{
                 System.out.println("data tidak ditemukan");
                 return null;
             }
             
-        } catch (SQLException ex) {
+        } catch (SQLException | IOException ex) {
             Logger.getLogger(KontenEduDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("terjadi error");
             return null;
@@ -139,6 +165,7 @@ public class AkunDAO {
         query = String.format(query, newNama, usn);
         conn = BaseDAO.getConn();
         try {
+        	conn = BaseDAO.getConn();
             stmt = conn.prepareStatement(query);
             stmt.executeUpdate();
             System.out.println(query);
@@ -149,11 +176,13 @@ public class AkunDAO {
             return false;
         } 
     }
+    
     public static boolean updatePhoneNum(String usn, String newPhone){
         String query = "update akun set phoneNum = '%s' where username  = '%s'";
         query = String.format(query, newPhone, usn);
         conn = BaseDAO.getConn();
         try {
+        	conn = BaseDAO.getConn();
             stmt = conn.prepareStatement(query);
             stmt.executeUpdate();
             return true;
@@ -161,14 +190,33 @@ public class AkunDAO {
             Logger.getLogger(KontenEduDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("update gagal");
             return false;
-        } 
+        } finally {
+			BaseDAO.closeConn(conn);
+		}
     }
     
+	public static boolean updateAccount(String name, String phone, String username) {
+		String query = "update akun set phoneNum = '%s', nama = '%s' where username = '%s'";
+		query = String.format(query, phone, name, username);
+		try {
+			conn = BaseDAO.getConn();
+			stmt = conn.prepareStatement(query);
+			stmt.executeUpdate();
+			conn.close();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Terjadi kesalahan saat update akun");
+			return false;
+		}
+		
+	}
     
     public static void registerAccount(String usn, String pass, String nama, String phone, String email, String role){
         try {
-        	String query = "insert into yukmakan.akun values ('%s', '%s', '%s', '%s', '%s', '%s')";
-        	query = String.format(query, usn, pass, nama, phone, email, role);
+        	String query = "insert into yukmakan.akun (username, password, nama, phoneNum, email, role)values ('%s', '%s', '%s', '%s', '%s', '%s')";
+            query = String.format(query, usn, pass, nama, phone, email, role);
             System.out.println(query);
             conn = BaseDAO.getConn();
             stmt = conn.prepareStatement(query);
@@ -200,7 +248,46 @@ public class AkunDAO {
     	}
     }
     
+    public static void setPicture (String usn, InputStream img) {
+    	conn = BaseDAO.getConn();
+    	try {
+			stmt = conn.prepareStatement("update akun set profilePicture = ? where username = ?");
+			stmt.setBlob(1, img);
+            stmt.setString(2, usn);
+			stmt.executeUpdate();
+			System.out.println(img);
+			System.out.println(stmt.toString());
+			System.out.println("Foto berhasil ditambahkan");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		} finally {
+			BaseDAO.closeConn(conn);
+		}
+    	
+    }
     
-    
+    public static InputStream getProfilePict (String usn) {
+    	
+    	conn = BaseDAO.getConn();
+    	try {
+			stmt = conn.prepareStatement("Select profilePicture from akun where username = ?");
+			stmt.setString(1, usn);
+			rs = stmt.executeQuery();
+			if (rs.next()) {
+				return rs.getBinaryStream("profilePicture");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			BaseDAO.closeConn(conn);
+		}
+    	
+    	
+    	return null;
+    	
+    }
     
 }

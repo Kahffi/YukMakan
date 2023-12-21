@@ -35,8 +35,9 @@ import javafx.stage.Stage;
  * @author Kahffi
  */
 public class SignUpController implements Initializable {
-	User user;
-	Admin admin;
+	public static boolean isAdmin;
+	public static User user;
+	public static Admin admin;
 
 	@FXML
     private Button btnDaftar;
@@ -84,6 +85,7 @@ public class SignUpController implements Initializable {
     private Button btnBackToLogin;
     
 
+  
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -117,11 +119,8 @@ public class SignUpController implements Initializable {
     		if (getAccRole(usn).equals("admin")) {
     			if (validateAcc(usn,pass)) {
     				admin = getAdmin(usn);
-    				/*TODO
-    				 * tambahin untuk lanjut ke dashboard admin
-    				*/
-    				lblErr.setVisible(true);
-    				lblErr.setText("Login berhasil");// sementara untuk ngecek
+    				isAdmin = true;
+    				openDashboard();
     				
     			}
     			else {
@@ -129,10 +128,13 @@ public class SignUpController implements Initializable {
     				lblErr.setText("username/password salah");
     			}
     		}
+
+			//login sebagai user
     		else if (getAccRole(usn).equals("user")) {
     			if (validateAcc(usn,pass)) {
     				user = getUser(usn);
-    				goToUsrDash();
+    				isAdmin = false;
+    				openDashboard();
     			}
     			else {
     				lblErr.setVisible(true);
@@ -154,8 +156,8 @@ public class SignUpController implements Initializable {
     			
     			registerAccount(usn, pass, name, phone, email, role);
     			user = new User(name, pass, name, phone, email, role);
-    			
-    			goToUsrDash();
+    			isAdmin = false;
+    			openDashboard();
     		}
     		else {
     			lblErr.setVisible(true);
@@ -182,9 +184,9 @@ public class SignUpController implements Initializable {
     	txtUsn.setText(null); txtPass.setText(null); txtPhone.setText(null); txtEmail.setText(null); txtName.setText(null);
     }
 
-    private void goToUsrDash(){
+    private void openDashboard(){
     	try {
-			Parent usrDashboardPage = FXMLLoader.load(getClass().getResource("/view/UserDashboard.fxml"));
+			Parent usrDashboardPage = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
 			Scene scene = new Scene(usrDashboardPage);
 			Stage thisStage = (Stage) txtUsn.getScene().getWindow();
 			thisStage.setScene(scene);

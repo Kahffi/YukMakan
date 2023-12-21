@@ -1,0 +1,7 @@
+.textField{
+	-fx-pref-height: 40px;
+	-fx-font-size: 20px;
+	-fx-background-color: none;
+	-fx-border-width: 0 0 3 0;
+	-fx-border-color: black;
+}

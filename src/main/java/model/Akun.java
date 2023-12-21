@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import javafx.scene.image.Image;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,22 +21,37 @@ import java.util.logging.Logger;
  * @author Kahffi
  */
 public class Akun {
-    
+
     private ArrayList <Resep> resepList = new ArrayList <>();
     private ArrayList <KontenEdukasi> kontenEduList = new ArrayList <>();
     private ArrayList <Campaign> campaignList = new ArrayList <>();
-    
-    
+
+
     private String username;
     private String password;
     private String nama;
     private String phoneNum;
     private String email;
     private String role;
+    private Image profilePict;
 
     Scanner scanner = new Scanner (System.in);
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    public Akun(String username, String password, String nama, String phoneNum, String email, String role) {
+
+
+
+    public Akun(String username, String password, String nama, String phoneNum, String email, String role,
+			Image profilePict) {
+		this.username = username;
+		this.password = password;
+		this.nama = nama;
+		this.phoneNum = phoneNum;
+		this.email = email;
+		this.role = role;
+		this.profilePict = profilePict;
+	}
+
+	public Akun(String username, String password, String nama, String phoneNum, String email, String role) {
         this.username = username;
         this.password = password;
         this.nama = nama;
@@ -53,10 +71,10 @@ public class Akun {
         this.email = email;
         this.role = role;
     }
-    
-    
-    
-    
+
+
+
+
     public void editProfile (){
         int start = 1;
         int menu;
@@ -64,7 +82,7 @@ public class Akun {
         while(start != 0){
            printProfile();
            System.out.println("1. Ubah nama\n2. Ubah nomor telepon\n3. Kembali");
-           
+
             // Integer.parseInt digunakan untuk merubah String ke integer, ini dilakukan karena bila menggunakan nexInt maka scanner akan di-skip.
            menu = Integer.parseInt(scanner.nextLine()) ;
             switch (menu) {
@@ -87,7 +105,7 @@ public class Akun {
             }
         }
     }
-    
+
     public void printProfile(){
         System.out.println("Username : " + this.username);
         System.out.println("Nama : " + this.nama);
@@ -96,7 +114,7 @@ public class Akun {
     }
 
     // method untuk menambahkan objek kedalam arraylist agar user dan admin dapat melihat dan mengakses
-    
+
     public void addToResepList (Resep resep){
         resepList.add(resep);
     }
@@ -106,9 +124,9 @@ public class Akun {
     public void addToCampaignList (Campaign campaign){
         campaignList.add(campaign);
     }
-    
+
     // method untuk menghapus objek dari arraylist
-    
+
     public void rmFromResepList(int index){
         resepList.remove(index);
     }
@@ -118,15 +136,25 @@ public class Akun {
     public void rmFromCampaignList(int index){
         campaignList.remove(index);
     }
-    
-    
+
+
     // setter & getter
-     
+
+
+
     public ArrayList<Resep> getResepList() {
         return resepList;
     }
 
-    public void setResepList(ArrayList<Resep> resepList) {
+    public Image getProfilePict() {
+		return profilePict;
+	}
+
+	public void setProfilePict(Image profilePict) {
+		this.profilePict = profilePict;
+	}
+
+	public void setResepList(ArrayList<Resep> resepList) {
         this.resepList = resepList;
     }
 
