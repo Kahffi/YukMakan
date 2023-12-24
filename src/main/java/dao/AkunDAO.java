@@ -91,14 +91,13 @@ public class AkunDAO {
                 conn.close();
                 if (profilePict != null){
                     us = new User (username, password, nama, phoneNum, email, role, new Image(profilePict));
+                    profilePict.close();
+                    return us;
                 }
                 else {
                      us = new User(username, password, nama, phoneNum, email, role);
+                     return us;
                 }
-                assert profilePict != null;
-                profilePict.close();
-
-                return us;
             }
             else{
                 System.out.println("data tidak ditemukan");
