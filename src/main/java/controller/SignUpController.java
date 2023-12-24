@@ -189,13 +189,12 @@ public class SignUpController implements Initializable {
 			Parent usrDashboardPage = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
 			Scene scene = new Scene(usrDashboardPage);
 			Stage thisStage = (Stage) txtUsn.getScene().getWindow();
+			thisStage.setTitle("YukMakan - Dashboard");
 			thisStage.setScene(scene);
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
     }
-
 }

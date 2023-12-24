@@ -5,14 +5,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import dao.AkunDAO;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.text.Text;
@@ -28,7 +26,7 @@ import static controller.SignUpController.admin;
 
 public class ProfileController implements Initializable{
 
-    InputStream pictureInput;
+    Image pictureInput;
     private FileChooser fileChooser;
 	@FXML
 	private ImageView profilePicture;
@@ -164,44 +162,28 @@ public class ProfileController implements Initializable{
 		}
 	}
 
-    public void changePicture(ActionEvent event){
-        fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image files", "*.png", "*.jpg", "*.gif")
-        );
+    public void changePicture(ActionEvent event) throws FileNotFoundException {
+		fileChooser = new FileChooser();
+		fileChooser.getExtensionFilters().addAll(
+				new FileChooser.ExtensionFilter("Image files", "*.png", "*.jpg", "*.gif")
+		);
 
-        File selectedImg = fileChooser.showOpenDialog(null);
-        if (selectedImg != null){
-            try {
-				pictureInput = new BufferedInputStream(new FileInputStream(selectedImg.getAbsolutePath()));
-                if (isAdmin){
-					System.out.println(pictureInput.toString());
-					AkunDAO.setPicture(admin.getUsername(), pictureInput);
-					if(pictureInput.markSupported()){
-						pictureInput.reset();
-						System.out.println("Resek");
-					}
-					System.out.println(pictureInput.toString());
-					admin.setProfilePict(new Image(pictureInput));
-                }
-                else {
-					if(pictureInput.markSupported()){
-						pictureInput.reset();
-						System.out.println("Resek");
-					}
-					AkunDAO.setPicture(user.getUsername(), pictureInput);
-					user.setProfilePict(new Image(pictureInput));
-                };
+		File selectedImg = fileChooser.showOpenDialog(null);
+		if (selectedImg != null) {
+			InputStream is = new FileInputStream(selectedImg.getAbsolutePath());
+			pictureInput = new Image(is);
+			if (isAdmin) {
+				System.out.println(pictureInput.toString());
+				AkunDAO.setPicture(admin.getUsername(), pictureInput);
+				System.out.println(pictureInput.toString());
+				admin.setProfilePict(pictureInput);
+			} else {
+				AkunDAO.setPicture(user.getUsername(), pictureInput);
+				user.setProfilePict(pictureInput);
+			}
 
-                initAccProfile();
-                pictureInput.close();
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-
-    }
-}
+			initAccProfile();
+		} else {
+			pictureInput = null;
+		}
+	}}

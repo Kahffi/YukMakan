@@ -4,23 +4,17 @@
  */
 package dao;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.UUID;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.mysql.cj.Query;
-
 import javafx.scene.image.Image;
-import model.Akun;
 import model.User;
 import model.Admin;
+import utils.ImageUtils;
 
 /**
  *
@@ -248,11 +242,12 @@ public class AkunDAO {
     	}
     }
     
-    public static void setPicture (String usn, InputStream img) {
+    public static void setPicture (String usn, Image img) {
+
     	conn = BaseDAO.getConn();
     	try {
 			stmt = conn.prepareStatement("update akun set profilePicture = ? where username = ?");
-			stmt.setBlob(1, img);
+			stmt.setBlob(1, ImageUtils.imageToInputStream(img));
             stmt.setString(2, usn);
 			stmt.executeUpdate();
 			System.out.println(img);

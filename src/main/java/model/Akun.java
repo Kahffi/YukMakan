@@ -3,11 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import javafx.scene.image.Image;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -41,7 +41,7 @@ public class Akun {
 
 
     public Akun(String username, String password, String nama, String phoneNum, String email, String role,
-			Image profilePict) {
+                Image profilePict) {
 		this.username = username;
 		this.password = password;
 		this.nama = nama;
@@ -151,6 +151,7 @@ public class Akun {
 	}
 
 	public void setProfilePict(Image profilePict) {
+		this.profilePict = profilePict;
 		this.profilePict = profilePict;
 	}
 

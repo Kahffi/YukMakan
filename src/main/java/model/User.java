@@ -9,8 +9,6 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 import java.util.UUID;
-import java.util.Scanner;
-import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,7 +28,7 @@ public class User extends Akun{
     }
     
     public User(String username, String password, String nama, String phoneNum, String email, String role,
-			Image profilePict) {
+                Image profilePict) {
 		super(username, password, nama, phoneNum, email, role, profilePict);
 		// TODO Auto-generated constructor stub
 	}

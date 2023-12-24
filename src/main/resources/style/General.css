@@ -1,0 +1,40 @@
+/* untuk teks judul
+ */
+
+.H1{
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
+
+.h2{
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+.h3{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+.h4{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+#formContainer > VBox{
+    -fx-spacing: 8px;
+    -fx-max-height: Max_Value;
+}
+
+TextField, TextArea{
+
+    -fx-pref-width: 470px;
+}
+
+StackPane{
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+}
+
+TextArea{
+    -fx-background: none;
+}

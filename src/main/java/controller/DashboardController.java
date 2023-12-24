@@ -1,11 +1,13 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+import dao.ResepDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,14 +28,9 @@ import model.Admin;
 import model.Resep;
 
 public class DashboardController implements Initializable {
-	
-	
-	private final Admin admin = new Admin("Kahffi", "123", "kahffi", "08907", "kahffi@gmail.com", "admin");
 
 	private final ArrayList <Button> buttonList = new ArrayList <>();
-	
-	private final ArrayList <Resep> resepList = new ArrayList<>();
-	
+
 	@FXML
 	private ImageView profilePict;
 	
@@ -74,13 +71,24 @@ public class DashboardController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
-
     }
+	@FXML
+	void toResepMenu (ActionEvent event) {
+		resetNavbarPropery();
+		navbarResep.getStyleClass().add("navbarBtnSelected");
+		setNavbarAffectedStyle(1);
+		if (SignUpController.isAdmin) {
+
+		}
+		else {
+			setResepCards(ResepDAO.getAllResep());
+		}
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
+		// jika yang login user
 		if (!SignUpController.isAdmin) {
 
 			lblUsername.setText(SignUpController.user.getUsername());
@@ -90,9 +98,10 @@ public class DashboardController implements Initializable {
 				profilePict.setImage(SignUpController.user.getProfilePict());
 				profilePict.setFitHeight(60);
 				profilePict.setFitWidth(60);
-			}
+			};
+			setResepCards(ResepDAO.getAllResep());
 		}
-
+		// jika yang login admin
 		else {
 			try {
 				mainSection.setContent(FXMLLoader.load(getClass().getResource("/view/ResepAdmin.fxml")));
@@ -106,31 +115,115 @@ public class DashboardController implements Initializable {
 				profilePict.setImage(SignUpController.admin.getProfilePict());
 				profilePict.setFitHeight(60);
 				profilePict.setFitWidth(60);
-			}
+			};
 		}
-		resepList.add(new Resep(UUID.randomUUID(),"Judul", "Telur makanan yang praktis dibuat namun menghasilkan rasa yang lezat. Perpaduan rasa gurih telur dengan kecap manis memang menjadikannya menu favorit bagi sebagian orang, terutama anak kos yang ingin serba cepat dan murah.",
-				"langkah", "bahan", "kandungan gizi", "image path", "2024-07-4", admin));
 
-
-
+	}
+	private void setResepCards(ArrayList<Resep> resepList) {
+		cardContainer.getChildren().clear();
+		int row = 1;
+		int column = 0;
+		System.out.println("ResepList size ->"+resepList.size());
 		int size = resepList.size();
 		try {
-		for (Resep element : resepList) {
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(getClass().getResource("/view/CardResep.fxml"));
+			for (Resep element : resepList) {
+				if (column == 3) {
+					column = 1;
+					row++;
+				} else {
+					column++;
+				}
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(getClass().getResource("/view/CardResep.fxml"));
 
 				VBox cardBox = fxmlLoader.load();
 				CardResepController cardController = fxmlLoader.getController();
 				cardController.setData(element);
-
-				cardContainer.getChildren().add(cardBox);
+				System.out.println(column + " " + row);
+				cardContainer.add(cardBox, column, row);
 				GridPane.setMargin(cardBox, new Insets(30));
+				System.out.println("limapuluh");
 			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+	@FXML
+	public void toCampaignMenu(ActionEvent event) {
+		cardContainer.getChildren().clear();
+		resetNavbarPropery();
+		setNavbarAffectedStyle(4);
+		navbarCampaign.getStyleClass().add("navbarBtnSelected");
+
+		if (SignUpController.isAdmin) {
+
+		}
+		else {
+
+		}
+
+	}
+	@FXML
+	public void toKontenEduMenu(ActionEvent event) {
+		cardContainer.getChildren().clear();
+		resetNavbarPropery();
+		setNavbarAffectedStyle(2);
+		navbarKontenEdu.getStyleClass().add("navbarBtnSelected");
+
+
+	}
+	@FXML
+	public void toDaftarFavMenu(ActionEvent event) {
+		cardContainer.getChildren().clear();
+		resetNavbarPropery();
+		setNavbarAffectedStyle(3);
+		navbarFavorit.getStyleClass().add("navbarBtnSelected");
+
+	}
+
+	// method untuk reset css dari navbar
+	public void resetNavbarPropery() {
+		navbarCampaign.getStyleClass().remove("navbarTopAffected");
+		navbarCampaign.getStyleClass().remove("navbarBottomAffected");
+		navbarCampaign.getStyleClass().remove("navbarBtnSelected");
+
+		navbarFavorit.getStyleClass().remove("navbarTopAffected");
+		navbarFavorit.getStyleClass().remove("navbarBottomAffected");
+		navbarFavorit.getStyleClass().remove("navbarBtnSelected");
+
+		navbarKontenEdu.getStyleClass().remove("navbarTopAffected");
+		navbarKontenEdu.getStyleClass().remove("navbarBottomAffected");
+		navbarKontenEdu.getStyleClass().remove("navbarBtnSelected");
+
+		navbarResep.getStyleClass().remove("navbarTopAffected");
+		navbarResep.getStyleClass().remove("navbarBottomAffected");
+		navbarResep.getStyleClass().remove("navbarBtnSelected");
+
+		navbarProfile.getStyleClass().remove("navbarTopAffected");
+		navbarProfile.getStyleClass().remove("navbarBottomAffected");
+		navbarProfile.getStyleClass().remove("navbarBtnSelected");
+	}
+	//method untuk mengatur style dari navbar yang berada di atas dan atau di bawah navbar yang sedang dipilih
+	public void setNavbarAffectedStyle(int i){
+		// 1 = resep, 2 = konten edukasi, 3 = daftar favorit, 4 = campaign
+
+		if(i==1) {
+			navbarKontenEdu.getStyleClass().add("navbarBottomAffected");
+		}
+		else if(i==2) {
+			navbarResep.getStyleClass().add("navbarTopAffected");
+			navbarFavorit.getStyleClass().add("navbarBottomAffected");
+		}
+		else if(i==3) {
+			navbarKontenEdu.getStyleClass().add("navbarTopAffected");
+			navbarCampaign.getStyleClass().add("navbarBottomAffected");
+		}
+		else if(i==4) {
+			navbarFavorit.getStyleClass().add("navbarTopAffected");
+		};
 
 	}
 

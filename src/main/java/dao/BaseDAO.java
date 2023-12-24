@@ -4,6 +4,12 @@
  */
 package dao;
 
+import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -40,5 +46,29 @@ public class BaseDAO {
             Logger.getLogger(BaseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public static InputStream imageToInputStream(Image image) {
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+        BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try {
+            javax.imageio.ImageIO.write(bufferedImage, "png", outputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ByteArrayInputStream(outputStream.toByteArray());
+    }
+
+    public static String getImageType(InputStream is) {
+        try {
+            javax.imageio.ImageReader reader = ImageIO.getImageReaders(is).next();
+            String formatName = reader.getFormatName();
+            return formatName.toLowerCase();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     
 }

@@ -4,6 +4,8 @@
  */
 package model;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -18,30 +20,65 @@ public class Resep {
     String langkah;
     String bahan;
     String kandunganGizi;
-    String imagePath;
+    Image fotoResep;
     String datePosted;
     Admin uploader;
     
     //Arraylist untuk menyimpan ulasan
     ArrayList <Ulasan> ulasan = new ArrayList <>();
-
-    // constructor
-    public Resep(UUID id, String judul, String deskripsi, String langkah, String bahan, String kandunganGizi, String imagePath, String datePosted, Admin uploader) {
+    //constructor lengkap
+    public Resep(UUID id, String judul, String deskripsi, String langkah, String bahan, String kandunganGizi, Image fotoResep, String datePosted, Admin uploader, ArrayList<Ulasan> ulasan) {
         this.id = id;
         this.judul = judul;
         this.deskripsi = deskripsi;
         this.langkah = langkah;
         this.bahan = bahan;
         this.kandunganGizi = kandunganGizi;
-        this.imagePath = imagePath;
+        this.fotoResep = fotoResep;
+        this.datePosted = datePosted;
+        this.uploader = uploader;
+        this.ulasan = ulasan;
+    }
+
+    // constructor tanpa ulasan
+    public Resep(UUID id, String judul, String deskripsi, String langkah, String bahan, String kandunganGizi, Image fotoResep, String datePosted, Admin uploader) {
+        this.id = id;
+        this.judul = judul;
+        this.deskripsi = deskripsi;
+        this.langkah = langkah;
+        this.bahan = bahan;
+        this.kandunganGizi = kandunganGizi;
+        this.fotoResep = fotoResep;
         this.datePosted = datePosted;
         this.uploader = uploader;
     }
-    
-    
+    // constructor tanpa foto
+    public Resep(UUID id, String judul, String deskripsi, String langkah, String bahan, String kandunganGizi, String datePosted, Admin uploader, ArrayList<Ulasan> ulasan) {
+        this.id = id;
+        this.judul = judul;
+        this.deskripsi = deskripsi;
+        this.langkah = langkah;
+        this.bahan = bahan;
+        this.kandunganGizi = kandunganGizi;
+        this.datePosted = datePosted;
+        this.uploader = uploader;
+        this.ulasan = ulasan;
+    }
+
+    // constructor tanpa ulasan dan foto
+    public Resep(UUID id, String judul, String deskripsi, String langkah, String bahan, String kandunganGizi, String datePosted, Admin uploader) {
+        this.id = id;
+        this.judul = judul;
+        this.deskripsi = deskripsi;
+        this.langkah = langkah;
+        this.bahan = bahan;
+        this.kandunganGizi = kandunganGizi;
+        this.datePosted = datePosted;
+        this.uploader = uploader;
+    }
     public void printResep(){
         System.out.println("======= " + getJudul() + " =======");
-        System.out.println(getImagePath());
+        System.out.println(getFotoResep());
         System.out.println("Deskripsi: ");
         System.out.println(getDeskripsi());
         System.out.println("Bahan: ");
@@ -116,12 +153,12 @@ public class Resep {
         this.kandunganGizi = kandunganGizi;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Image getFotoResep() {
+        return fotoResep;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setFotoResep(Image fotoResep) {
+        this.fotoResep = fotoResep;
     }
 
     public String getDatePosted() {

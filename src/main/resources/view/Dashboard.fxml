@@ -53,7 +53,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </padding>
             </HBox>
-            <Button fx:id="navbarResep" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="276.0" text="Resep">
+            <Button fx:id="navbarResep" alignment="BASELINE_LEFT" graphicTextGap="20.0" mnemonicParsing="false" onAction="#toResepMenu" prefHeight="70.0" prefWidth="276.0" text="Resep">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" styleClass="navbarIcon">
                      <image>
@@ -67,7 +67,7 @@
                   <String fx:value="mouseHover" />
                </styleClass>
             </Button>
-            <Button fx:id="navbarKontenEdu" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="268.0" text="Konten Edukasi">
+            <Button fx:id="navbarKontenEdu" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="140.0" mnemonicParsing="false" onAction="#toKontenEduMenu" prefHeight="70.0" prefWidth="268.0" text="Konten Edukasi">
                <graphic>
                   <ImageView fitHeight="36.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" styleClass="navbarIcon">
                      <image>
@@ -81,7 +81,7 @@
                   <String fx:value="mouseHover" />
                </styleClass>
             </Button>
-            <Button fx:id="navbarFavorit" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" text="Daftar Favorit">
+            <Button fx:id="navbarFavorit" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="210.0" mnemonicParsing="false" onAction="#toDaftarFavMenu" prefHeight="70.0" prefWidth="225.0" text="Daftar Favorit">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" styleClass="navbarIcon">
                      <image>
@@ -94,7 +94,7 @@
                   <String fx:value="mouseHover" />
                </styleClass>
             </Button>
-            <Button fx:id="navbarCampaign" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" text="Campaign">
+            <Button fx:id="navbarCampaign" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="280.0" mnemonicParsing="false" onAction="#toCampaignMenu" prefHeight="70.0" prefWidth="225.0" text="Campaign">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" styleClass="navbarIcon">
                      <image>

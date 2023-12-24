@@ -6,9 +6,7 @@ package model;
 
 import javafx.scene.image.Image;
 
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.UUID;
 
 /**
@@ -30,7 +28,7 @@ public class Admin extends Akun{
 
 
     public Admin(String username, String password, String nama, String phoneNum, String email, String role,
-			Image profilePict) {
+                 Image profilePict) {
 		super(username, password, nama, phoneNum, email, role, profilePict);
 		// TODO Auto-generated constructor stub
 	}

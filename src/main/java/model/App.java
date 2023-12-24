@@ -20,6 +20,7 @@ public class App extends Application {
         Parent parent = FXMLLoader.load(getClass().getResource("/view/SignUp.fxml"));
         var scene = new Scene(parent);
         stage.setScene(scene);
+        stage.setTitle("YukMakan");
         stage.show();
     }
 

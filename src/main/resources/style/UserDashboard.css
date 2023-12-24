@@ -5,6 +5,10 @@
 
 }
 
+#mainSection{
+	-fx-background: #C1C5AA;
+}
+
 .mainPanel{
 	-fx-background-color: #C1C5AA;
 }

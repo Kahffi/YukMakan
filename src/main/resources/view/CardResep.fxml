@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="cardContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#toResep" prefHeight="310.0" prefWidth="241.0" spacing="5.0" style="-fx-background-color: B2C8BA;" styleClass="mainContainer" stylesheets="@../style/ItemCard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CardResepController">
+<VBox fx:id="cardContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#toResepDetail" prefHeight="310.0" prefWidth="241.0" spacing="5.0" style="-fx-background-color: B2C8BA;" styleClass="mainContainer" stylesheets="@../style/ItemCard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CardResepController">
    <children>
       <ImageView fx:id="fotoResep" fitHeight="117.0" fitWidth="221.0" pickOnBounds="true">
          <image>
