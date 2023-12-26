@@ -107,7 +107,7 @@ public class ResepDAO {
             stmt = conn.prepareStatement(query);
             rs = stmt.executeQuery();
             
-            if (!rs.next()){
+            if (rs.next()){
                 Admin admin;
                 UUID uuid;
                 ArrayList <Ulasan> ulasan = new ArrayList <>();
@@ -130,8 +130,8 @@ public class ResepDAO {
                 bahan = rs.getString(7);
                 kandunganGizi = rs.getString(8);
                 is = rs.getBinaryStream(9);
+                ulasan = UlasanDAO.getAllUlasan(uuid.toString());
                 admin = AkunDAO.getAdmin(uploader);
-
                 if (is!=null){
                     imageResep = new Image(is);
                     is.close();

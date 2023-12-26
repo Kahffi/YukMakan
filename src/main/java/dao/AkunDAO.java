@@ -8,10 +8,14 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.scene.image.Image;
+import model.Resep;
+import model.Ulasan;
 import model.User;
 import model.Admin;
 import utils.ImageUtils;
@@ -47,7 +51,36 @@ public class AkunDAO {
         registerAccount(values);
     }
     */
-    
+
+    public static int addFavorite(String id_resep, String user_username){
+        conn = BaseDAO.getConn();
+        try {
+            stmt = conn.prepareStatement("insert into daftarfavorit values (?, ?)");
+            stmt.setString(1, user_username);
+            stmt.setString(2, id_resep);
+            return stmt.executeUpdate();
+        } catch (SQLException e) {
+            return -1;
+        } finally {
+            BaseDAO.closeConn(conn);
+        }
+    }
+    public static ArrayList <Resep> getDaftarFav(String usn){
+        conn = BaseDAO.getConn();
+        try {
+            stmt = conn.prepareStatement("select * from daftarfavorit where user_username = ?");
+            stmt.setString(1, usn);
+            rs = stmt.executeQuery();
+            ArrayList <Resep> daftarFavorit = new ArrayList <>();
+            while (rs.next()){
+                daftarFavorit.add(ResepDAO.getResep(rs.getString("id_resep")));
+            }
+            return daftarFavorit;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static String getAccRole(String usn) {
     	String query = "Select role from akun where username = '%s'";
     	query = String.format(query, usn);
@@ -79,8 +112,6 @@ public class AkunDAO {
             if (rs.next()){
                 String username, password, nama, phoneNum, email, role;
                 InputStream profilePict;
-                
-                
                 username = rs.getString(1);
                 password = rs.getString(2);
                 nama = rs.getString(3);

@@ -146,7 +146,6 @@ public class SignUpController implements Initializable {
     			lblErr.setText("Akun belum ada");
     		}
     	}
-    	
     	//kondisi untuk daftar
     	else {
     		String usn, phone, pass, name, role, email;

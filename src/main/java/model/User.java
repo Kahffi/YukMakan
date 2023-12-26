@@ -18,8 +18,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class User extends Akun{
     
-    private ArrayList <Resep> daftarFavorit;
-    private ArrayList <DonationLog> riwayatDonasi;
+    private ArrayList <Resep> daftarFavorit = new ArrayList<>();
+    private ArrayList <DonationLog> riwayatDonasi = new ArrayList<>();
     private ArrayList <Ulasan> createdUlasan = new ArrayList <>();
     
 

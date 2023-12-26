@@ -1,0 +1,12 @@
+.textContainer{
+    -fx-font-size: 21px;
+}
+
+#navbarTop{
+    -fx-background-color: #e8e8cf;
+}
+
+#backButton:hover{
+    -fx-cursor: hand;
+    -fx-text-fill: #076063;
+}

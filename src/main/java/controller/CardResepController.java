@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class CardResepController {
 
-		public static Resep resep;
+		private Resep resep;
 
 	  	@FXML
 	    private VBox cardContainer;
@@ -38,6 +38,7 @@ public class CardResepController {
 
 	    @FXML
 	    void toResepDetail(MouseEvent event) throws IOException {
+			System.out.println("judul: " + resep.getJudul());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ResepDetail.fxml"));
 			loader.setController(new ResepDetailController(resep));
 			Parent parent = loader.load();

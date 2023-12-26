@@ -48,11 +48,10 @@ public class UlasanDAO{
             stmt = conn.prepareStatement(query);
             rs = stmt.executeQuery();
             
-            if (!rs.next()){
+            if (rs.next()){
                 UUID uuid;
                 User usr;
                 String ulasan, tanggalUlasan, user;
-   
                 
                 uuid = UUID.fromString(rs.getString(1));
                 user= rs.getString(2);
@@ -75,6 +74,50 @@ public class UlasanDAO{
             return null;
         }
     }
+
+    public static ArrayList<Ulasan> getAllUlasan(String id){
+        ArrayList <Ulasan> ulasan = new ArrayList <>();
+        conn = BaseDAO.getConn();
+        try {
+            stmt = conn.prepareStatement("select * from ulasan where id = ?");
+            stmt.setString(1, id);
+            rs = stmt.executeQuery();
+            while (rs.next()){
+                Ulasan u;
+                String id2 = rs.getString("id");
+                User user = AkunDAO.getUser(rs.getString("username"));
+                String isi = rs.getString("isi");
+                String tanggal = rs.getString("tanggal");
+                u = new Ulasan(user, isi, tanggal, id2);
+                ulasan.add(u);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        BaseDAO.closeConn(conn);
+        return ulasan;
+    }
+    public static ArrayList<Ulasan> getAllUlasan(){
+        ArrayList <Ulasan> ulasan = new ArrayList <>();
+        conn = BaseDAO.getConn();
+        try {
+            stmt = conn.prepareStatement("select * from ulasan");
+            rs = stmt.executeQuery();
+            while (rs.next()){
+                Ulasan u;
+                String id = rs.getString("id");
+                User user = AkunDAO.getUser(rs.getString("user_username"));
+                String isi = rs.getString("isi");
+                String tanggal = rs.getString("tanggal");
+                u = new Ulasan(user, isi, tanggal, id);
+                ulasan.add(u);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        BaseDAO.closeConn(conn);
+        return ulasan;
+    }
     
     public static void delUlasan(Ulasan u){
         String query = "DELETE FROM yukmakan.ulasan WHERE id = '%s';";
@@ -90,7 +133,7 @@ public class UlasanDAO{
     }
     
     public static void editUlasan(Ulasan u){
-         String query = "update ulasan set ulasan = '%s', tanggalulasan = '%s' where id  = '%s'";
+         String query = "update ulasan set isi = '%s', tanggal = '%s' where id  = '%s'";
          query = String.format(query, u.getUlasan(), u.getTanggalUlasan(), u.getId().toString());
          conn = BaseDAO.getConn();
         try {

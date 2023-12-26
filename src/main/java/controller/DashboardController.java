@@ -119,7 +119,7 @@ public class DashboardController implements Initializable {
 		}
 
 	}
-	private void setResepCards(ArrayList<Resep> resepList) {
+	public void setResepCards(ArrayList<Resep> resepList) {
 		cardContainer.getChildren().clear();
 		int row = 1;
 		int column = 0;
@@ -139,10 +139,8 @@ public class DashboardController implements Initializable {
 				VBox cardBox = fxmlLoader.load();
 				CardResepController cardController = fxmlLoader.getController();
 				cardController.setData(element);
-				System.out.println(column + " " + row);
 				cardContainer.add(cardBox, column, row);
 				GridPane.setMargin(cardBox, new Insets(30));
-				System.out.println("limapuluh");
 			}
 
 		} catch (IOException e) {
