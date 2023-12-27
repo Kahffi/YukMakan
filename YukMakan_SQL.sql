@@ -1,14 +1,13 @@
 -- yukmakan.akun definition
 
 CREATE TABLE `akun` (
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
+  `password` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `nama` varchar(100) NOT NULL,
   `phoneNum` varchar(30) NOT NULL,
   `email` varchar(100) NOT NULL,
   `role` varchar(5) NOT NULL,
   `profilePicture` longblob,
-  `imagePath` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`username`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
@@ -19,7 +18,7 @@ CREATE TABLE `akun` (
 
 CREATE TABLE `campaign` (
   `id` varchar(40) NOT NULL,
-  `admin_username` varchar(50) DEFAULT NULL,
+  `admin_username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
   `judul` varchar(255) DEFAULT NULL,
   `deskripsi` text,
   `targetDonasi` int DEFAULT NULL,
@@ -36,7 +35,7 @@ CREATE TABLE `campaign` (
 
 CREATE TABLE `kontenedukasi` (
   `id` varchar(40) NOT NULL,
-  `admin_username` varchar(50) DEFAULT NULL,
+  `admin_username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
   `judul` varchar(255) DEFAULT NULL,
   `konten` text,
   `tanggal` varchar(30) DEFAULT NULL,
@@ -51,7 +50,7 @@ CREATE TABLE `kontenedukasi` (
 
 CREATE TABLE `resep` (
   `id` varchar(40) NOT NULL,
-  `admin_username` varchar(50) DEFAULT NULL,
+  `admin_username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
   `judul` varchar(255) DEFAULT NULL,
   `datePosted` varchar(30) DEFAULT NULL,
   `deskripsi` text,
@@ -70,7 +69,7 @@ CREATE TABLE `resep` (
 CREATE TABLE `riwayatdonasi` (
   `id` varchar(40) NOT NULL,
   `campaign_id` varchar(40) DEFAULT NULL,
-  `user_username` varchar(100) DEFAULT NULL,
+  `user_username` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
   `nominal` int DEFAULT NULL,
   `tanggal` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -86,7 +85,7 @@ CREATE TABLE `riwayatdonasi` (
 CREATE TABLE `ulasan` (
   `id` varchar(40) NOT NULL,
   `resep_id` varchar(40) DEFAULT NULL,
-  `user_username` varchar(100) DEFAULT NULL,
+  `user_username` varchar(100)CHARACTER SET latin1 COLLATE latin1_general_cs  DEFAULT NULL,
   `isi` varchar(1000) DEFAULT NULL,
   `tanggal` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -100,10 +99,10 @@ CREATE TABLE `ulasan` (
 -- yukmakan.daftarfavorit definition
 
 CREATE TABLE `daftarfavorit` (
-  `user_username` varchar(50) DEFAULT NULL,
+  `user_username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
   `id_resep` varchar(40) DEFAULT NULL,
-  KEY `user_username` (`user_username`),
-  KEY `id_resep` (`id_resep`),
+  UNIQUE KEY `user_username` (`user_username`),
+  UNIQUE KEY `id_resep` (`id_resep`),
   CONSTRAINT `daftarfavorit_ibfk_1` FOREIGN KEY (`user_username`) REFERENCES `akun` (`username`),
   CONSTRAINT `daftarfavorit_ibfk_2` FOREIGN KEY (`id_resep`) REFERENCES `resep` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

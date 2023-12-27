@@ -1,1 +1,0 @@
-select * from yukmakan.akun where username = 'rahmat' and password = '123'
