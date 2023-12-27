@@ -85,9 +85,10 @@ CREATE TABLE `riwayatdonasi` (
 CREATE TABLE `ulasan` (
   `id` varchar(40) NOT NULL,
   `resep_id` varchar(40) DEFAULT NULL,
-  `user_username` varchar(100)CHARACTER SET latin1 COLLATE latin1_general_cs  DEFAULT NULL,
+  `user_username` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
   `isi` varchar(1000) DEFAULT NULL,
   `tanggal` varchar(30) DEFAULT NULL,
+  `rating` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `resep_id` (`resep_id`),
   KEY `user_username` (`user_username`),
