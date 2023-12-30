@@ -1,17 +1,19 @@
 package utils;
 
+import dao.AkunDAO;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
+import javafx.stage.FileChooser;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Iterator;
+
+import static controller.SignUpController.*;
+import static controller.SignUpController.user;
 
 public class ImageUtils {
 
@@ -52,6 +54,27 @@ public class ImageUtils {
             return image;
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static Image imageFileChooser(){
+        Image selectedImage;
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image files", "*.png", "*.jpg", "*.gif")
+        );
+        File selectedImg = fileChooser.showOpenDialog(null);
+        if (selectedImg != null) {
+            InputStream is;
+            try {
+                is = new FileInputStream(selectedImg.getAbsolutePath());
+                selectedImage = new Image(is);
+                return selectedImage;
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return null;
         }
     }
 }

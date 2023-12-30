@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -12,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlller.ResepDetailController">
+<BorderPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0">
          <content>
@@ -20,20 +23,36 @@
                <children>
                   <VBox maxWidth="1.7976931348623157E308" prefWidth="1280.0">
                      <children>
-                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#backToDash" text="Back">
+                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#backToDash" style="-fx-background-color: none;">
                            <VBox.margin>
                               <Insets left="100.0" top="50.0" />
                            </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Close_Icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" layoutX="404.0" layoutY="10.0" prefWidth="411.0" stylesheets="@../style/ContentDetail.css">
+                  <VBox alignment="CENTER" layoutX="404.0" layoutY="10.0" prefWidth="411.0" spacing="20.0" stylesheets="@../style/ContentDetail.css">
                      <children>
                         <Label fx:id="lblJudul" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="550.0" styleClass="H1" stylesheets="@../style/General.css" text="Judul Resep">
                            <font>
                               <Font size="35.0" />
                            </font>
                         </Label>
+                        <VBox>
+                           <children>
+                              <Label styleClass="h3" stylesheets="@../style/General.css" text="Judul Resep" />
+                              <TextField fx:id="txtEditJudul" prefHeight="33.0" prefWidth="507.0" />
+                           </children>
+                        </VBox>
                         <ImageView fx:id="imgResep" fitHeight="347.0" fitWidth="528.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../Desktop/icon/bakwan.png" />
@@ -46,39 +65,59 @@
                   </VBox>
                   <VBox styleClass="textContainer" stylesheets="@../style/ContentDetail.css">
                      <children>
-                        <Label styleClass="header-label" text="Header 1" />
-                        <Text fx:id="txtDeskripsi" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat non tortor non pellentesque. Praesent aliquet arcu arcu, nec varius arcu ullamcorper id. Aliquam blandit magna aliquet, lobortis eros vel, ultrices dolor. Vestibulum scelerisque enim a metus efficitur, quis convallis ex fermentum. Sed condimentum turpis malesuada justo faucibus, non molestie lectus cursus. Vestibulum dapibus, sapien at hendrerit porta, ligula tellus efficitur turpis, in rhoncus nibh ipsum at tellus. In id ex sit amet nunc dictum luctus. Curabitur at libero nec felis vulputate mollis.Nulla pellentesque ultrices nulla, vel mollis arcu vehicula id. In vel ligula in arcu congue scelerisque. Sed elit urna, tristique ac egestas ac, tincidunt vitae augue. Vestibulum ultrices neque est, nec dictum leo aliquam nec. Nullam suscipit mi ac sapien sodales volutpat. Nulla auctor purus non dolor elementum, sit amet luctus nisi auctor. Phasellus id lectus posuere arcu sollicitudin auctor a sit amet neque.Sed elementum nunc id porta vestibulum. Nulla pharetra ipsum sit amet magna sollicitudin posuere. Nulla finibus risus vitae auctor rhoncus. Nullam et neque ultrices, facilisis sem quis, iaculis massa. Nunc vel faucibus lorem. Nulla non quam nec libero aliquet semper quis et purus. Duis sed posuere quam.Proin enim nisi, elementum eu ligula eu, rutrum tristique sapien. Nullam lobortis non sem eu auctor. Mauris vestibulum interdum sollicitudin. Proin pulvinar magna quis condimentum egestas. Maecenas sed orci quis ex ullamcorper sodales. Morbi accumsan, arcu eu tempus gravida, elit nulla aliquam odio, at venenatis metus felis in tortor. Fusce eget convallis ante. Donec ornare ipsum et magna porta, ac ullamcorper ante pulvinar.Sed leo erat, interdum et tellus a, faucibus vehicula turpis. Nulla non purus sodales, pellentesque mi at, mattis felis. Quisque eu dui vitae ante iaculis facilisis. Etiam a neque at velit venenatis euismod. Quisque ac sem eu lorem blandit volutpat ut non nulla. Praesent ultrices risus eget interdum fringilla. Mauris ac scelerisque ligula. Donec sit amet ligula aliquam, egestas nunc vulputate, iaculis orci. Cras magna sem, malesuada ac massa eu, ultrices laoreet sem. Maecenas ut placerat lorem. Vivamus ac condimentum felis. Quisque ut ornare erat. Aliquam rhoncus dapibus ante, et commodo ex gravida ac. Vivamus eu odio luctus, blandit massa ac, fermentum libero. Sed eu orci euismod augue sodales tincidunt." textAlignment="JUSTIFY" wrappingWidth="600.0" />
+                        <Text fx:id="txtDeskripsi" strokeType="OUTSIDE" strokeWidth="0.0" text="Ini kan deskripsi" textAlignment="JUSTIFY" wrappingWidth="600.0" />
+                        <VBox>
+                           <children>
+                              <Label styleClass="h3" stylesheets="@../style/General.css" text="Deskripsi" />
+                              <TextArea fx:id="txtEditDeskripsi" prefHeight="200.0" prefWidth="600.0" wrapText="true" />
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" styleClass="textContainer" stylesheets="@../style/ContentDetail.css">
                      <children>
-                        <Label styleClass="header-label" text="Header 2" />
-                        <Text fx:id="txtBahan" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat non tortor non pellentesque. Praesent aliquet arcu arcu, nec varius arcu ullamcorper id. Aliquam blandit magna aliquet, lobortis eros vel, ultrices dolor. Vestibulum scelerisque enim a metus efficitur, quis convallis ex fermentum. Sed condimentum turpis malesuada justo faucibus, non molestie lectus cursus. Vestibulum dapibus, sapien at hendrerit porta, ligula tellus efficitur turpis, in rhoncus nibh ipsum at tellus. In id ex sit amet nunc dictum luctus. Curabitur at libero nec felis vulputate mollis.Nulla pellentesque ultrices nulla, vel mollis arcu vehicula id. In vel ligula in arcu congue scelerisque. Sed elit urna, tristique ac egestas ac, tincidunt vitae augue. Vestibulum ultrices neque est, nec dictum leo aliquam nec. Nullam suscipit mi ac sapien sodales volutpat. Nulla auctor purus non dolor elementum, sit amet luctus nisi auctor. Phasellus id lectus posuere arcu sollicitudin auctor a sit amet neque.Sed elementum nunc id porta vestibulum. Nulla pharetra ipsum sit amet magna sollicitudin posuere. Nulla finibus risus vitae auctor rhoncus. Nullam et neque ultrices, facilisis sem quis, iaculis massa. Nunc vel faucibus lorem. Nulla non quam nec libero aliquet semper quis et purus. Duis sed posuere quam.Proin enim nisi, elementum eu ligula eu, rutrum tristique sapien. Nullam lobortis non sem eu auctor. Mauris vestibulum interdum sollicitudin. Proin pulvinar magna quis condimentum egestas. Maecenas sed orci quis ex ullamcorper sodales. Morbi accumsan, arcu eu tempus gravida, elit nulla aliquam odio, at venenatis metus felis in tortor. Fusce eget convallis ante. Donec ornare ipsum et magna porta, ac ullamcorper ante pulvinar.Sed leo erat, interdum et tellus a, faucibus vehicula turpis. Nulla non purus sodales, pellentesque mi at, mattis felis. Quisque eu dui vitae ante iaculis facilisis. Etiam a neque at velit venenatis euismod. Quisque ac sem eu lorem blandit volutpat ut non nulla. Praesent ultrices risus eget interdum fringilla. Mauris ac scelerisque ligula. Donec sit amet ligula aliquam, egestas nunc vulputate, iaculis orci. Cras magna sem, malesuada ac massa eu, ultrices laoreet sem. Maecenas ut placerat lorem. Vivamus ac condimentum felis. Quisque ut ornare erat. Aliquam rhoncus dapibus ante, et commodo ex gravida ac. Vivamus eu odio luctus, blandit massa ac, fermentum libero. Sed eu orci euismod augue sodales tincidunt." textAlignment="JUSTIFY" wrappingWidth="600.0" />
+                        <Label styleClass="h3" stylesheets="@../style/General.css" text="Bahan yang Dibutuhkan" />
+                        <Text fx:id="txtBahan" strokeType="OUTSIDE" strokeWidth="0.0" text="ini baahan" textAlignment="JUSTIFY" wrappingWidth="600.0" />
+                        <TextArea fx:id="txtEditBahan" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" styleClass="textContainer" stylesheets="@../style/ContentDetail.css">
                      <children>
-                        <Label styleClass="header-label" text="Header 3" />
-                        <Text fx:id="txtLangkah" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat non tortor non pellentesque. Praesent aliquet arcu arcu, nec varius arcu ullamcorper id. Aliquam blandit magna aliquet, lobortis eros vel, ultrices dolor. Vestibulum scelerisque enim a metus efficitur, quis convallis ex fermentum. Sed condimentum turpis malesuada justo faucibus, non molestie lectus cursus. Vestibulum dapibus, sapien at hendrerit porta, ligula tellus efficitur turpis, in rhoncus nibh ipsum at tellus. In id ex sit amet nunc dictum luctus. Curabitur at libero nec felis vulputate mollis.Nulla pellentesque ultrices nulla, " textAlignment="JUSTIFY" wrappingWidth="600.0" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" layoutX="10.0" layoutY="942.0" styleClass="textContainer" stylesheets="@../style/ContentDetail.css">
-                     <children>
-                        <Label styleClass="header-label" text="Header 3" />
-                        <Label styleClass="normal-text" text="Curabitur convallis, lacus in cursus ullamcorper, justo eros tincidunt dui, ut dictum erat odio at dolor. Nam hendrerit tellus nec leo bibendum, ut cursus arcu sodales. Vestibulum convallis turpis in erat malesuada, a ultrices elit bibendum. Ut eget elit id libero convallis condimentum vel nec elit." />
+                        <Label styleClass="h3" stylesheets="@../style/General.css" text="Langkah Pembuatan" />
+                        <Text fx:id="txtLangkah" strokeType="OUTSIDE" strokeWidth="0.0" text="Ini langkah pembuatan" textAlignment="JUSTIFY" wrappingWidth="600.0" />
+                        <TextArea fx:id="txtEditLangkah" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" layoutX="10.0" layoutY="1065.0" styleClass="textContainer" stylesheets="@../style/ContentDetail.css">
                      <children>
-                        <Label styleClass="header-label" text="Header 3" />
-                        <Text fx:id="txtGizi" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat non tortor non pellentesque. " textAlignment="JUSTIFY" wrappingWidth="600.0" />
+                        <Label styleClass="h3" stylesheets="@../style/General.css" text="Kandungan Gizi" />
+                        <Text fx:id="txtGizi" strokeType="OUTSIDE" strokeWidth="0.0" text="Ini kandungan gizzi" textAlignment="JUSTIFY" wrappingWidth="600.0" />
+                        <TextArea fx:id="txtEditGizi" prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="56.0" prefWidth="1280.0" spacing="50.0">
                      <children>
-                        <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#startEditResep" text="Edit" />
-                        <Button fx:id="btnAddFav" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToFav" text="Tambahkan Ke Daftar Favorit" />
-                        <Button fx:id="btnHapus" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteResep" text="Hapus" />
+                        <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#startEditResep" text="Edit">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelEdit" text="Batal">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="btnAddFav" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToFav" text="Tambahkan Ke Daftar Favorit">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="btnHapus" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteResep" text="Hapus">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="btnSaveUpdate" mnemonicParsing="false" onAction="#saveUpdate" text="Simpan" />
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

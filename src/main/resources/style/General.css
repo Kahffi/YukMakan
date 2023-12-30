@@ -25,7 +25,6 @@
 }
 
 TextField, TextArea{
-
     -fx-pref-width: 470px;
 }
 
@@ -33,6 +32,11 @@ StackPane{
     -fx-background-color: white;
     -fx-background-radius: 10px;
     -fx-padding: 10px;
+}
+
+.rounded{
+    -fx-background-image: url("../images/ABDUL MUIN KOLAM.jpg");
+    -fx-background-radius: 50%;
 }
 
 TextArea{
