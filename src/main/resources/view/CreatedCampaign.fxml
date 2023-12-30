@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane id="AnchorPane" prefHeight="1350.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreatedCampaignController">
+   <children>
+      <ScrollPane prefHeight="1350.0" prefWidth="1280.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1469.0" prefWidth="1280.0" style="-fx-background-color: c1c5aa;">
+               <children>
+                  <VBox alignment="TOP_CENTER" layoutX="400.0" layoutY="78.0" prefHeight="720.0" prefWidth="470.0" spacing="20.0" styleClass="mainPanel">
+                     <children>
+                        <Label layoutX="370.0" styleClass="h2" stylesheets="@../style/General.css" text="Buat" textFill="#49504b" />
+                        <Label styleClass="h2" stylesheets="@../style/General.css" text="CAMPAIGN" textFill="#49504b">
+                           <VBox.margin>
+                              <Insets top="-30.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <VBox fx:id="containerJudul" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="470.0">
+                           <children>
+                              <Label styleClass="h4" stylesheets="@../style/General.css" text="Judul" />
+                              <TextFlow prefHeight="39.0" prefWidth="485.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <TextField fx:id="txtJudul" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="39.0" prefWidth="473.0">
+                                       <stylesheets>
+                                          <URL value="@../style/General.css" />
+                                          <URL value="@../style/CreateStyle.css" />
+                                       </stylesheets>
+                                    </TextField>
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="containerDesc" layoutX="149.0" layoutY="261.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="470.0">
+                           <children>
+                              <Label styleClass="h4" stylesheets="@../style/General.css" text="Deskripsi" />
+                              <TextFlow prefHeight="69.0" prefWidth="300.0">
+                                 <children>
+                                    <TextArea fx:id="txtDesc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="470.0" style="-fx-background-color: #E4E7D7;" wrapText="true">
+                                       <stylesheets>
+                                          <URL value="@../style/General.css" />
+                                          <URL value="@../style/CreateStyle.css" />
+                                       </stylesheets>
+                                    </TextArea>
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="containerTanggal" layoutX="149.0" layoutY="261.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="470.0">
+                           <children>
+                              <Label styleClass="h4" stylesheets="@../style/General.css" text="Tanggal " />
+                              <TextFlow prefHeight="69.0" prefWidth="300.0">
+                                 <children>
+                                    <TextArea fx:id="txtTanggal" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="470.0" style="-fx-background-color: #E4E7D7;" wrapText="true">
+                                       <stylesheets>
+                                          <URL value="@../style/General.css" />
+                                          <URL value="@../style/CreateStyle.css" />
+                                       </stylesheets>
+                                    </TextArea>
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="containerGizi1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="470.0">
+                           <children>
+                              <Label styleClass="h4" stylesheets="@../style/General.css" text="Target Donasi" />
+                              <TextFlow prefHeight="69.0" prefWidth="300.0">
+                                 <children>
+                                    <TextArea fx:id="txtTargetDonasi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="79.0" prefWidth="470.0" style="-fx-background-color: #E6E6E6;" wrapText="true">
+                                       <stylesheets>
+                                          <URL value="@../style/General.css" />
+                                          <URL value="@../style/CreateStyle.css" />
+                                       </stylesheets>
+                                    </TextArea>
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="containerGizi" layoutX="130.0" layoutY="147.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="20.0" prefWidth="470.0">
+                           <children>
+                              <Label styleClass="h4" stylesheets="@../style/General.css" text="Sumbangan Saat ini " />
+                              <TextFlow prefHeight="69.0" prefWidth="300.0">
+                                 <children>
+                                    <TextArea fx:id="txtDonasi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="79.0" prefWidth="470.0" wrapText="true">
+                                       <stylesheets>
+                                          <URL value="@../style/General.css" />
+                                          <URL value="@../style/CreateStyle.css" />
+                                       </stylesheets>
+                                    </TextArea>
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="containerFoto" layoutX="51.0" layoutY="679.0" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="470.0">
+                           <children>
+                              <Label styleClass="h4" stylesheets="@../style/General.css" text="Foto" />
+                              <VBox alignment="CENTER">
+                                 <children>
+                                    <ImageView fx:id="imageIn" fitHeight="300.0" fitWidth="306.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../images/add_photo_alternate.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Button fx:id="btnAddPhoto" mnemonicParsing="false" onAction="#pilihFoto" prefHeight="23.0" prefWidth="122.0" styleClass="Button" stylesheets="@../style/CreateStyle.css" text="Pilih Foto" textFill="WHITE">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <Button fx:id="btnCreateCampaign" mnemonicParsing="false" onAction="#saveCampaign" prefHeight="0.0" prefWidth="467.0" styleClass="Button" stylesheets="@../style/CreateStyle.css" text="Buat Campaign" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="50.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="50.0" top="50.0" />
+                     </padding>
+                  </VBox>
+                  <Button alignment="CENTER" blendMode="DARKEN" depthTest="ENABLE" layoutX="27.0" layoutY="69.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="75.0" prefWidth="89.0" text="X">
+                     <font>
+                        <Font name="System Bold" size="39.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Group>
+         <children>
+            <Pane prefHeight="60.0" prefWidth="1280.0" style="-fx-background-color: #E4E7D7;" />
+            <HBox layoutX="16.0" layoutY="4.0">
+               <children>
+                  <ImageView fitHeight="50.0" fitWidth="63.0" layoutX="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Coklat_Hitam_Profesional_Perusahaan_Penyedia_Makanan_Sehat_Presentasi__3_-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="btnLogout" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="87.0" text="Logout">
+                     <HBox.margin>
+                        <Insets left="1110.0" top="8.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

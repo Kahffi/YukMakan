@@ -3,41 +3,63 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import java.util.ArrayList;
 import java.util.UUID;
 
 
 import java.util.Scanner;
+import javafx.scene.image.Image;
 /**
  *
  * @author Kahffi
  */
 public class KontenEdukasi {
     
-    private Scanner scanner = new Scanner(System.in);
     
-    private UUID id;
-    private String imagePath;
-    private String judul;
-    private String content;
-    private String tanggal;
-    private Admin uploader;
+    
+    UUID id;
+    Image imagePath;
+    String judul;
+    String content;
+    String tanggal;
+    Admin uploader;
+    ArrayList <Ulasan> ulasan = new ArrayList <>();
     
     //main constructor
-    public KontenEdukasi(String imagePath, String judul, String content, String tanggal, Admin uploader, String strID) {
-        this.id = UUID.fromString(strID);
-        this.imagePath = imagePath;
+    public KontenEdukasi(UUID id, String judul, String content, String tanggal, Image imagePath, Admin uploader, ArrayList <Ulasan> ulasan) {
+        this.id = id;
         this.judul = judul;
         this.content = content;
         this.tanggal = tanggal;
         this.uploader = uploader;
-    }
-
-    public KontenEdukasi(UUID id, String imagePath, String judul, String content, String tanggal) {
-        this.id = id;
         this.imagePath = imagePath;
+        this.ulasan = ulasan;
+    }
+    // without ulasan
+    public KontenEdukasi(UUID id, Image imagePath, String judul, String content, String tanggal, Admin uploader) {
+        this.id = id;
         this.judul = judul;
         this.content = content;
         this.tanggal = tanggal;
+        this.uploader = uploader;
+        this.imagePath = imagePath;
+    }
+    //tanpa foto
+     public KontenEdukasi(UUID id, String judul, String content, String tanggal, Admin uploader, ArrayList <Ulasan> ulasan) {
+        this.id = id;
+        this.judul = judul;
+        this.content = content;
+        this.tanggal = tanggal;
+        this.uploader = uploader;
+        this.ulasan = ulasan;
+    }
+    // tanpa foto dan ulasan
+    public KontenEdukasi(UUID id, String judul, String content, String tanggal, Admin uploader) {
+        this.id = id;
+        this.judul = judul;
+        this.content = content;
+        this.tanggal = tanggal;
+        this.uploader = uploader;
     }
 
     public KontenEdukasi (Admin uploader){
@@ -45,9 +67,13 @@ public class KontenEdukasi {
     }
     
     
-    
-    
-    
+    public void addUlasan(Ulasan u){
+        this.ulasan.add(u);
+    }
+
+    public ArrayList<Ulasan> getUlasan() {
+        return ulasan;
+    }
     
     // print atribut
     public void printKontenEdu(){
@@ -58,12 +84,8 @@ public class KontenEdukasi {
         System.out.println(getTanggal());
         System.out.println(uploader.getUsername());
     }
-
     
-    
-
     //setter & getter
-    
     public UUID getId() {
         return id;
     }
@@ -72,19 +94,11 @@ public class KontenEdukasi {
         this.id = id;
     }
 
-    public Scanner getScanner() {
-        return scanner;
-    }
-
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
-    }
-
-    public String getImagePath() {
+    public Image getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) {
+    public void setImagePath(Image imagePath) {
         this.imagePath = imagePath;
     }
 
