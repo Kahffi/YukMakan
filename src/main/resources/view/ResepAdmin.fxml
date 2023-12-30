@@ -33,7 +33,7 @@
                   <Label text="Buat Resep" />
                </children>
             </VBox>
-            <VBox onMouseClicked="#toCreateResep" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="2">
+            <VBox fx:id="btnCreateKontenEdu" onMouseClicked="#toCreateKontenEdu" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="2">
                <children>
                   <ImageView fitHeight="62.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,7 +43,7 @@
                   <Label text="Buat Konten Edukasi" />
                </children>
             </VBox>
-            <VBox onMouseClicked="#toCreateResep" prefHeight="234.0" prefWidth="204.0" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <VBox onMouseClicked="#viewKontenEdu" prefHeight="234.0" prefWidth="204.0" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
                   <ImageView fx:id="btnVie" fitHeight="48.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>

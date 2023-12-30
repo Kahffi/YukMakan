@@ -21,13 +21,10 @@ public class CardResepController {
 	  	@FXML
 	    private VBox cardContainer;
 
-	    @FXML
 	    private Label deskripsiResep;
 
-	    @FXML
 	    private ImageView fotoResep;
 
-	    @FXML
 	    private Label judulResep;
 
 	    @FXML
@@ -35,6 +32,7 @@ public class CardResepController {
 
 	    @FXML
 	    private Label tanggal;
+    
 
 	    @FXML
 	    void toResepDetail(MouseEvent event) throws IOException {
@@ -52,7 +50,7 @@ public class CardResepController {
     public void setData(Resep resep) {
 		this.resep = resep;
     	judulResep.setText(resep.getJudul());
-    	deskripsiResep.setText(resep.getJudul());
+    	deskripsiResep.setText(resep.getDeskripsi());
     	namaAdmin.setText(resep.getUploader().getUsername());
     	tanggal.setText(resep.getDatePosted());
 		fotoResep.setImage(resep.getFotoResep());

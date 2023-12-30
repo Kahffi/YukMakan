@@ -91,40 +91,11 @@ public class Admin extends Akun{
 
 
 //create konten edukasi
-    public KontenEdukasi createKontenEdukasi () {
-        KontenEdukasi k;
-        k = new KontenEdukasi (this);
-        k.setId(generateUUID());
-        System.out.println("Judul konten edukasi: ");
-        k.setJudul(scanner.nextLine());
-        System.out.println("Konten edukasi : ");
-        k.setContent(super.createParagraph());
-        System.out.println("Sumber gambar : ");
-        k.setImagePath(scanner.nextLine());
-        k.setTanggal(super.getDate());
-        super.addToKontenEduList(k);
-        return k;
-    }
+    
    
     // method update kontenEdukasi
-    public KontenEdukasi updateKontenEduDesc(KontenEdukasi k){
-        k.printKontenEdu();
-        System.out.println("Masukkan isi konten edukasi yang baru : ");
-        String newContent = super.createParagraph();
-        k.setContent(newContent);
-        System.out.println("Isi konten edukasi berhasil diubah");
-        k.printKontenEdu();
-        return k;
-    }
-    public KontenEdukasi updateKontenEduJudul(KontenEdukasi k){
-        k.printKontenEdu();
-        System.out.println("Masukkan judul konten edukasi yang baru : ");
-        String newContent = super.createParagraph();
-        k.setContent(newContent);
-        System.out.println("Judul Berhasil diubah");
-        k.printKontenEdu();
-        return k;
-    }    
+   
+   
     // ini entah bener atau engga naronya begini
     public KontenEdukasi delKontenEdukasi (KontenEdukasi k){
         return k = null;
