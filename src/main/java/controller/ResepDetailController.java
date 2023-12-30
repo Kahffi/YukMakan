@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.security.jgss.GSSUtil;
 import dao.AkunDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -21,7 +22,26 @@ import java.util.ResourceBundle;
 
 public class ResepDetailController implements Initializable {
     @FXML
+    private TextArea txtEditBahan;
+
+    @FXML
+    private TextArea txtEditDeskripsi;
+
+    @FXML
+    private TextArea txtEditGizi;
+
+    @FXML
+    private TextField txtEditJudul;
+
+    @FXML
+    private TextArea txtEditLangkah;
+
+    @FXML
+    private Button btnCancel;
+    @FXML
     private Button btnAddFav;
+    @FXML
+    private Button btnSaveUpdate;
 
     @FXML
     private Button btnEdit;
@@ -57,6 +77,7 @@ public class ResepDetailController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setEditVisibility(false);
         lblJudul.setText(resep.getJudul());
         txtDeskripsi.setText(resep.getDeskripsi());
         txtBahan.setText(resep.getBahan());
@@ -97,7 +118,31 @@ public class ResepDetailController implements Initializable {
 
     @FXML
     void startEditResep(ActionEvent event) {
+        setEditVisibility(true);
+        txtEditBahan.setText(txtBahan.getText());
+        txtEditDeskripsi.setText(txtDeskripsi.getText());
+        txtEditGizi.setText(txtGizi.getText());
+        txtEditJudul.setText(lblJudul.getText());
+        txtEditLangkah.setText(txtLangkah.getText());
+    }
+    @FXML
+    public void saveUpdate(ActionEvent event){
+        String updatedBahan, updatedDeskripsi, updatedGizi, updatedJudul, updatedLangkah;
+        updatedBahan = txtEditBahan.getText(); updatedDeskripsi = txtEditDeskripsi.getText(); updatedGizi = txtEditGizi.getText();
+        updatedJudul = txtEditJudul.getText();updatedLangkah = txtEditLangkah.getText();
 
+        if (updatedDeskripsi.isEmpty() || updatedBahan.isEmpty() || updatedGizi.isEmpty() || updatedJudul.isEmpty() || updatedLangkah.isEmpty()){
+            System.out.println("data tidak boleh ada yang kosong");
+        }
+        else {
+            resep.setBahan(updatedBahan);
+            resep.setDeskripsi(updatedDeskripsi);
+            resep.setKandunganGizi(updatedGizi);
+            resep.setJudul(updatedJudul);
+            resep.setLangkah(updatedLangkah);
+        }
+
+        setEditVisibility(false);
     }
     @FXML
     public void backToDash(ActionEvent event){
@@ -110,5 +155,28 @@ public class ResepDetailController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @FXML
+    public void cancelEdit(ActionEvent event){
+        setEditVisibility(false);
+    }
+
+
+    // method untuk mengatur visibilitas saat berinteraksi dengan tombol edit
+    private void setEditVisibility(Boolean visibility){
+        txtBahan.setVisible(!visibility); txtBahan.managedProperty().bind(txtBahan.visibleProperty());
+        txtDeskripsi.setVisible(!visibility); txtDeskripsi.managedProperty().bind(txtDeskripsi.visibleProperty());
+        txtGizi.setVisible(!visibility); txtGizi.managedProperty().bind(txtGizi.visibleProperty());
+        txtLangkah.setVisible(!visibility); txtLangkah.managedProperty().bind(txtLangkah.visibleProperty());
+        lblJudul.setVisible(!visibility); lblJudul.managedProperty().bind(lblJudul.visibleProperty());
+
+        btnSaveUpdate.setVisible(visibility); btnSaveUpdate.managedProperty().bind(btnSaveUpdate.visibleProperty());
+        btnCancel.setVisible(visibility); btnCancel.managedProperty().bind(btnCancel.visibleProperty());
+        txtEditBahan.setVisible(visibility); txtEditBahan.managedProperty().bind(txtEditBahan.visibleProperty());
+        txtEditDeskripsi.setVisible(visibility); txtEditDeskripsi.managedProperty().bind(txtEditDeskripsi.visibleProperty());
+        txtEditGizi.setVisible(visibility); txtEditGizi.managedProperty().bind(txtEditGizi.visibleProperty());
+        txtEditLangkah.setVisible(visibility); txtEditLangkah.managedProperty().bind(txtEditLangkah.visibleProperty());
+        txtEditJudul.setVisible(visibility); txtEditJudul.managedProperty().bind(txtEditJudul.visibleProperty());
     }
 }
