@@ -1,5 +1,6 @@
 package controller;
 
+import dao.KontenEduDAO;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
@@ -25,12 +26,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Admin;
+import model.KontenEdukasi;
 import model.Resep;
 
 public class DashboardController implements Initializable {
-
-	private final ArrayList <Button> buttonList = new ArrayList <>();
-
 	@FXML
 	private ImageView profilePict;
 	
@@ -47,8 +46,6 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Button navbarCampaign;
-
-    @FXML
     private Button navbarFavorit;
 
     @FXML
@@ -72,19 +69,6 @@ public class DashboardController implements Initializable {
 			e.printStackTrace();
 		}
     }
-	@FXML
-	void toResepMenu (ActionEvent event) {
-		resetNavbarPropery();
-		navbarResep.getStyleClass().add("navbarBtnSelected");
-		setNavbarAffectedStyle(1);
-		if (SignUpController.isAdmin) {
-
-		}
-		else {
-			setResepCards(ResepDAO.getAllResep());
-		}
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -119,6 +103,20 @@ public class DashboardController implements Initializable {
 		}
 
 	}
+
+	@FXML
+	void toResepMenu (ActionEvent event) {
+		resetNavbarPropery();
+		navbarResep.getStyleClass().add("navbarBtnSelected");
+		setNavbarAffectedStyle(1);
+		if (SignUpController.isAdmin) {
+
+		}
+		else {
+			setResepCards(ResepDAO.getAllResep());
+		}
+	}
+
 	public void setResepCards(ArrayList<Resep> resepList) {
 		cardContainer.getChildren().clear();
 		int row = 1;
@@ -149,6 +147,7 @@ public class DashboardController implements Initializable {
 		}
 
 	}
+
 	@FXML
 	public void toCampaignMenu(ActionEvent event) {
 		cardContainer.getChildren().clear();
@@ -164,6 +163,7 @@ public class DashboardController implements Initializable {
 		}
 
 	}
+
 	@FXML
 	public void toKontenEduMenu(ActionEvent event) {
 		cardContainer.getChildren().clear();
@@ -171,6 +171,39 @@ public class DashboardController implements Initializable {
 		setNavbarAffectedStyle(2);
 		navbarKontenEdu.getStyleClass().add("navbarBtnSelected");
 
+		if (SignUpController.isAdmin){
+
+		}
+		else {
+			setKontenEduCards(KontenEduDAO.getAllKonten());
+		}
+	}
+	public void setKontenEduCards(ArrayList<KontenEdukasi> kontenEduList){
+		cardContainer.getChildren().clear();
+		int row = 1;
+		int column = 0;
+		int size = kontenEduList.size();
+		try {
+			for (KontenEdukasi element : kontenEduList) {
+				if (column == 3) {
+					column = 1;
+					row++;
+				} else {
+					column++;
+				}
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(getClass().getResource("/view/CardKontenEdu.fxml"));
+				VBox cardBox = fxmlLoader.load();
+				CardKontenEduController cardController = fxmlLoader.getController();
+				cardController.setData(element);
+				cardContainer.add(cardBox, column, row);
+				GridPane.setMargin(cardBox, new Insets(30));
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 	@FXML

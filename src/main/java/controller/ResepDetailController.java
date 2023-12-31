@@ -1,6 +1,8 @@
 package controller;
 
 import dao.AkunDAO;
+import dao.ResepDAO;
+import dao.UlasanDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,15 +14,31 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Resep;
+import model.Ulasan;
+import model.User;
+import org.controlsfx.control.Rating;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class ResepDetailController implements Initializable {
+    @FXML
+    private VBox ulasanCardsLayout;
+    @FXML
+    private Rating ratingUlasan;
+    @FXML
+    private TextField txtInUlasan;
+    @FXML
+    private Button btnCancelUlasan;
+    @FXML
+    private Button btnSaveUlasan;
     @FXML
     private TextArea txtEditBahan;
 
@@ -70,6 +88,7 @@ public class ResepDetailController implements Initializable {
     private Button btnBack;
 
     private Resep resep;
+    private ArrayList <Ulasan> ulasanList = new ArrayList<>();
 
     public ResepDetailController (Resep resep){
         this.resep = resep;
@@ -78,6 +97,7 @@ public class ResepDetailController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setEditVisibility(false);
+        initUlasanCards();
         lblJudul.setText(resep.getJudul());
         txtDeskripsi.setText(resep.getDeskripsi());
         txtBahan.setText(resep.getBahan());
@@ -140,8 +160,9 @@ public class ResepDetailController implements Initializable {
             resep.setKandunganGizi(updatedGizi);
             resep.setJudul(updatedJudul);
             resep.setLangkah(updatedLangkah);
+            ResepDAO.updateResep(resep);
+            updateResepProperties(resep);
         }
-
         setEditVisibility(false);
     }
     @FXML
@@ -161,10 +182,29 @@ public class ResepDetailController implements Initializable {
     public void cancelEdit(ActionEvent event){
         setEditVisibility(false);
     }
+    @FXML
+    void cancelUlasan(ActionEvent event) {
+        txtInUlasan.clear();
+        ratingUlasan.setRating(0);
+    }
+    @FXML
+    void saveUlasan(ActionEvent event) {
+        User currentUser = SignUpController.user;
+        String isi = txtInUlasan.getText();
+        int rating = (int) ratingUlasan.getRating();
+        UUID id = UUID.randomUUID();
+        Ulasan ulasan = new Ulasan(currentUser, isi, SignUpController.user.getDate(),rating, id, this.resep.getId());
+        UlasanDAO.saveUlasan(ulasan);
+        initUlasanCards();
+
+
+    }
 
 
     // method untuk mengatur visibilitas saat berinteraksi dengan tombol edit
     private void setEditVisibility(Boolean visibility){
+        btnCancelUlasan.setVisible(!visibility); btnCancelUlasan.managedProperty().bind(btnCancelUlasan.visibleProperty());
+        btnSaveUlasan.setVisible(!visibility); btnSaveUlasan.managedProperty().bind(btnSaveUlasan.visibleProperty());
         txtBahan.setVisible(!visibility); txtBahan.managedProperty().bind(txtBahan.visibleProperty());
         txtDeskripsi.setVisible(!visibility); txtDeskripsi.managedProperty().bind(txtDeskripsi.visibleProperty());
         txtGizi.setVisible(!visibility); txtGizi.managedProperty().bind(txtGizi.visibleProperty());
@@ -178,5 +218,30 @@ public class ResepDetailController implements Initializable {
         txtEditGizi.setVisible(visibility); txtEditGizi.managedProperty().bind(txtEditGizi.visibleProperty());
         txtEditLangkah.setVisible(visibility); txtEditLangkah.managedProperty().bind(txtEditLangkah.visibleProperty());
         txtEditJudul.setVisible(visibility); txtEditJudul.managedProperty().bind(txtEditJudul.visibleProperty());
+    }
+
+    private void initUlasanCards(){
+        this.ulasanList = UlasanDAO.getAllUlasan(resep.getId().toString());
+        for (Ulasan ulasan : ulasanList) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/view/CardUlasan.fxml"));
+                VBox ulasanBox = fxmlLoader.load();
+                CardUlasanController cardUlasanController = fxmlLoader.getController();
+                cardUlasanController.setData(ulasan);
+                fxmlLoader.setController(cardUlasanController);
+                ulasanCardsLayout.getChildren().add(ulasanBox);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+    }
+    private void updateResepProperties(Resep resep){
+        txtBahan.setText(resep.getBahan());
+        txtDeskripsi.setText(resep.getDeskripsi());
+        txtGizi.setText(resep.getKandunganGizi());
+        txtLangkah.setText(resep.getLangkah());
+        lblJudul.setText(resep.getJudul());
     }
 }

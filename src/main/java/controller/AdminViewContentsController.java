@@ -2,6 +2,11 @@ package controller;
 
 import dao.ResepDAO;
 import dao.KontenEduDAO;
+import javafx.event.ActionEvent;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import model.KontenEdukasi;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,9 +23,11 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AdminViewContentsController implements Initializable {
+    private String session;
     @FXML
     private GridPane cardsLayout;
-    private String session;
+    @FXML
+    private Button btnBackToDash;
     @FXML
     private BorderPane pane = new BorderPane();
 
@@ -100,11 +107,21 @@ public class AdminViewContentsController implements Initializable {
         }
         
     }
-    
-    
+
     
     public void setSession(String session){
         this.session = session;
+    }
+    @FXML
+    void backToDashboard(ActionEvent event) {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) btnBackToDash.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

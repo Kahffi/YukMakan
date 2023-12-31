@@ -20,11 +20,11 @@ public class CardResepController {
 
 	  	@FXML
 	    private VBox cardContainer;
-
+	  	@FXML
 	    private Label deskripsiResep;
-
+		@FXML
 	    private ImageView fotoResep;
-
+		@FXML
 	    private Label judulResep;
 
 	    @FXML

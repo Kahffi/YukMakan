@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.Rating?>
+
+<VBox fx:id="cardContainer" prefHeight="196.0" prefWidth="317.0" style="-fx-border-color: black; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CardUlasanController">
+   <children>
+      <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="104.0" prefWidth="424.0" spacing="30.0">
+         <children>
+            <Circle fx:id="imgUser" fill="DODGERBLUE" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+            <VBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="176.0">
+               <children>
+                  <Label fx:id="username" text="Username">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Rating fx:id="ratingUlasan" mouseTransparent="true" prefHeight="19.0" prefWidth="176.0" rating="5.0" />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="10.0" />
+               </HBox.margin>
+            </VBox>
+            <Label fx:id="tanggalUlasan" text="21/07/2002">
+               <HBox.margin>
+                  <Insets top="15.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="TOP_CENTER" fillWidth="false">
+         <children>
+            <Text fx:id="txtUlasan" strokeType="OUTSIDE" strokeWidth="0.0" text="kahfffiiii ganteng banget sih kamu amin" textAlignment="JUSTIFY" wrappingWidth="255.13671875" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

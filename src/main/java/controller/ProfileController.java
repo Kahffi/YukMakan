@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -26,10 +28,11 @@ import static controller.SignUpController.admin;
 
 public class ProfileController implements Initializable{
 
+	@FXML
+	private Circle profilePicture;
+
     Image pictureInput;
     private FileChooser fileChooser;
-	@FXML
-	private ImageView profilePicture;
 	@FXML
 	private Text pictureStatus;
     @FXML
@@ -131,14 +134,24 @@ public class ProfileController implements Initializable{
 	
 	private void initAccProfile() {
 		if (isAdmin) {
-			profilePicture.setImage(admin.getProfilePict());
+			if (admin.getProfilePict() != null) {
+				profilePicture.setFill(new ImagePattern(admin.getProfilePict()));
+			}
+			else{
+				profilePicture.setFill(new ImagePattern(new Image("/images/account_circle.png")));
+			}
 			lblUsername.setText(admin.getUsername());
 			lblNama.setText(admin.getNama());
 			lblEmail.setText(admin.getEmail());
 			lblPhone.setText(admin.getPhoneNum());
 		}
 		else {
-			profilePicture.setImage(user.getProfilePict());
+			if (user.getProfilePict() != null) {
+				profilePicture.setFill(new ImagePattern(user.getProfilePict()));
+			}
+			else{
+				profilePicture.setFill(new ImagePattern(new Image("/images/account_circle.png")));
+			}
 			lblUsername.setText(user.getUsername());
 			lblNama.setText(user.getNama());
 			lblEmail.setText(user.getEmail());
@@ -146,8 +159,6 @@ public class ProfileController implements Initializable{
 		};
 		txtEditNama.setText(lblNama.getText());
 		txtEditPhone.setText(lblPhone.getText());
-        profilePicture.setFitHeight(60);
-        profilePicture.setFitWidth(60);
 	}
 	
 	public void backToDashboard (ActionEvent event) {
@@ -181,7 +192,7 @@ public class ProfileController implements Initializable{
 				AkunDAO.setPicture(user.getUsername(), pictureInput);
 				user.setProfilePict(pictureInput);
 			}
-
+			pictureStatus.setVisible(true);
 			initAccProfile();
 		} else {
 			pictureInput = null;

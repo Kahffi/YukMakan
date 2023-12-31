@@ -26,12 +26,14 @@ public class UlasanDAO{
     
     public static void saveUlasan(Ulasan u){
         try {
-            String query = "insert into ulasan values ('%s', '%s', '%s', '%s')";
-            query = String.format(query, u.getId().toString(),
-                        u.getUlasanUsername(), u.getUlasan(), u.getTanggalUlasan());
             conn = BaseDAO.getConn();
-            System.out.println("ini query : " + query);
-            stmt = conn.prepareStatement(query);
+            stmt = conn.prepareStatement( "insert into ulasan values (?, ?, ?, ?, ?, ?)");
+            stmt.setString(1, u.getId().toString());
+            stmt.setString(2, u.getResepId().toString());
+            stmt.setString(3, u.getUser().getUsername());
+            stmt.setString(4, u.getUlasan());
+            stmt.setString(5, u.getTanggalUlasan());
+            stmt.setInt(6, u.getRating());
             stmt.executeUpdate();
             conn.close();
         } catch (SQLException ex) {
@@ -75,20 +77,21 @@ public class UlasanDAO{
         }
     }
 
-    public static ArrayList<Ulasan> getAllUlasan(String id){
+    public static ArrayList<Ulasan> getAllUlasan(String resepID){
         ArrayList <Ulasan> ulasan = new ArrayList <>();
         conn = BaseDAO.getConn();
         try {
-            stmt = conn.prepareStatement("select * from ulasan where id = ?");
-            stmt.setString(1, id);
+            stmt = conn.prepareStatement("select * from ulasan where resep_id = ?");
+            stmt.setString(1, resepID);
             rs = stmt.executeQuery();
             while (rs.next()){
                 Ulasan u;
-                String id2 = rs.getString("id");
-                User user = AkunDAO.getUser(rs.getString("username"));
+                String id = rs.getString("id");
+                User user = AkunDAO.getUser(rs.getString("user_username"));
+                int rating = rs.getInt("rating");
                 String isi = rs.getString("isi");
                 String tanggal = rs.getString("tanggal");
-                u = new Ulasan(user, isi, tanggal, id2);
+                u = new Ulasan(user, isi, tanggal, rating, UUID.fromString(id), UUID.fromString(resepID));
                 ulasan.add(u);
             }
         } catch (SQLException e) {
@@ -144,12 +147,5 @@ public class UlasanDAO{
             System.out.println("update gagal");
         }
     }
-    
-    
-    
-    
-        
-    
-    
-    
+
 }
