@@ -79,20 +79,22 @@ public class ResepDAO {
     
     //hapus resep (dan juga ulasan yang berkaitan)
     public static void delResep(Resep r){
+        // sebelum hapus resep, hapus ulasan dulu
+        UlasanDAO.delUlasan(r);
         String query = "DELETE FROM yukmakan.resep WHERE id = '%s';";
         query = String.format(query, r.getId().toString());
         conn = BaseDAO.getConn();
         try {
             stmt = conn.prepareStatement(query);
             stmt.executeUpdate();
-            
             //sambungkan dengan method pada ulasanDAO untuk menghapus ulasan
             //ulasanDAO.delUlasan(r.getId().toString());
-            
+            System.out.println(query);
             conn.close();
         } catch (SQLException ex) {
-            Logger.getLogger(ResepDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Hapus data gagal");
+
+            Logger.getLogger(ResepDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
