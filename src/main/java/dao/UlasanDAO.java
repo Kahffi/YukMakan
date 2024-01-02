@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import model.Resep;
 import model.Ulasan;
 import model.User;
 
@@ -121,7 +123,8 @@ public class UlasanDAO{
         BaseDAO.closeConn(conn);
         return ulasan;
     }
-    
+
+//    hapus ulasan yang spesifik
     public static void delUlasan(Ulasan u){
         String query = "DELETE FROM yukmakan.ulasan WHERE id = '%s';";
         query = String.format(query, u.getId().toString());
@@ -133,6 +136,20 @@ public class UlasanDAO{
             Logger.getLogger(UlasanDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Hapus data gagal");
         }
+    }
+
+//    hapus ulasan yang terkait dengan resep
+    public static void delUlasan(Resep resep){
+        conn = BaseDAO.getConn();
+        try {
+            stmt = conn.prepareStatement("delete from ulasan where resep_id = ?");
+            stmt.setString(1, resep.getId().toString());
+            stmt.executeUpdate();
+            System.out.println("Berhasil hapus seluruh ulasan pada resep");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
     
     public static void editUlasan(Ulasan u){

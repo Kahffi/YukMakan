@@ -1,109 +1,124 @@
--- yukmakan.akun definition
+create table yukmakan.akun
+(
+    username       varchar(50) collate latin1_general_cs not null
+        primary key,
+    password       varchar(50) collate latin1_general_cs not null,
+    nama           varchar(100)                          not null,
+    phoneNum       varchar(30)                           not null,
+    email          varchar(100)                          not null,
+    role           varchar(5)                            not null,
+    profilePicture longblob                              null,
+    constraint email
+        unique (email),
+    constraint username
+        unique (username)
+);
 
-CREATE TABLE `akun` (
-  `username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
-  `password` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `phoneNum` varchar(30) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `role` varchar(5) NOT NULL,
-  `profilePicture` longblob,
-  PRIMARY KEY (`username`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create table yukmakan.campaign
+(
+    id             varchar(40)                           not null
+        primary key,
+    admin_username varchar(50) collate latin1_general_cs null,
+    judul          varchar(255)                          null,
+    deskripsi      text                                  null,
+    targetDonasi   int                                   null,
+    currentDonasi  int                                   null,
+    imagePath      varchar(100)                          null,
+    tanggal        varchar(30)                           null,
+    constraint campaign_ibfk_1
+        foreign key (admin_username) references yukmakan.akun (username)
+);
 
+create index admin_username
+    on yukmakan.campaign (admin_username);
 
--- yukmakan.campaign definition
+create table yukmakan.kontenedukasi
+(
+    id             varchar(40)                           not null
+        primary key,
+    admin_username varchar(50) collate latin1_general_cs null,
+    judul          varchar(255)                          null,
+    konten         text                                  null,
+    tanggal        varchar(30)                           null,
+    imagePath      longblob                              null,
+    constraint kontenedukasi_ibfk_1
+        foreign key (admin_username) references yukmakan.akun (username)
+);
 
-CREATE TABLE `campaign` (
-  `id` varchar(40) NOT NULL,
-  `admin_username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
-  `judul` varchar(255) DEFAULT NULL,
-  `deskripsi` text,
-  `targetDonasi` int DEFAULT NULL,
-  `currentDonasi` int DEFAULT NULL,
-  `imagePath` varchar(100) DEFAULT NULL,
-  `tanggal` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `admin_username` (`admin_username`),
-  CONSTRAINT `campaign_ibfk_1` FOREIGN KEY (`admin_username`) REFERENCES `akun` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create index admin_username
+    on yukmakan.kontenedukasi (admin_username);
 
+create table yukmakan.resep
+(
+    id             varchar(40)                           not null
+        primary key,
+    admin_username varchar(50) collate latin1_general_cs null,
+    judul          varchar(255)                          null,
+    datePosted     varchar(30)                           null,
+    deskripsi      text                                  null,
+    langkah        text                                  null,
+    bahan          text                                  null,
+    kandunganGizi  text                                  null,
+    imageResep     longblob                              null,
+    constraint resep_ibfk_1
+        foreign key (admin_username) references yukmakan.akun (username)
+);
 
--- yukmakan.kontenedukasi definition
+create table yukmakan.daftarfavorit
+(
+    user_username varchar(50) collate latin1_general_cs null,
+    id_resep      varchar(40)                           null,
+    constraint id_resep
+        unique (id_resep),
+    constraint user_username
+        unique (user_username),
+    constraint daftarfavorit_ibfk_1
+        foreign key (user_username) references yukmakan.akun (username),
+    constraint daftarfavorit_ibfk_2
+        foreign key (id_resep) references yukmakan.resep (id)
+);
 
-CREATE TABLE `kontenedukasi` (
-  `id` varchar(40) NOT NULL,
-  `admin_username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
-  `judul` varchar(255) DEFAULT NULL,
-  `konten` text,
-  `tanggal` varchar(30) DEFAULT NULL,
-  `imagePath` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `admin_username` (`admin_username`),
-  CONSTRAINT `kontenedukasi_ibfk_1` FOREIGN KEY (`admin_username`) REFERENCES `akun` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create index admin_username
+    on yukmakan.resep (admin_username);
 
+create table yukmakan.riwayatdonasi
+(
+    id            varchar(40)                            not null
+        primary key,
+    campaign_id   varchar(40)                            null,
+    user_username varchar(100) collate latin1_general_cs null,
+    nominal       int                                    null,
+    tanggal       varchar(30)                            null,
+    constraint riwayatdonasi_ibfk_1
+        foreign key (campaign_id) references yukmakan.campaign (id),
+    constraint riwayatdonasi_ibfk_2
+        foreign key (user_username) references yukmakan.akun (username)
+);
 
--- yukmakan.resep definition
+create index campaign_id
+    on yukmakan.riwayatdonasi (campaign_id);
 
-CREATE TABLE `resep` (
-  `id` varchar(40) NOT NULL,
-  `admin_username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
-  `judul` varchar(255) DEFAULT NULL,
-  `datePosted` varchar(30) DEFAULT NULL,
-  `deskripsi` text,
-  `langkah` text,
-  `bahan` text,
-  `kandunganGizi` text,
-  `imageResep` longblob,
-  PRIMARY KEY (`id`),
-  KEY `admin_username` (`admin_username`),
-  CONSTRAINT `resep_ibfk_1` FOREIGN KEY (`admin_username`) REFERENCES `akun` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create index user_username
+    on yukmakan.riwayatdonasi (user_username);
 
+create table yukmakan.ulasan
+(
+    id            varchar(40)                            not null
+        primary key,
+    resep_id      varchar(40)                            not null,
+    user_username varchar(100) collate latin1_general_cs not null,
+    isi           text                                   not null,
+    tanggal       varchar(30)                            not null,
+    rating        int                                    not null,
+    constraint ulasan_ibfk_1
+        foreign key (resep_id) references yukmakan.resep (id),
+    constraint ulasan_ibfk_2
+        foreign key (user_username) references yukmakan.akun (username)
+);
 
--- yukmakan.riwayatdonasi definition
+create index resep_id
+    on yukmakan.ulasan (resep_id);
 
-CREATE TABLE `riwayatdonasi` (
-  `id` varchar(40) NOT NULL,
-  `campaign_id` varchar(40) DEFAULT NULL,
-  `user_username` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
-  `nominal` int DEFAULT NULL,
-  `tanggal` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `campaign_id` (`campaign_id`),
-  KEY `user_username` (`user_username`),
-  CONSTRAINT `riwayatdonasi_ibfk_1` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`id`),
-  CONSTRAINT `riwayatdonasi_ibfk_2` FOREIGN KEY (`user_username`) REFERENCES `akun` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+create index user_username
+    on yukmakan.ulasan (user_username);
 
-
--- yukmakan.ulasan definition
-
-CREATE TABLE `ulasan` (
-  `id` varchar(40) NOT NULL,
-  `resep_id` varchar(40) DEFAULT NULL,
-  `user_username` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
-  `isi` varchar(1000) DEFAULT NULL,
-  `tanggal` varchar(30) DEFAULT NULL,
-  `rating` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `resep_id` (`resep_id`),
-  KEY `user_username` (`user_username`),
-  CONSTRAINT `ulasan_ibfk_1` FOREIGN KEY (`resep_id`) REFERENCES `resep` (`id`),
-  CONSTRAINT `ulasan_ibfk_2` FOREIGN KEY (`user_username`) REFERENCES `akun` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
--- yukmakan.daftarfavorit definition
-
-CREATE TABLE `daftarfavorit` (
-  `user_username` varchar(50) CHARACTER SET latin1 COLLATE latin1_general_cs DEFAULT NULL,
-  `id_resep` varchar(40) DEFAULT NULL,
-  UNIQUE KEY `user_username` (`user_username`),
-  UNIQUE KEY `id_resep` (`id_resep`),
-  CONSTRAINT `daftarfavorit_ibfk_1` FOREIGN KEY (`user_username`) REFERENCES `akun` (`username`),
-  CONSTRAINT `daftarfavorit_ibfk_2` FOREIGN KEY (`id_resep`) REFERENCES `resep` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

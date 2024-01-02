@@ -29,6 +29,9 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 public class ResepDetailController implements Initializable {
+
+    @FXML
+    private VBox containerAddUlasan;
     @FXML
     private VBox ulasanCardsLayout;
     @FXML
@@ -116,6 +119,7 @@ public class ResepDetailController implements Initializable {
         }
     }
 
+
     @FXML
     void addToFav(ActionEvent event) {
         int i = AkunDAO.addFavorite(this.resep.getId().toString(), SignUpController.user.getUsername());
@@ -133,7 +137,16 @@ public class ResepDetailController implements Initializable {
 
     @FXML
     void deleteResep(ActionEvent event) {
-
+        ResepDAO.delResep(this.resep);
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(getClass().getResource("../view/Dashboard.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) btnBack.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -144,6 +157,10 @@ public class ResepDetailController implements Initializable {
         txtEditGizi.setText(txtGizi.getText());
         txtEditJudul.setText(lblJudul.getText());
         txtEditLangkah.setText(txtLangkah.getText());
+    }
+    @FXML
+    public void cancelEdit(ActionEvent event){
+        setEditVisibility(false);
     }
     @FXML
     public void saveUpdate(ActionEvent event){
@@ -165,6 +182,7 @@ public class ResepDetailController implements Initializable {
         }
         setEditVisibility(false);
     }
+
     @FXML
     public void backToDash(ActionEvent event){
         Stage stage = (Stage) btnBack.getScene().getWindow();
@@ -176,16 +194,6 @@ public class ResepDetailController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @FXML
-    public void cancelEdit(ActionEvent event){
-        setEditVisibility(false);
-    }
-    @FXML
-    void cancelUlasan(ActionEvent event) {
-        txtInUlasan.clear();
-        ratingUlasan.setRating(0);
     }
     @FXML
     void saveUlasan(ActionEvent event) {
@@ -199,12 +207,15 @@ public class ResepDetailController implements Initializable {
 
 
     }
+    @FXML
+    void cancelUlasan(ActionEvent event) {
+        txtInUlasan.clear();
+        ratingUlasan.setRating(0);
+    }
 
 
     // method untuk mengatur visibilitas saat berinteraksi dengan tombol edit
     private void setEditVisibility(Boolean visibility){
-        btnCancelUlasan.setVisible(!visibility); btnCancelUlasan.managedProperty().bind(btnCancelUlasan.visibleProperty());
-        btnSaveUlasan.setVisible(!visibility); btnSaveUlasan.managedProperty().bind(btnSaveUlasan.visibleProperty());
         txtBahan.setVisible(!visibility); txtBahan.managedProperty().bind(txtBahan.visibleProperty());
         txtDeskripsi.setVisible(!visibility); txtDeskripsi.managedProperty().bind(txtDeskripsi.visibleProperty());
         txtGizi.setVisible(!visibility); txtGizi.managedProperty().bind(txtGizi.visibleProperty());
@@ -224,12 +235,27 @@ public class ResepDetailController implements Initializable {
         this.ulasanList = UlasanDAO.getAllUlasan(resep.getId().toString());
         for (Ulasan ulasan : ulasanList) {
             try {
+                System.out.println(ulasan.getUser().getUsername());
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/view/CardUlasan.fxml"));
                 VBox ulasanBox = fxmlLoader.load();
                 CardUlasanController cardUlasanController = fxmlLoader.getController();
-                cardUlasanController.setData(ulasan);
-                fxmlLoader.setController(cardUlasanController);
+                cardUlasanController.setData(ulasan, this.resep);
+                if (SignUpController.isAdmin){
+                    cardUlasanController.setEditVisibility(false);
+                    cardUlasanController.setEditBtnVisibility(false);
+                    containerAddUlasan.setVisible(false); containerAddUlasan.managedProperty().bind(containerAddUlasan.visibleProperty());
+                }
+                else{
+                    if (SignUpController.user.getUsername().equals(ulasan.getUser().getUsername())){
+                        cardUlasanController.setEditVisibility(false);
+                        containerAddUlasan.setVisible(false); containerAddUlasan.managedProperty().bind(containerAddUlasan.visibleProperty());
+                    }
+                    else{
+                        cardUlasanController.setEditVisibility(false);
+                        cardUlasanController.setEditBtnVisibility(false);
+                    }
+                }
                 ulasanCardsLayout.getChildren().add(ulasanBox);
             } catch (IOException e) {
                 throw new RuntimeException(e);

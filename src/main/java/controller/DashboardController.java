@@ -46,6 +46,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Button navbarCampaign;
+	@FXML
     private Button navbarFavorit;
 
     @FXML
