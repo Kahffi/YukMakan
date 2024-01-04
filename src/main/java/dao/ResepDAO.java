@@ -143,22 +143,19 @@ public class ResepDAO {
 
                 // mengambil data admin untuk construct class resep
                 //ulasan = UlasanDAO.getUlasan(uuid.toString());
-
-                conn.close();
                 return r;
-            }
-            else{
-                System.out.println("gagal mengambil data konten edukasi");
-                return null;
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(KontenEduDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("gagal mengambil data konten edukasi");
-            return null;
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally{
+            BaseDAO.closeConn(conn);
         }
+        System.out.println("null returned");
+        return null;
 
     }
     

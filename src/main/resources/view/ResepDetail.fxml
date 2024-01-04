@@ -166,6 +166,11 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
+                        <Button fx:id="btnDelFav" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteFav" text="Hapus Dari Daftar Favorit">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
                         <Button fx:id="btnHapus" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteResep" text="Hapus">
                            <cursor>
                               <Cursor fx:constant="HAND" />

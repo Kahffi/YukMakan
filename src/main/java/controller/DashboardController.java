@@ -1,5 +1,7 @@
 package controller;
 
+import static controller.PictureController.resep;
+import dao.AkunDAO;
 import dao.KontenEduDAO;
 import javafx.event.ActionEvent;
 import java.io.IOException;
@@ -28,6 +30,7 @@ import javafx.stage.Stage;
 import model.Admin;
 import model.KontenEdukasi;
 import model.Resep;
+import model.User;
 
 public class DashboardController implements Initializable {
 	@FXML
@@ -140,6 +143,7 @@ public class DashboardController implements Initializable {
 				cardController.setData(element);
 				cardContainer.add(cardBox, column, row);
 				GridPane.setMargin(cardBox, new Insets(30));
+                                System.out.println("Resep card");
 			}
 
 		} catch (IOException e) {
@@ -213,9 +217,14 @@ public class DashboardController implements Initializable {
 		resetNavbarPropery();
 		setNavbarAffectedStyle(3);
 		navbarFavorit.getStyleClass().add("navbarBtnSelected");
-
+                
+                if (!SignUpController.isAdmin) {
+                    ArrayList <Resep> daftarFav = new ArrayList<>();
+                    daftarFav = AkunDAO.getDaftarFav(SignUpController.user.getUsername());
+                    setResepCards(daftarFav);
+                    System.out.println("dibawah ini jalan");
+                }
 	}
-
 	// method untuk reset css dari navbar
 	public void resetNavbarPropery() {
 		navbarCampaign.getStyleClass().remove("navbarTopAffected");
