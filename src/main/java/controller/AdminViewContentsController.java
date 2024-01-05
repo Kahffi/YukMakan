@@ -1,5 +1,6 @@
 package controller;
 
+import dao.CampaignDAO;
 import dao.ResepDAO;
 import dao.KontenEduDAO;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.Campaign;
 import model.KontenEdukasi;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +52,8 @@ public class AdminViewContentsController implements Initializable {
 
         }
         else if (session.equals("campaign")){
+            ArrayList<Campaign> campaignList = CampaignDAO.getAllCampaign();
+            initCampaignCards(campaignList);
 
         }
     }
@@ -106,6 +110,32 @@ public class AdminViewContentsController implements Initializable {
 
         }
         
+    }
+
+    public void initCampaignCards(ArrayList<Campaign> campaigns){
+        cardsLayout.getChildren().clear();
+        try {
+            int row = 1;
+            int column = 0;
+            for (Campaign campaign : campaigns){
+                if (column == 4){
+                    column = 1;
+                    row++;
+                }
+                else{
+                    column++;
+                }
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/view/CardCampaign.fxml"));
+                VBox card = loader.load();
+                CardCampaignController cardController = loader.getController();
+                cardController.setData(campaign);
+                cardsLayout.add(card, column, row);
+                GridPane.setMargin(card, new Insets(30));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     

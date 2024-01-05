@@ -257,7 +257,7 @@ public class Akun {
     // mengambil tanggal dan jam saat ini
     public String getDate(){
         String date;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         LocalDateTime current = LocalDateTime.now();
         date = dtf.format(current);
         return date;

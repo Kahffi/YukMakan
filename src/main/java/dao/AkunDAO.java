@@ -60,8 +60,9 @@ public class AkunDAO {
             stmt.setString(1, user_username);
             stmt.setString(2, id_resep);
             return stmt.executeUpdate();
+
         } catch (SQLException e) {
-            return -1;
+            throw new RuntimeException(e);
         } finally {
             BaseDAO.closeConn(conn);
         }

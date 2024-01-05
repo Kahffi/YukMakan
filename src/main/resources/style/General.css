@@ -19,14 +19,46 @@
     -fx-font-weight: bold;
 }
 
+.btnGreen{
+    -fx-background-radius: 2px;
+    -fx-background-color: #18a84b;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.btnBlue{
+    -fx-background-radius: 2px;
+    -fx-background-color: #0093C4;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.normalTextField{
+    -fx-border-color: none;
+    -fx-border-width:  0 0 0 0;
+}
+
+.editTextField{
+    -fx-border-color: black;
+    -fx-background-color: none;
+    -fx-border-width:  0 0 3 0;
+}
+
+.btnRed{
+    -fx-background-radius: 2px;
+    -fx-background-color: #c53333;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
 #formContainer > VBox{
     -fx-spacing: 8px;
     -fx-max-height: Max_Value;
 }
 
-TextField, TextArea{
-    -fx-pref-width: 470px;
-}
 
 StackPane{
     -fx-background-color: white;
