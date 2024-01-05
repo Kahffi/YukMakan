@@ -4,6 +4,13 @@
  */
 package model;
 
+import dao.AkunDAO;
+import dao.BaseDAO;
+import dao.ResepDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -17,6 +24,10 @@ import java.time.format.DateTimeFormatter;
  * @author Kahffi
  */
 public class User extends Akun{
+
+    private static Connection conn;
+    private static PreparedStatement stmt;
+    private static ResultSet rs;
     
     private ArrayList <Resep> daftarFavorit = new ArrayList<>();
     private ArrayList <DonationLog> riwayatDonasi = new ArrayList<>();
@@ -70,13 +81,16 @@ public class User extends Akun{
         DonationLog donationLog = new DonationLog(campaign, this, amount);
         riwayatDonasi.add(donationLog);
         campaign.addDonationLog(donationLog);
-        campaign.setCurrentDonasi(campaign.getCurrentDonasi() + amount);
-        System.out.println("Donation successful!");
-    }
-    
+
+        // Update the current donation directly in the Campaign class
+        int currentDonasi = campaign.getCurrentDonasi();
+        campaign.setCurrentDonasi(currentDonasi + amount);
+
+        System.out.println("Donasi Berhasil!");
+    }   
+
     //method untuk menambahkan resep kedalam daftar favorit
     public void addToFav(Resep resep){
-        //menambahkan resep ke dalam daftar favorit
         daftarFavorit.add(resep);
     }
     public void delFav(int index){
@@ -100,7 +114,7 @@ public class User extends Akun{
     public ArrayList<Resep> getDaftarFavorit() {
         return daftarFavorit;
     }
-
+    
     public ArrayList<DonationLog> getRiwayatDonasi() {
         return riwayatDonasi;
     }
