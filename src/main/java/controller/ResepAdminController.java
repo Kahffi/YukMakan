@@ -96,6 +96,15 @@ public class ResepAdminController implements Initializable {
 
     @FXML
     void toDaftarAdmin(MouseEvent event) {
+        Parent parent = null;
+        try {
+            parent = FXMLLoader.load(getClass().getResource("/view/AdminCreateAccount.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) btnAddAdmin.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -110,6 +119,7 @@ public class ResepAdminController implements Initializable {
             Parent parent = FXMLLoader.load(getClass().getResource("/view/MetodePembayaran.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = (Stage) btnCreateResep.getScene().getWindow();
+            stage.setTitle("YukMakan - Metode Pembayaran");
             stage.setScene(scene);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -141,6 +151,7 @@ public class ResepAdminController implements Initializable {
             Parent parent = fxmlLoader.load();
             Scene scene = new Scene(parent);
             Stage stage = (Stage) btnCreateResep.getScene().getWindow();
+            stage.setTitle("YukMakan - View Campaigns");
             stage.setScene(scene);
             System.out.println("Meluncur");
         } catch (IOException e) {

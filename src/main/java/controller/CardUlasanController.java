@@ -119,7 +119,7 @@ public class CardUlasanController{
         btnCancelEdit.setVisible(visibility); btnCancelEdit.managedProperty().bind(btnCancelEdit.visibleProperty());
         btnSaveEdit.setVisible(visibility); btnSaveEdit.managedProperty().bind(btnSaveEdit.visibleProperty());
         txtEditUlasan.setVisible(visibility); txtEditUlasan.managedProperty().bind(txtEditUlasan.visibleProperty());
-        ratingUlasan.setMouseTransparent(visibility);
+        ratingUlasan.setMouseTransparent(!visibility);
 
         btnStartEdit.setVisible(!visibility); btnStartEdit.managedProperty().bind(btnStartEdit.visibleProperty());
         btnDeleteUlasan.setVisible(!visibility); btnDeleteUlasan.managedProperty().bind(btnDeleteUlasan.visibleProperty());

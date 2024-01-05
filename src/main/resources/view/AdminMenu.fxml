@@ -10,31 +10,28 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AdminMenuLainnya">
+<AnchorPane prefHeight="933.0" prefWidth="1046.0" styleClass="mainPanel" stylesheets="@../style/UserDashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ResepAdminController">
    <children>
-      <GridPane hgap="30.0" layoutX="192.0" layoutY="65.0" prefHeight="496.0" prefWidth="655.0" vgap="30.0">
-         <columnConstraints>
+      <GridPane hgap="30.0" layoutX="227.0" layoutY="61.0" prefHeight="750.0" prefWidth="655.0" vgap="30.0" AnchorPane.bottomAnchor="78.0" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="202.0" AnchorPane.topAnchor="61.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+        </rowConstraints>
          <children>
-            <VBox fx:id="btnCreateResep" alignment="CENTER" onMouseClicked="#toCreateResep" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <VBox fx:id="btnCreateResep" onMouseClicked="#toCreateResep" styleClass="adminCard" stylesheets="@../style/ItemCard.css">
                <children>
                   <ImageView fitHeight="46.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Add%20List.png" />
                      </image>
-                     <VBox.margin>
-                        <Insets top="25.0" />
-                     </VBox.margin>
                   </ImageView>
-                  <Label prefHeight="72.0" prefWidth="126.0" text="Metode Pembayaran" textAlignment="CENTER" wrapText="true" />
+                  <Label text="Buat Resep" />
                </children>
             </VBox>
             <VBox fx:id="btnCreateKontenEdu" onMouseClicked="#toCreateKontenEdu" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="2">
@@ -66,7 +63,7 @@
             </VBox>
             <VBox onMouseClicked="#toViewResep" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.rowIndex="1">
                <children>
-                  <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="51.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Delete%20Document.png" />
                      </image>
@@ -74,7 +71,7 @@
                   <Label text="Edit/Hapus Resep" />
                </children>
             </VBox>
-            <VBox onMouseClicked="#toCreateResep" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="1">
+            <VBox fx:id="btnCreateCampaign" onMouseClicked="#toCreateCampaign" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="1">
                <children>
                   <ImageView fitHeight="48.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -84,7 +81,7 @@
                   <Label text="Buat Campaign" />
                </children>
             </VBox>
-            <VBox onMouseClicked="#toCreateResep" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <VBox onMouseClicked="#toViewCampaign" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
                   <ImageView fitHeight="62.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -92,6 +89,26 @@
                      </image>
                   </ImageView>
                   <Label text="Edit/Hapus Campaign" />
+               </children>
+            </VBox>
+            <VBox fx:id="btnMetodePembayaran" onMouseClicked="#toKelolaMetodePembayaran" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fitHeight="51.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Online%20Payment.png" />
+                     </image>
+                  </ImageView>
+                  <Label prefHeight="65.0" prefWidth="199.0" text="Kelola Metode Pembayaran" textAlignment="CENTER" wrapText="true" />
+               </children>
+            </VBox>
+            <VBox fx:id="btnAddAdmin" layoutX="10.0" layoutY="530.0" onMouseClicked="#toDaftarAdmin" styleClass="adminCard" stylesheets="@../style/ItemCard.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fitHeight="57.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Admin%20Settings%20Male.png" />
+                     </image>
+                  </ImageView>
+                  <Label contentDisplay="CENTER" prefHeight="59.0" prefWidth="116.0" text="Daftar Akun Admin" textAlignment="CENTER" wrapText="true" />
                </children>
             </VBox>
          </children>

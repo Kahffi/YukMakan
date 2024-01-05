@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -107,6 +108,7 @@ public class CampaignDetailController{
         if (!SignUpController.isAdmin){
             btnStartEdit.setVisible(false); btnStartEdit.managedProperty().bind(btnStartEdit.visibleProperty());
             btnHapusCampaign.setVisible(false); btnHapusCampaign.managedProperty().bind(btnHapusCampaign.visibleProperty());
+            btnViewLog.setVisible(false); btnViewLog.managedProperty().bind(btnViewLog.visibleProperty());
         }
         else {
             donationContainer.setVisible(false); donationContainer.managedProperty().bind(donationContainer.visibleProperty());
@@ -216,19 +218,32 @@ public class CampaignDetailController{
         btnHapusCampaign.setVisible(!visibility); btnHapusCampaign.managedProperty().bind(btnHapusCampaign.visibleProperty());
     }
 
+    @FXML
     private void showDonationLog(ActionEvent e){
+        VBox donationContainer = new VBox();
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setMaxWidth(800);
+        scrollPane.setMaxHeight(600);
+        scrollPane.setContent(donationContainer);
+        Scene scene = new Scene(scrollPane);
+        Stage logStage = new Stage();
+        logStage.setScene(scene);
+        logStage.setTitle("Riwayat Donasi - " + this.campaign.getId().toString());
+        logStage.setHeight(600);
+        logStage.setWidth(800);
+        logStage.show();
+
         for (DonationLog donation : this.campaign.getDonationLogs()){
-            VBox cardDonation = new VBox(10);
-            Image userProfilePict = donation.getDonor().getProfilePict();
-            Circle userImageLayout = new Circle();
-            userImageLayout.prefWidth(50);
-            userImageLayout.prefHeight(50);
-            userImageLayout.setFill(new ImagePattern(userProfilePict));
-            Label nominal = new Label(donation.getAmount() + "");
-            Label user = new Label(donation.getDonor().getUsername());
-            Label date = new Label(donation.getTanggal());
-
-
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/DonationCard.fxml"));
+            try {
+                HBox box = loader.load();
+                DonationCardController controller = loader.getController();
+                controller.initialize(donation);
+                donationContainer.getChildren().add(box);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
     }

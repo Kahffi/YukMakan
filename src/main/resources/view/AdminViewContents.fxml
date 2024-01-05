@@ -28,7 +28,7 @@
       </HBox>
    </top>
    <center>
-      <ScrollPane BorderPane.alignment="CENTER">
+      <ScrollPane style="-fx-background: C1C5AA;" BorderPane.alignment="CENTER">
          <content>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
