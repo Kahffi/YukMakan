@@ -1,7 +1,6 @@
 package controller;
 
 import dao.CampaignDAO;
-import static controller.PictureController.resep;
 import dao.AkunDAO;
 import dao.KontenEduDAO;
 import javafx.event.ActionEvent;
@@ -9,7 +8,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 import dao.ResepDAO;
 import javafx.fxml.FXML;
@@ -27,12 +25,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import model.*;
 
 public class DashboardController implements Initializable {
 	@FXML
-	private ImageView profilePict;
+	private Circle profilePict;
 	
 	@FXML
 	private Label lblUsername;
@@ -83,21 +83,28 @@ public class DashboardController implements Initializable {
 			//setup tampilan profile picture untuk user
 			if (SignUpController.user.getProfilePict()!=null) {
 				System.out.println(SignUpController.user.getProfilePict() != null);
-				profilePict.setImage(SignUpController.user.getProfilePict());
-				profilePict.setFitHeight(60);
-				profilePict.setFitWidth(60);
-			};
+				profilePict.setFill(new ImagePattern(SignUpController.user.getProfilePict()));
+			}
+			else{
+				profilePict.setFill(new ImagePattern(new Image("/images/account_circle.png")));
+			}
 			setResepCards(ResepDAO.getAllResep());
 		}
 		// jika yang login admin
 		else {
 			try {
-				mainSection.setContent(FXMLLoader.load(getClass().getResource("/view/ResepAdmin.fxml")));
+				mainSection.setContent(FXMLLoader.load(getClass().getResource("/view/AdminMenu.fxml")));
 				// hide beberapa navbar karena admin hanya memiliki 1 navbar
 				navbarHistoriDonasi.setVisible(false); navbarHistoriDonasi.managedProperty().bind(navbarHistoriDonasi.visibleProperty());
 				navbarKontenEdu.setVisible(false); navbarKontenEdu.managedProperty().bind(navbarKontenEdu.visibleProperty());
 				navbarFavorit.setVisible(false); navbarFavorit.managedProperty().bind(navbarFavorit.visibleProperty());
 				navbarCampaign.setVisible(false); navbarCampaign.managedProperty().bind(navbarCampaign.visibleProperty());
+				navbarResep.setText("Admin Menu");
+				ImageView adminIcon = new ImageView(new Image("/images/Admin Settings Male.png"));
+				adminIcon.setFitWidth(35);
+				adminIcon.setFitHeight(35);
+				adminIcon.setPreserveRatio(false);
+				navbarResep.setGraphic(adminIcon);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -105,9 +112,7 @@ public class DashboardController implements Initializable {
 			//setup tampilan profile picture untuk admin
 			if (SignUpController.admin.getProfilePict()!=null) {
 				System.out.println(SignUpController.admin.getProfilePict().toString());
-				profilePict.setImage(SignUpController.admin.getProfilePict());
-				profilePict.setFitHeight(60);
-				profilePict.setFitWidth(60);
+				profilePict.setFill(new ImagePattern(SignUpController.admin.getProfilePict()));
 			};
 		}
 

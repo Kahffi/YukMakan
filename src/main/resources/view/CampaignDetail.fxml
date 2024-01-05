@@ -35,7 +35,7 @@
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <content>
-            <VBox maxWidth="-Infinity" prefWidth="1265.0" spacing="15.0">
+            <VBox maxWidth="-Infinity" prefWidth="1265.0" spacing="15.0" style="-fx-background-color: c1c5aa;">
                <children>
                   <VBox>
                      <children>
@@ -59,7 +59,7 @@
                   <VBox alignment="TOP_CENTER" fillWidth="false" spacing="20.0">
                      <children>
                         <Label fx:id="txtJudulCampaign" styleClass="H1" stylesheets="@../style/General.css" text="Judul Campaign" />
-                        <TextField fx:id="txtEditJudul" prefHeight="33.0" prefWidth="343.0" styleClass="editTextField" stylesheets="@../style/General.css" text="asfdfds">
+                        <TextField fx:id="txtEditJudul" prefHeight="33.0" prefWidth="343.0" styleClass="editTextField" stylesheets="@../style/General.css">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -153,7 +153,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button layoutX="10.0" layoutY="22.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="135.0" styleClass="btnGreen" stylesheets="@../style/General.css" text="Lihat Riwayat Donasi">
+                              <Button fx:id="btnViewLog" layoutX="10.0" layoutY="22.0" mnemonicParsing="false" onAction="#showDonationLog" prefHeight="35.0" prefWidth="135.0" styleClass="btnGreen" stylesheets="@../style/General.css" text="Lihat Riwayat Donasi">
                                  <graphic>
                                     <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
                                        <image>
@@ -174,8 +174,11 @@
                   </VBox>
                   <VBox fx:id="donationContainer" alignment="TOP_CENTER" fillWidth="false">
                      <children>
-                        <Label text="Mari Berdonasi!" />
-                        <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="112.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white;">
+                        <Label text="Mari Berdonasi!">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="112.0" prefWidth="600.0" spacing="20.0" style="-fx-border-color: black;">
                            <children>
                               <VBox alignment="CENTER_LEFT" fillWidth="false">
                                  <children>

@@ -123,7 +123,9 @@ public class ResepDetailController implements Initializable {
             btnHapus.setVisible(false); btnHapus.managedProperty().bind(btnHapus.visibleProperty());
         }
         Platform.runLater(() -> {
-            updateButtonVisibility();
+            if (!SignUpController.isAdmin){
+                updateButtonVisibility();
+            }
         });
     }
 

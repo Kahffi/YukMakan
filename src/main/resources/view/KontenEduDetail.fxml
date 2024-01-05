@@ -2,6 +2,7 @@
 
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -19,13 +20,23 @@
    <center>
       <ScrollPane hbarPolicy="NEVER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0">
          <content>
-            <VBox alignment="CENTER" fillWidth="false" maxWidth="1280.0" prefWidth="1280.0" spacing="30.0">
+            <VBox alignment="CENTER" fillWidth="false" maxWidth="1280.0" prefWidth="1280.0" spacing="30.0" style="-fx-background-color: C1C5AA;">
                <children>
                   <VBox maxWidth="1.7976931348623157E308" prefWidth="1280.0">
                      <children>
-                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#BackToDash" prefHeight="35.0" prefWidth="33.0" text="&lt;">
+                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#backToDash" style="-fx-background-color: none;">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Close_Icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                            <VBox.margin>
-                              <Insets left="100.0" top="50.0" />
+                              <Insets left="70.0" top="30.0" />
                            </VBox.margin>
                         </Button>
                      </children>
