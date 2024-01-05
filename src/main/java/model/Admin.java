@@ -102,6 +102,7 @@ public class Admin extends Akun{
     }
     
     // Create campaign
+    /*
     public Campaign createCampaign(Admin creator) {
         Campaign c;
         c = new Campaign(this);
@@ -112,14 +113,14 @@ public class Admin extends Akun{
         c.setDeskripsi(super.createParagraph());
         c.setTanggal(super.getDate());
         System.out.println("Sumber gambar campaign: ");
-        c.setImagePath(scanner.nextLine());
+        c.setCampaignImage(scanner.nextLine());
         System.out.println("Target donasi campaign: ");
         c.setTargetDonasi(scanner.nextInt());
         super.addToCampaignList(c);
 
         return c;
     }
-
+    */
     public Campaign updateCampaignDesc(Campaign c) {
         c.printCampaign();
         System.out.println("Masukkan deskripsi campaign yang baru : ");

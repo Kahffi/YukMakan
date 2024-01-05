@@ -3,7 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+import javafx.scene.image.Image;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.UUID;
 
 
@@ -17,33 +22,39 @@ public class Campaign {
     private Scanner scanner = new Scanner(System.in);
  
     private UUID id;
-    private String imagePath;
+    private Image campaignImage;
     private String judul;
     private Admin creator;
     private String deskripsi;
     private String tanggal;
-    private ArrayList <DonationLog> donatur = new ArrayList<>();
+    private ArrayList <DonationLog> donationLogs = new ArrayList<>();
+    private ArrayList <MetodePembayaran> listMetodePembayaran;
+    private String endDate;
     private int targetDonasi;
     private int currentDonasi;
     
     //main constructor
-    public Campaign (String judul, Admin creator, String deskripsi, String tanggal, String imagePath, String strID, int targetDonasi){
-        this.id = UUID.fromString(strID);
+    public Campaign (String judul, Admin creator, String deskripsi, String tanggal, String endDate, Image campaignImage, UUID id, int targetDonasi, int currentDonasi,
+                     ArrayList <MetodePembayaran> listMetodePembayaran, ArrayList<DonationLog> riwayatDonasi){
+        this.id = id;
         this.judul = judul;
         this.creator = creator;
         this.tanggal = tanggal;
+        this.endDate = endDate;
         this.deskripsi = deskripsi;
-        this.imagePath = imagePath;
+        this.campaignImage = campaignImage;
         this.targetDonasi = targetDonasi;
-        this.currentDonasi = 0;
+        this.currentDonasi = currentDonasi;
+        this.listMetodePembayaran = listMetodePembayaran;
+        this.donationLogs = riwayatDonasi;
     }
     
-    public Campaign (UUID id, String judul, String deskripsi, String tanggal, String imagePath, int targetDonasi){
+    public Campaign (UUID id, String judul, String deskripsi, String tanggal, Image campaignImage, int targetDonasi){
         this.id = id;
         this.judul = judul;
         this.tanggal = tanggal;
         this.deskripsi = deskripsi;
-        this.imagePath = imagePath;
+        this.campaignImage = campaignImage;
         this.targetDonasi = targetDonasi;
         this.currentDonasi = 0;
     }
@@ -54,7 +65,7 @@ public class Campaign {
 
     public void printCampaign(){
         System.out.println("ID : " + getId().toString());
-        System.out.println(getImagePath());
+        System.out.println(getCampaignImage());
         System.out.println(getJudul());
         System.out.println(getDeskripsi());
         System.out.println(getTanggal());
@@ -64,23 +75,45 @@ public class Campaign {
     }
     
     public void addDonationLog(DonationLog donationLog) {
-        if (donatur == null) {
-            donatur = new ArrayList<>();
+        if (donationLogs == null) {
+            donationLogs = new ArrayList<>();
         }
-        donatur.add(donationLog);
+        donationLogs.add(donationLog);
     }
     
     public int getCurrentDonasi() {
         int totalDonasi = 0;
 
         // Iterate through the list of DonationLog and sum up the donation amounts
-        for (DonationLog donationLog : donatur) {
+        for (DonationLog donationLog : donationLogs) {
             totalDonasi += donationLog.getAmount();
         }
 
         return totalDonasi;
     }   
     //setter getter
+
+
+    public ArrayList<DonationLog> getDonationLogs() {
+        return donationLogs;
+    }
+
+    public void setDonationLogs(ArrayList<DonationLog> donationLogs) {
+        this.donationLogs = donationLogs;
+    }
+
+    public void setListMetodePembayaran(ArrayList<MetodePembayaran> listMetodePembayaran) {
+        this.listMetodePembayaran = listMetodePembayaran;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     public Scanner getScanner() {
         return scanner;
     }
@@ -97,12 +130,12 @@ public class Campaign {
         this.id = id;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public Image getCampaignImage() {
+        return campaignImage;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setCampaignImage(Image campaignImage) {
+        this.campaignImage = campaignImage;
     }
 
     public String getJudul() {
@@ -138,11 +171,11 @@ public class Campaign {
     }
 
     public ArrayList<DonationLog> getDonationLog() {
-        return donatur;
+        return donationLogs;
     }
 
     public void setDonationLog(ArrayList<DonationLog> donatur) {
-        this.donatur = donatur;
+        this.donationLogs = donatur;
     }
 
     public int getTargetDonasi() {
@@ -156,6 +189,24 @@ public class Campaign {
     public void setCurrentDonasi(int currentDonasi) {
         this.currentDonasi = currentDonasi;
     }
-    
-    
+
+
+    public ArrayList<MetodePembayaran> getListMetodePembayaran() {
+        return this.listMetodePembayaran;
+    }
+
+    public String currencyFormatter(int i){
+        NumberFormat currencyFormat = DecimalFormat.getCurrencyInstance(Locale.forLanguageTag("id-ID"));
+        return currencyFormat.format(i);
+    }
+    public String getFormattedTargetDonasi(){
+        return currencyFormatter(targetDonasi);
+    }
+    public String getFormattedCurrentDonasi(){
+        return currencyFormatter(currentDonasi);
+    }
+
+    public double getDonationProgress(){
+        return (double) currentDonasi / targetDonasi;
+    }
 }

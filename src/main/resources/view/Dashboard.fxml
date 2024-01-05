@@ -107,7 +107,20 @@
                   <String fx:value="mouseHover" />
                </styleClass>
             </Button>
-            <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="241.0" prefWidth="200.0" styleClass="navbarBtn" VBox.vgrow="ALWAYS" />
+            <Button fx:id="navbarHistoriDonasi" alignment="BASELINE_LEFT" graphicTextGap="20.0" layoutX="10.0" layoutY="350.0" mnemonicParsing="false" onAction="#toHistoriDonasi" prefHeight="70.0" prefWidth="225.0" text="Histori Donasi">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" styleClass="navbarIcon">
+                     <image>
+                        <Image url="@../images/menu_book.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <styleClass>
+                  <String fx:value="navbarBtn" />
+                  <String fx:value="mouseHover" />
+               </styleClass>
+            </Button>
+            <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="166.0" prefWidth="200.0" styleClass="navbarBtn" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </left>

@@ -1,5 +1,6 @@
 package controller;
 
+import dao.CampaignDAO;
 import static controller.PictureController.resep;
 import dao.AkunDAO;
 import dao.KontenEduDAO;
@@ -27,10 +28,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Admin;
-import model.KontenEdukasi;
-import model.Resep;
-import model.User;
+import model.*;
 
 public class DashboardController implements Initializable {
 	@FXML
@@ -60,6 +58,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Button navbarResep;
+	@FXML
+	private Button navbarHistoriDonasi;
 
     @FXML
     void toProfile(MouseEvent event) {
@@ -93,6 +93,11 @@ public class DashboardController implements Initializable {
 		else {
 			try {
 				mainSection.setContent(FXMLLoader.load(getClass().getResource("/view/ResepAdmin.fxml")));
+				// hide beberapa navbar karena admin hanya memiliki 1 navbar
+				navbarHistoriDonasi.setVisible(false); navbarHistoriDonasi.managedProperty().bind(navbarHistoriDonasi.visibleProperty());
+				navbarKontenEdu.setVisible(false); navbarKontenEdu.managedProperty().bind(navbarKontenEdu.visibleProperty());
+				navbarFavorit.setVisible(false); navbarFavorit.managedProperty().bind(navbarFavorit.visibleProperty());
+				navbarCampaign.setVisible(false); navbarCampaign.managedProperty().bind(navbarCampaign.visibleProperty());
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
@@ -164,7 +169,35 @@ public class DashboardController implements Initializable {
 
 		}
 		else {
+			setCampaignCards(CampaignDAO.getAllCampaign());
+		}
 
+	}
+	private void setCampaignCards(ArrayList<Campaign> campaignList){
+		cardContainer.getChildren().clear();
+		int row = 1;
+		int column = 0;
+		int size = campaignList.size();
+		try {
+			for (Campaign element : campaignList) {
+				if (column == 3) {
+					column = 1;
+					row++;
+				} else {
+					column++;
+				}
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(getClass().getResource("/view/CardCampaign.fxml"));
+				VBox cardBox = fxmlLoader.load();
+				CardCampaignController cardController = fxmlLoader.getController();
+				cardController.setData(element);
+				cardContainer.add(cardBox, column, row);
+				GridPane.setMargin(cardBox, new Insets(30));
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
@@ -225,8 +258,42 @@ public class DashboardController implements Initializable {
                     System.out.println("dibawah ini jalan");
                 }
 	}
+
+	@FXML
+	public void toHistoriDonasi (ActionEvent event){
+		resetNavbarPropery();
+		navbarHistoriDonasi.getStyleClass().add("navbarBtnSelected");
+		setNavbarAffectedStyle(5);
+		setDonationCards(CampaignDAO.getDonationLogsByUser(SignUpController.user.getUsername()));
+	}
+	public void setDonationCards(ArrayList<DonationLog> donationLogs) {
+		cardContainer.getChildren().clear();
+		int column = 0;
+		try {
+			for (DonationLog donation : donationLogs) {
+				FXMLLoader fxmlLoader = new FXMLLoader();
+				fxmlLoader.setLocation(getClass().getResource("/view/DonationCard.fxml"));
+				HBox cardBox = null;
+				cardBox = fxmlLoader.load();
+				DonationCardController cardController = fxmlLoader.getController();
+				cardController.initialize(donation);
+				cardContainer.add(cardBox, 0, column);
+				column++;
+				GridPane.setMargin(cardBox, new Insets(20, 0, 0, 100));
+				if (column > 1) {
+					GridPane.setMargin(cardBox, new Insets(0, 0, 0, 100));
+				}
+			}
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	// method untuk reset css dari navbar
 	public void resetNavbarPropery() {
+		navbarHistoriDonasi.getStyleClass().remove("navbarTopAffected");
+		navbarHistoriDonasi.getStyleClass().remove("navbarBottomAffected");
+		navbarHistoriDonasi.getStyleClass().remove("navbarBtnSelected");
+
 		navbarCampaign.getStyleClass().remove("navbarTopAffected");
 		navbarCampaign.getStyleClass().remove("navbarBottomAffected");
 		navbarCampaign.getStyleClass().remove("navbarBtnSelected");
@@ -249,7 +316,7 @@ public class DashboardController implements Initializable {
 	}
 	//method untuk mengatur style dari navbar yang berada di atas dan atau di bawah navbar yang sedang dipilih
 	public void setNavbarAffectedStyle(int i){
-		// 1 = resep, 2 = konten edukasi, 3 = daftar favorit, 4 = campaign
+		// 1 = resep, 2 = konten edukasi, 3 = daftar favorit, 4 = campaign 5 = Histori Donasi
 
 		if(i==1) {
 			navbarKontenEdu.getStyleClass().add("navbarBottomAffected");
@@ -264,8 +331,11 @@ public class DashboardController implements Initializable {
 		}
 		else if(i==4) {
 			navbarFavorit.getStyleClass().add("navbarTopAffected");
-		};
-
+			navbarHistoriDonasi.getStyleClass().add("navbarBottomAffected");
+		}
+		else if (i==5) {
+			navbarCampaign.getStyleClass().add("navbarTopAffected");
+		}
 	}
 
 }

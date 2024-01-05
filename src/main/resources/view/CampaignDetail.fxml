@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CampaignDetailController">
+   <top>
+      <HBox id="navbarTop" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="78.0" prefWidth="1292.0" stylesheets="@../style/ContentDetail.css">
+         <children>
+            <ImageView fitHeight="62.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Coklat_Hitam_Profesional_Perusahaan_Penyedia_Makanan_Sehat_Presentasi__3_-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="40.0" top="8.0" />
+         </padding>
+      </HBox>
+   </top>
+   <center>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <content>
+            <VBox maxWidth="-Infinity" prefWidth="1265.0" spacing="15.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#backToDash" style="-fx-background-color: none;">
+                           <graphic>
+                              <ImageView fx:id="btnBackToDash" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/Close_Icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" fillWidth="false" spacing="20.0">
+                     <children>
+                        <Label fx:id="txtJudulCampaign" styleClass="H1" stylesheets="@../style/General.css" text="Judul Campaign" />
+                        <TextField fx:id="txtEditJudul" prefHeight="33.0" prefWidth="343.0" styleClass="editTextField" stylesheets="@../style/General.css" text="asfdfds">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </TextField>
+                        <ImageView fx:id="imgCampaign" fitHeight="500.0" fitWidth="500.0" mouseTransparent="true" onMouseClicked="#editImageCampaign" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../Pictures/KOLAM/ABDUL%20HAMID%20KOLAM.jpg" />
+                           </image>
+                        </ImageView>
+                        <VBox prefHeight="83.0" prefWidth="358.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="txtCurrentDonasi" styleClass="h3" stylesheets="@../style/General.css" text="Rp. 1,000,000 Terkumpul">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </Label>
+                              <HBox spacing="5.0">
+                                 <children>
+                                    <Label text="Target:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="txtTargetDonasi" layoutX="10.0" layoutY="10.0" styleClass="h4" stylesheets="@../style/General.css" text="Rp. 5,000,000">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </HBox>
+                              <ProgressBar fx:id="donationProgress" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="12.0" progress="0.33" style="-fx-padding: 1;" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" fillWidth="false" prefWidth="1265.0">
+                     <children>
+                        <VBox fillWidth="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="600.0">
+                           <children>
+                              <Text fx:id="txtDeskripsiCampaign" strokeType="OUTSIDE" strokeWidth="0.0" text="Where does it come from?Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham." textAlignment="JUSTIFY" wrappingWidth="600.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <VBox fx:id="editDeskripsiContainer">
+                                 <children>
+                                    <Label text="Edit Deskripsi Campaign" />
+                                    <TextArea fx:id="txtEditDeskripsi" prefHeight="159.0" prefWidth="598.0" wrapText="true" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER" prefHeight="59.0" prefWidth="567.0" spacing="50.0">
+                           <children>
+                              <Button fx:id="btnStartEdit" mnemonicParsing="false" onAction="#startEdit" prefHeight="35.0" prefWidth="135.0" styleClass="btnGreen" stylesheets="@../style/General.css" text="Edit Campaign">
+                                 <graphic>
+                                    <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../images/Edit_white.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="btnHapusCampaign" layoutX="226.0" layoutY="22.0" mnemonicParsing="false" onAction="#deleteCampaign" prefHeight="35.0" prefWidth="135.0" styleClass="btnRed" stylesheets="@../style/General.css" text="Hapus Campaign">
+                                 <graphic>
+                                    <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../images/Trash_white.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="btnConfirmEdit" layoutX="304.0" layoutY="22.0" mnemonicParsing="false" onAction="#saveEdit" prefHeight="35.0" prefWidth="135.0" styleClass="btnGreen" stylesheets="@../style/General.css" text="Simpan Perubahan">
+                                 <graphic>
+                                    <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../images/Save_white.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="btnCancelEdit" layoutX="381.0" layoutY="22.0" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="35.0" prefWidth="135.0" styleClass="btnRed" stylesheets="@../style/General.css" text="Batalkan">
+                                 <graphic>
+                                    <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../images/cancel_white.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="10.0" layoutY="22.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="135.0" styleClass="btnGreen" stylesheets="@../style/General.css" text="Lihat Riwayat Donasi">
+                                 <graphic>
+                                    <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true">
+                                       <image>
+                                          <Image url="@../images/Edit_white.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox fx:id="donationContainer" alignment="TOP_CENTER" fillWidth="false">
+                     <children>
+                        <Label text="Mari Berdonasi!" />
+                        <HBox alignment="CENTER_LEFT" maxWidth="-Infinity" prefHeight="112.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white;">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" fillWidth="false">
+                                 <children>
+                                    <Label text="Masukkan Nominal Donasi">
+                                       <VBox.margin>
+                                          <Insets left="5.0" />
+                                       </VBox.margin></Label>
+                                    <TextField fx:id="txtNominalDonasi" prefHeight="37.0" prefWidth="227.0">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                       </VBox.margin></TextField>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <MenuButton fx:id="menuMetodePembayaran" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Pilih Metode Pembayaran" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <Button fx:id="btnConfirmDonation" mnemonicParsing="false" onAction="#confirmDonation" prefHeight="40.0" prefWidth="115.0" styleClass="btnGreen" stylesheets="@../style/General.css" text="Konfirmasi">
+                                 <HBox.margin>
+                                    <Insets top="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../images/Checkmark_white.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+        </content>
+      </ScrollPane>
+   </center>
+</BorderPane>
