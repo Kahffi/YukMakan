@@ -27,6 +27,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
+import javafx.application.Platform;
+import model.Akun;
 
 public class ResepDetailController implements Initializable {
 
@@ -61,6 +63,8 @@ public class ResepDetailController implements Initializable {
     private Button btnCancel;
     @FXML
     private Button btnAddFav;
+    @FXML
+    private Button btnDelFav;
     @FXML
     private Button btnSaveUpdate;
 
@@ -112,27 +116,62 @@ public class ResepDetailController implements Initializable {
 
         if (SignUpController.isAdmin){
             btnAddFav.setVisible(false); btnAddFav.managedProperty().bind(btnAddFav.visibleProperty());
+            btnDelFav.setVisible(false); btnDelFav.managedProperty().bind(btnDelFav.visibleProperty());
         }
         else{
             btnEdit.setVisible(false); btnEdit.managedProperty().bind(btnEdit.visibleProperty());
             btnHapus.setVisible(false); btnHapus.managedProperty().bind(btnHapus.visibleProperty());
         }
+        Platform.runLater(() -> {
+            updateButtonVisibility();
+        });
     }
 
 
     @FXML
     void addToFav(ActionEvent event) {
-        int i = AkunDAO.addFavorite(this.resep.getId().toString(), SignUpController.user.getUsername());
-        if (i>0){
-            System.out.println("sukses menambahkan ke daftar favorit");
-        }
-        else {
+        User currentUser = SignUpController.user;
+        String resepId = resep.getId().toString();
+        ArrayList<Resep> daftarFav = AkunDAO.getDaftarFav(currentUser.getUsername());
+
+        if (!daftarFav.contains(resep)) {
+            currentUser.addToFav(resep);
+            AkunDAO.addFavorite(resepId, currentUser.getUsername());
+
+            for (Resep favResep : currentUser.getDaftarFavorit()) {
+                System.out.println(favResep.getJudul());
+            }
+            updateButtonVisibility();
+        } else {
             System.out.println("Resep sudah ada di daftar favorit");
         }
-        SignUpController.user.addToFav(this.resep);
-        for(Resep resep: SignUpController.user.getDaftarFavorit()){
-            System.out.println(resep.getJudul());
+    }
+
+    @FXML
+    void deleteFav(ActionEvent event) {
+        User currentUser = SignUpController.user;
+        String resepId = resep.getId().toString();
+        ArrayList<Resep> daftarFav = AkunDAO.getDaftarFav(currentUser.getUsername());
+
+        if (daftarFav.contains(resep)) {
+            AkunDAO.delFavorite(resepId, currentUser.getUsername());
+            for (Resep favResep : currentUser.getDaftarFavorit()) {
+                System.out.println(favResep.getJudul());
+            }
+            updateButtonVisibility();
+        } else {
+            System.out.println("Gagal menghapus dari daftar favorit");
         }
+    }
+
+    // Add this method to update button visibility
+    private void updateButtonVisibility() {
+        ArrayList<Resep> daftarFav = AkunDAO.getDaftarFav(SignUpController.user.getUsername());
+        btnAddFav.setVisible(!daftarFav.contains(resep));
+        btnAddFav.managedProperty().bind(btnAddFav.visibleProperty());
+
+        btnDelFav.setVisible(daftarFav.contains(resep));
+        btnDelFav.managedProperty().bind(btnDelFav.visibleProperty());
     }
 
     @FXML
