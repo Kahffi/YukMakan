@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminCreateCampaignController">
@@ -25,11 +24,6 @@
          <content>
             <AnchorPane prefWidth="1280.0">
                <children>
-                  <Button fx:id="btnBack" layoutX="136.0" layoutY="88.0" mnemonicParsing="false" onAction="#backToDash" prefHeight="39.0" prefWidth="39.0" text="&lt;" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="1095.0">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Button>
                   <VBox alignment="TOP_CENTER" layoutX="371.0" spacing="20.0" styleClass="mainPanel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="371.0" AnchorPane.rightAnchor="357.0">
                      <children>
                         <Label styleClass="h2" stylesheets="@../style/General.css" text="Buat Campaign" />
@@ -135,31 +129,32 @@
                         <Insets bottom="50.0" top="50.0" />
                      </padding>
                   </VBox>
+                  <Button fx:id="btnBack" layoutX="109.0" layoutY="42.0" mnemonicParsing="false" onAction="#backToDash" style="-fx-background-color: none;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/Close_Icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </content>
       </ScrollPane>
    </center>
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="1280.0" style="-fx-background-color: white;">
+      <HBox id="navbarTop" alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="1280.0" stylesheets="@../style/ContentDetail.css">
          <children>
             <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/Coklat_Hitam_Profesional_Perusahaan_Penyedia_Makanan_Sehat_Presentasi__3_-removebg-preview.png" />
                </image>
             </ImageView>
-            <AnchorPane prefHeight="23.0" prefWidth="1194.0">
-               <children>
-                  <Button fx:id="btnLogout" alignment="CENTER" layoutX="1124.0" layoutY="12.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: none;" text="Logout" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="12.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
+            <AnchorPane prefHeight="23.0" prefWidth="1194.0" />
          </children>
          <padding>
             <Insets bottom="7.0" left="20.0" right="20.0" top="7.0" />

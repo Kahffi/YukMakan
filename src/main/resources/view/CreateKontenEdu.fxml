@@ -23,10 +23,17 @@
          <content>
             <AnchorPane prefHeight="933.0" prefWidth="1281.0">
                <children>
-                  <Button fx:id="btnBack" layoutX="75.0" layoutY="40.0" mnemonicParsing="false" onAction="#backToDash" prefHeight="39.0" prefWidth="39.0" text="&lt;" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="1156.3333333333333">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
+                  <Button fx:id="btnBack" layoutX="103.0" layoutY="51.0" mnemonicParsing="false" onAction="#backToDash" style="-fx-background-color: none;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/Close_Icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                   <VBox alignment="TOP_CENTER" layoutX="371.0" spacing="20.0" styleClass="mainPanel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="371.0" AnchorPane.rightAnchor="357.0">
                      <children>
@@ -96,7 +103,7 @@
       </ScrollPane>
    </center>
    <top>
-      <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="1280.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+      <HBox id="navbarTop" alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="1280.0" stylesheets="@../style/ContentDetail.css" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="55.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                <image>

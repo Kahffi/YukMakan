@@ -82,14 +82,7 @@ public class Campaign {
     }
     
     public int getCurrentDonasi() {
-        int totalDonasi = 0;
-
-        // Iterate through the list of DonationLog and sum up the donation amounts
-        for (DonationLog donationLog : donationLogs) {
-            totalDonasi += donationLog.getAmount();
-        }
-
-        return totalDonasi;
+        return currentDonasi;
     }   
     //setter getter
 

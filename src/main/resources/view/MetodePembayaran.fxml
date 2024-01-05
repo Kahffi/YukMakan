@@ -33,7 +33,7 @@
    <center>
       <ScrollPane prefHeight="602.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox maxWidth="1.7976931348623157E308" prefHeight="1200.0" prefWidth="1260.0">
+            <VBox maxWidth="1.7976931348623157E308" prefHeight="1200.0" prefWidth="1260.0" style="-fx-background-color: C1C5AA;">
                <children>
                   <VBox>
                      <children>
