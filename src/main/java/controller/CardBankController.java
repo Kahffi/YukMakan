@@ -90,6 +90,8 @@ public class CardBankController implements Initializable {
     @FXML
     private void saveEdit(ActionEvent event) {
         oldImage = logoBank.getImage();
+        txtNamaBank.setText(txtInBankName.getText());
+        setEditVisibilty(false);
 
     }
 

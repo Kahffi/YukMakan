@@ -117,7 +117,7 @@ public class KontenEduDetailController implements Initializable {
     }
     // method to back to dashboard
     @FXML
-    public void BackToDash(ActionEvent event){
+    public void backToDash(ActionEvent event){
         Stage stage = (Stage) btnBack.getScene().getWindow();
         Parent parent = null;
         try {
