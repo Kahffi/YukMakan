@@ -59,7 +59,7 @@ public class KontenEduDAO {
     
     // method-method untuk update data dalam database
     public static void updateKontenEdu(KontenEdukasi k){
-       String query = "update kontenedukasi set judul = ?, deskripsi = ?, langkah = ?, bahan = ?, kandunganGizi = ?, imageResep = ?  where id  = ?";
+       String query = "update kontenedukasi set judul = ?, konten = ?, imagePath = ?  where id  = ?";
 
         query = String.format(query, k.getJudul(),
                 k.getContent(), k.getImagePath());
@@ -67,9 +67,9 @@ public class KontenEduDAO {
         try {
             stmt = conn.prepareStatement(query);
             stmt.setString(1, k.getJudul());
-            stmt.setString(4, k.getContent());
-            stmt.setBlob(6, ImageUtils.imageToInputStream(k.getImagePath()));
-            stmt.setString(7, k.getId().toString());
+            stmt.setString(2, k.getContent());
+            stmt.setBlob(3, ImageUtils.imageToInputStream(k.getImagePath()));
+            stmt.setString(4, k.getId().toString());
             System.out.println("ini query : " + query);
             stmt.executeUpdate();
         } catch (SQLException ex) {
