@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="cardContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#toKontenDetail" prefHeight="310.0" prefWidth="241.0" spacing="5.0" style="-fx-background-color: B2C8BA;" styleClass="mainContainer" stylesheets="@../style/ItemCard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CardKontenEduController">
+<VBox fx:id="cardContainer" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#toKontenEduDetail" prefHeight="310.0" prefWidth="241.0" spacing="5.0" style="-fx-background-color: B2C8BA;" styleClass="mainContainer" stylesheets="@../style/ItemCard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CardKontenEduController">
    <children>
       <ImageView fx:id="fotoKonten" fitHeight="117.0" fitWidth="221.0" pickOnBounds="true">
          <image>
@@ -21,7 +21,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="descKonten" alignment="TOP_LEFT" layoutX="39.0" layoutY="165.0" maxWidth="1.7976931348623157E308" prefHeight="62.0" prefWidth="188.0" text="Stunting merupakan kondisi dimana seorang anak kekurangan gizi" wrapText="true" VBox.vgrow="ALWAYS">
+      <Label fx:id="descKonten" alignment="TOP_LEFT" layoutX="39.0" layoutY="165.0" maxWidth="1.7976931348623157E308" prefHeight="62.0" prefWidth="188.0" text="Stunting merupakan kondisi dimana seorang anak kekurangan gizi. mereka membutuhkan gizi yang cukup dan seimbang dalam memenuhi nutrisi nya masing-masing" wrapText="true" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets left="3.0" />
          </VBox.margin>

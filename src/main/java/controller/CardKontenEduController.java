@@ -5,11 +5,11 @@
 package controller;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -19,12 +19,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.KontenEdukasi;
 
+
 /**
  * FXML Controller class
  *
  * @author Asus
  */
-public class CardKontenEduController implements Initializable {
+public class CardKontenEduController{
 
     @FXML
     private VBox cardContainer;
@@ -38,36 +39,33 @@ public class CardKontenEduController implements Initializable {
     private Label tanggal;
     @FXML
     private Label descKonten;
-    KontenEdukasi konten;
+    private KontenEdukasi konten;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
-    }    
-
-    @FXML
-    void toKontenDetail(MouseEvent event) throws IOException {
-        System.out.println("judul: " + konten.getJudul());
-	FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/KontenEduDetail.fxml"));
-	loader.setController(new KontenEduDetailController(konten));
-	Parent parent = loader.load();
-	Scene scene = new Scene(parent);
-	Stage stage = (Stage) namaAdmin.getScene().getWindow();
-	stage.setTitle("YukMakan - Konten Edukasi Detail");
-	stage.setScene(scene);
-    }
     
     public void setData(KontenEdukasi konten){
-        this.konten = konten;
+            this.konten = konten;
         judulKonten.setText(konten.getJudul());
         descKonten.setText(konten.getContent());
         namaAdmin.setText(konten.getUploader().getUsername());
         tanggal.setText(konten.getTanggal());
         fotoKonten.setImage(konten.getImagePath());
+    }
+
+    @FXML
+    void toKontenEduDetail(){
+        try {
+            System.out.println("judul: " + konten.getJudul());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/KontenEduDetail.fxml"));
+            loader.setController(new KontenEduDetailController(konten));
+            Parent parent = loader.load();
+            Scene scene = new Scene(parent);
+            
+            Stage stage = (Stage) namaAdmin.getScene().getWindow();
+            stage.setTitle("YukMakan - Konten Edukasi Detail");
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();        
+        }
     }
     
 }

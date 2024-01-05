@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -12,49 +15,63 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="3000.0" maxWidth="1280.0" prefHeight="3000.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.KontenEduDetailController">
+<BorderPane maxHeight="680.0" maxWidth="1280.0" prefHeight="680.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1280.0">
+      <ScrollPane hbarPolicy="NEVER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1280.0">
          <content>
             <VBox alignment="CENTER" fillWidth="false" maxWidth="1280.0" prefWidth="1280.0" spacing="30.0">
                <children>
                   <VBox maxWidth="1.7976931348623157E308" prefWidth="1280.0">
                      <children>
-                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#BackToDash" text="Back">
+                        <Button fx:id="btnBack" mnemonicParsing="false" onAction="#BackToDash" prefHeight="35.0" prefWidth="33.0" text="&lt;">
                            <VBox.margin>
                               <Insets left="100.0" top="50.0" />
                            </VBox.margin>
                         </Button>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" layoutX="404.0" layoutY="10.0" prefWidth="411.0" stylesheets="@../style/ContentDetail.css">
+                  <VBox alignment="CENTER" layoutX="404.0" layoutY="10.0" prefHeight="610.0" prefWidth="600.0" stylesheets="@../style/ContentDetail.css">
                      <children>
                         <Label fx:id="lblJudul" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="58.0" prefWidth="550.0" styleClass="H1" stylesheets="@../style/General.css" text="Judul Konten">
                            <font>
                               <Font size="35.0" />
                            </font>
                         </Label>
-                        <ImageView fx:id="imgKonten" fitHeight="347.0" fitWidth="528.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../Desktop/icon/bakwan.png" />
-                           </image>
-                        </ImageView>
+                        <VBox prefHeight="31.0" prefWidth="600.0">
+                           <children>
+                              <Label fx:id="lblEditJudul" prefHeight="17.0" prefWidth="76.0" stylesheets="@../style/General.css" text="Judul">
+                                 <styleClass>
+                                    <String fx:value="H3" />
+                                    <String fx:value="h3" />
+                                 </styleClass>
+                              </Label>
+                              <TextField fx:id="txtEditJudul" prefHeight="32.0" prefWidth="600.0" />
+                           </children>
+                        </VBox>
+                        <ImageView fx:id="imgKonten" fitHeight="347.0" fitWidth="528.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="imgEditFoto" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="btnPilihFoto" mnemonicParsing="false" onAction="#pilihFoto" prefHeight="27.0" prefWidth="119.0" text="Pilih Foto" />
                      </children>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
                   </VBox>
-                  <VBox styleClass="textContainer" stylesheets="@../style/ContentDetail.css">
+                  <VBox prefHeight="10.0" styleClass="textContainer" stylesheets="@../style/ContentDetail.css">
                      <children>
-                        <Label styleClass="header-label" text="Header 1" />
-                        <Text fx:id="txtContent" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque feugiat non tortor non pellentesque. Praesent aliquet arcu arcu, nec varius arcu ullamcorper id. Aliquam blandit magna aliquet, lobortis eros vel, ultrices dolor. Vestibulum scelerisque enim a metus efficitur, quis convallis ex fermentum. Sed condimentum turpis malesuada justo faucibus, non molestie lectus cursus. Vestibulum dapibus, sapien at hendrerit porta, ligula tellus efficitur turpis, in rhoncus nibh ipsum at tellus. In id ex sit amet nunc dictum luctus. Curabitur at libero nec felis vulputate mollis.Nulla pellentesque ultrices nulla, vel mollis arcu vehicula id. In vel ligula in arcu congue scelerisque. Sed elit urna, tristique ac egestas ac, tincidunt vitae augue. Vestibulum ultrices neque est, nec dictum leo aliquam nec. Nullam suscipit mi ac sapien sodales volutpat. Nulla auctor purus non dolor elementum, sit amet luctus nisi auctor. Phasellus id lectus posuere arcu sollicitudin auctor a sit amet neque.Sed elementum nunc id porta vestibulum. Nulla pharetra ipsum sit amet magna sollicitudin posuere. Nulla finibus risus vitae auctor rhoncus. Nullam et neque ultrices, facilisis sem quis, iaculis massa. Nunc vel faucibus lorem. Nulla non quam nec libero aliquet semper quis et purus. Duis sed posuere quam.Proin enim nisi, elementum eu ligula eu, rutrum tristique sapien. Nullam lobortis non sem eu auctor. Mauris vestibulum interdum sollicitudin. Proin pulvinar magna quis condimentum egestas. Maecenas sed orci quis ex ullamcorper sodales. Morbi accumsan, arcu eu tempus gravida, elit nulla aliquam odio, at venenatis metus felis in tortor. Fusce eget convallis ante. Donec ornare ipsum et magna porta, ac ullamcorper ante pulvinar.Sed leo erat, interdum et tellus a, faucibus vehicula turpis. Nulla non purus sodales, pellentesque mi at, mattis felis. Quisque eu dui vitae ante iaculis facilisis. Etiam a neque at velit venenatis euismod. Quisque ac sem eu lorem blandit volutpat ut non nulla. Praesent ultrices risus eget interdum fringilla. Mauris ac scelerisque ligula. Donec sit amet ligula aliquam, egestas nunc vulputate, iaculis orci. Cras magna sem, malesuada ac massa eu, ultrices laoreet sem. Maecenas ut placerat lorem. Vivamus ac condimentum felis. Quisque ut ornare erat. Aliquam rhoncus dapibus ante, et commodo ex gravida ac. Vivamus eu odio luctus, blandit massa ac, fermentum libero. Sed eu orci euismod augue sodales tincidunt." textAlignment="JUSTIFY" wrappingWidth="600.0" />
+                        <Text fx:id="txtContent" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. " textAlignment="JUSTIFY" wrappingWidth="600.0" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" styleClass="textContainer" stylesheets="@../style/ContentDetail.css" />
-                  <HBox alignment="CENTER" prefHeight="56.0" prefWidth="1280.0" spacing="50.0">
+                  <VBox prefHeight="40.0" prefWidth="468.0">
                      <children>
-                        <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#EditKonten" text="Edit" />
-                        <Button fx:id="btnHapus" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteKonten" text="Hapus" />
+                        <TextArea fx:id="txtEditKonten" prefHeight="20.0" prefWidth="501.0" />
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="9.0" prefWidth="1280.0" spacing="50.0">
+                     <children>
+                        <Button fx:id="btnSave" mnemonicParsing="false" onAction="#saveEditKonten" prefHeight="25.0" prefWidth="84.0" text="Save" />
+                        <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#EditKonten" prefHeight="25.0" prefWidth="101.0" text="Edit" />
+                        <Button fx:id="btnHapus" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteKonten" prefHeight="25.0" prefWidth="88.0" text="Hapus" />
+                        <Button fx:id="btnBatal" mnemonicParsing="false" onAction="#cancelEdit" prefHeight="25.0" prefWidth="85.0" text="Batal" />
                      </children>
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

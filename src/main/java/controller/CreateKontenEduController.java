@@ -129,6 +129,15 @@ public class CreateKontenEduController implements Initializable {
         konten = new KontenEdukasi(UUID.randomUUID(), imageIn.getImage(), judul, kontenEdukasi, tanggal, admin);
         imageIn.setImage(konten.getImagePath());
         KontenEduDAO.saveKontenEdu(konten);
+        try {
+            Parent parent;
+            parent = FXMLLoader.load(getClass().getResource("../view/Dashboard.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = (Stage) btnBack.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     
 }
