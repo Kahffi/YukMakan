@@ -14,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import model.KontenEdukasi;
-import dao.AkunDAO;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -63,24 +62,32 @@ public class KontenEduDetailController implements Initializable {
     private Button btnSave;
     @FXML
     private Button btnBatal;
+    @FXML
+    private Label lblEditJudul;
 
+    
     /**
      * Initializes the controller class.
+     * 
      */
-    public KontenEduDetailController(KontenEdukasi konten){
+    public KontenEduDetailController(KontenEdukasi konten) {
         this.konten = konten;
     }
+      
     @Override
-    public void initialize(URL url, ResourceBundle rb){
+    public void initialize(URL location, ResourceBundle resources){
         // TODO
+        setVisibility(false);
         lblJudul.setText(konten.getJudul());
+        txtContent.setText(konten.getContent());
         imgKonten.setImage(konten.getImagePath());
         imgKonten.setFitWidth(600);
         imgKonten.setFitHeight(400);
-        txtContent.setText(konten.getContent());
         if (!SignUpController.isAdmin){
-            btnEdit.setVisible(false); btnEdit.managedProperty().bind(btnEdit.visibleProperty());
-            btnHapus.setVisible(false); btnHapus.managedProperty().bind(btnHapus.visibleProperty());
+            btnEdit.setVisible(false); 
+            btnEdit.managedProperty().bind(btnEdit.visibleProperty());
+            btnHapus.setVisible(false); 
+            btnHapus.managedProperty().bind(btnHapus.visibleProperty());
         }       
     }
    
@@ -88,9 +95,11 @@ public class KontenEduDetailController implements Initializable {
     @FXML
     void EditKonten(ActionEvent event){
         setVisibility(true);
+        btnEdit.setVisible(false);
+        btnHapus.setVisible(false);
         txtEditJudul.setText(lblJudul.getText());
         imgEditFoto.setImage(imgKonten.getImage());
-        txtEditKonten.setText(txtContent.getText());      
+        txtEditKonten.setText(txtContent.getText());               
     }
     // to delete konten
     @FXML
@@ -152,16 +161,20 @@ public class KontenEduDetailController implements Initializable {
         imgKonten.managedProperty().bind(imgKonten.visibleProperty());
         txtContent.setVisible(!visibility);
         txtContent.managedProperty().bind(txtContent.visibleProperty());
+        
         btnSave.setVisible(visibility);
         btnSave.managedProperty().bind(btnSave.visibleProperty());
         btnBatal.setVisible(visibility);
         btnBatal.managedProperty().bind(btnBatal.visibleProperty());
+        lblEditJudul.setVisible(visibility);
         txtEditJudul.setVisible(visibility);
         txtEditJudul.managedProperty().bind(txtEditJudul.visibleProperty());
         imgEditFoto.setVisible(visibility);
         imgEditFoto.managedProperty().bind(imgEditFoto.visibleProperty());
         txtEditKonten.setVisible(visibility);
-        txtEditKonten.managedProperty().bind(txtEditKonten.visibleProperty());      
+        txtEditKonten.managedProperty().bind(txtEditKonten.visibleProperty());
+        btnPilihFoto.setVisible(visibility);
+        btnPilihFoto.managedProperty().bind(btnPilihFoto.visibleProperty());
     }
     
     private void updateKontenEduProperties(KontenEdukasi konten){
