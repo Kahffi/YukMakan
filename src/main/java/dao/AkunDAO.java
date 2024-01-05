@@ -66,16 +66,33 @@ public class AkunDAO {
             BaseDAO.closeConn(conn);
         }
     }
-    public static ArrayList <Resep> getDaftarFav(String usn){
+    public static int delFavorite(String id_resep, String user_username){
         conn = BaseDAO.getConn();
         try {
+            stmt = conn.prepareStatement("DELETE from daftarfavorit where user_username = ? and resep_id = ?;");
+            stmt.setString(1, user_username);
+            stmt.setString(2, id_resep);
+            return stmt.executeUpdate();
+        } catch (SQLException e) {
+            return -1;
+        } finally {
+            BaseDAO.closeConn(conn);
+        }
+    }
+    public static ArrayList <Resep> getDaftarFav(String usn){
+        try {
+            conn = BaseDAO.getConn();
             stmt = conn.prepareStatement("select * from daftarfavorit where user_username = ?");
             stmt.setString(1, usn);
-            rs = stmt.executeQuery();
+            ResultSet RS = stmt.executeQuery();
             ArrayList <Resep> daftarFavorit = new ArrayList <>();
-            while (rs.next()){
-                daftarFavorit.add(ResepDAO.getResep(rs.getString("id_resep")));
+            while (RS.next()){
+                String id = RS.getString("resep_id");
+                Resep resep = ResepDAO.getResep(id);
+                daftarFavorit.add(resep);
+                System.out.println("HALOOO BANDUng");
             }
+            
             return daftarFavorit;
         } catch (SQLException e) {
             throw new RuntimeException(e);

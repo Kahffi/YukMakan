@@ -7,6 +7,7 @@ package model;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -89,7 +90,23 @@ public class Resep {
         System.out.println(getKandunganGizi());
         System.out.println("Diupload oleh: " + getUploader().getUsername() + ", Pada tanggal: " + getDatePosted());
     }
-    
+    // Di kelas Resep
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Resep otherResep = (Resep) obj;
+        return Objects.equals(id, otherResep.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
     //menambahkan ulasan kedalam resep
     public void addUlasan(Ulasan u){
         this.ulasan.add(u);
